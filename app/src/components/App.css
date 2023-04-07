@@ -1,0 +1,15 @@
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-self: center;
+    
+    border: 1px solid #2d2d2d;
+}
+
+.event{
+    /* size: 11%; */
+
+    border: 1px solid #2d2d2d;
+}
+
