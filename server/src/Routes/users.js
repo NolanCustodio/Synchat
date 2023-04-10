@@ -62,6 +62,8 @@ router.route("/loginUser").post((require, response) => {
 
     db.query(sqlSelect, 
         (error, result) => {
+            //result is an array of users wth the username
+
             if (error) {
                 response.send({error : error});
             }
@@ -69,9 +71,10 @@ router.route("/loginUser").post((require, response) => {
             if (result.length > 0) {
                 bcrypt.compare(password, result[0].password, (error, res) => {
                     if (res) {
-                        require.session.user = result;
-                        console.log(require.session.user);
-                        response.send(result);
+                        console.log(result[0].username);
+                        require.session.user = result[0].username;
+                        // console.log(require.session.user);
+                        response.send(result[0].username);
                     }else{
                         response.send({error:error});
                     }
@@ -92,7 +95,11 @@ router.route("/sessionLogin").get((require,response) => {
 });
 
 router.route("/sessionLogout").get((require, response) => {
-    return
+    if (require.session.user) {
+        response.send({loggedIn: false})
+    }else{
+        response.send({loggedIn: false})
+    }
 });
 
 module.exports = router;

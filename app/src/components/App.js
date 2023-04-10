@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 //userSelector hook is used to access values from states
 
@@ -21,6 +22,8 @@ import LandingPage  from './LandingPage/LandingPage';
 import CreateEvent  from './Event/CreateEvent';
 import Login        from './Users/Login';
 import Register     from './Users/Register';
+// import CheckCookies from './Users/CheckCookies';
+
 
 //Actions
 // import { initState } from '../actions';
@@ -29,18 +32,25 @@ import Register     from './Users/Register';
 function App() {
     axios.defaults.withCredentials = true;
 
+    const dispatch = useDispatch();
+
+    //refactor this to another file
+    useEffect(() => {
+        axios.get("http://localhost:3001/db/user/sessionLogin").then((response) => {
+            // console.log(response);
+            const username = response;
+        })
+    }, []);
+    // CheckCookies();
+
+
     // const user = useSelector((state) => state.user.value);
 
     // console.log(useSelector((state) => state));
 
     // const event = useSelector((state) =>state.eventList.value);
+    
 
-    //refactor this to another file
-    useEffect(() => {
-        axios.get("http://localhost:3001/db/user/sessionLogin").then((response) => {
-            console.log(response);
-        })
-    }, []);
 
     return(
         <div>

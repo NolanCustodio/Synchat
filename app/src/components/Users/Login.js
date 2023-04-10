@@ -1,8 +1,11 @@
 import React,{ useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import {loginUser} from '../databaseQueries/users'
 
 const Login = () => {
+    const dispatch = useDispatch();
+
     const [newUsername, setUsername] = useState("");
     const [newPassword, setPassword] = useState("");
 
@@ -12,7 +15,7 @@ const Login = () => {
 
             <form onSubmit={(e) => {
                 e.preventDefault();
-                loginUser(newUsername, newPassword);
+                loginUser(dispatch, newUsername, newPassword);
             }}>
 
                 <div className='form-group'>
