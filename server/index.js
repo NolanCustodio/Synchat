@@ -1,3 +1,4 @@
+//
 const express = require("express");
 const bodyParser = require("body-parser");
 const mysql = require("mysql");
@@ -6,8 +7,18 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 
+var router = express.Router();
+
 //Routes
 const users = require('./src/Routes/users');
+
+//rabbitmq from danielpdev.io
+// const rabbit = require("./src/Middleware/rabbitmq/recieve")
+// var rabbitMQHandler = require('./connection');
+
+//rabbitmq from rabbit getting started
+// const rabbit = require("./src/Middleware/rabbitmq/recieve")
+
 
 //Instances
 const app = express();
@@ -37,6 +48,10 @@ app.use(session({
         expires: 60 * 60 * 24 * 7
     }
 }))
+
+var server = require('http').Server(app);
+var socketIO = require('socket.io')(server);
+var calcSocket = socketIO.of('./calc');
 
 app.post("/", (req, res) => {
     console.log("connected");

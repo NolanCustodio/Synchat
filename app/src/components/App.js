@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
 
 //userSelector hook is used to access values from states
 
@@ -24,6 +24,10 @@ import Login        from './Users/Login';
 import Register     from './Users/Register';
 // import CheckCookies from './Users/CheckCookies';
 
+//RabbitMQ
+import sendRabbit from './RabbitMQ/sendRabbit';
+// import clientSocket from 'socket.io-client';
+
 
 //Actions
 // import { initState } from '../actions';
@@ -32,17 +36,9 @@ import Register     from './Users/Register';
 function App() {
     axios.defaults.withCredentials = true;
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
-    //refactor this to another file
-    useEffect(() => {
-        axios.get("http://localhost:3001/db/user/sessionLogin").then((response) => {
-            // console.log(response);
-            const username = response;
-        })
-    }, []);
     // CheckCookies();
-
 
     // const user = useSelector((state) => state.user.value);
 
@@ -50,6 +46,12 @@ function App() {
 
     // const event = useSelector((state) =>state.eventList.value);
     
+    //rabbit testing
+
+    useEffect (() =>{
+        // console.log(1);
+        // sendRabbit();
+    }, []);
 
 
     return(

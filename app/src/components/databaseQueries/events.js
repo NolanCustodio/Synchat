@@ -23,10 +23,14 @@ export const insertEvent = async (eventName, eventTopic) =>{
 
 }
 
+//Refactor above function to use rabbitmq instead of axios
+
 
 const getEvents = async (dispatch) => {
 
     const eventsArray = await axios.get(`${dbConnection}/get`);
+
+    //Change above axios call with a rabbitMQ query instead
     
     // console.log(2);
     // console.log(eventsArray.data);

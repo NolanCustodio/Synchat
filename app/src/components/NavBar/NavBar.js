@@ -1,6 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
+import axios from 'axios';
 
 const NavBar = () => {
+
+    useEffect(() => {
+        axios.get("http://localhost:3001/db/user/sessionLogin").then((response) => {
+            console.log(response);
+            // const username = response;
+        })
+    }, []);
 
     return(
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
