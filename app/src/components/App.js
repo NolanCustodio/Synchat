@@ -50,7 +50,7 @@ function App() {
 
     useEffect (() =>{
         // console.log(1);
-        // sendRabbit();
+        sendRabbit();
     }, []);
 
 
