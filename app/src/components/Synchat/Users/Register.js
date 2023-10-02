@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import { insertNewUser } from '../databaseQueries/users';
+import { insertNewUser } from '../../databaseQueries/users';
 
 const Register = () => {
     const [newUsername, setUsername] = useState("");

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 // import { Link } from "react-router-dom";
 
-import { insertEvent } from '../databaseQueries/events';
+import { insertEvent } from '../../databaseQueries/events';
 
 // function printData(event){
 //     event.preventDefault();

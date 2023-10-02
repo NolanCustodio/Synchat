@@ -16,12 +16,12 @@ import 'react-calendar/dist/Calendar.css';
 
 //App
 import './App.css';
-import HomePage     from './HomePage/HomePage';
+import HomePage     from './Synchat/HomePage/HomePage';
 import NavBar       from './NavBar/NavBar';
-import LandingPage  from './LandingPage/LandingPage';
-import CreateEvent  from './Event/CreateEvent';
-import Login        from './Users/Login';
-import Register     from './Users/Register';
+import LandingPage  from './Synchat/LandingPage/LandingPage';
+import CreateEvent  from './Synchat/Event/CreateEvent';
+import Login        from './Synchat/Users/Login';
+import Register     from './Synchat/Users/Register';
 // import CheckCookies from './Users/CheckCookies';
 
 //RabbitMQ
