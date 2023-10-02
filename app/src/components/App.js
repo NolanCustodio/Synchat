@@ -14,7 +14,7 @@ import axios from 'axios';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
-//App
+//Synchat
 import './App.css';
 import HomePage     from './Synchat/HomePage/HomePage';
 import NavBar       from './NavBar/NavBar';
@@ -23,6 +23,10 @@ import CreateEvent  from './Synchat/Event/CreateEvent';
 import Login        from './Synchat/Users/Login';
 import Register     from './Synchat/Users/Register';
 // import CheckCookies from './Users/CheckCookies';
+
+//Static Info
+import Landing      from './personalInfo/index';
+import Resume       from './personalInfo/resume';
 
 //RabbitMQ
 import sendRabbit from './RabbitMQ/sendRabbit';
@@ -59,20 +63,30 @@ function App() {
             
             <NavBar></NavBar>
             
+            <div>
+                <a className="navbar-brand" href="/">Home</a>
+                <a className="navbar-brand" href="/resume">Resume</a>
+                <a className="navbar-brand" href="/synchat">Synchat</a>
+                <a className="navbar-brand" href="/Synchat/LandingPage">LandingPage</a>
+                <a className="navbar-brand" href="/Synchat/CreateEvent">CreateEvent</a>
+            </div>
 
             <div className="content container">
                 {/* <div className='content'>Name: {user.name}</div> 
                 <div className='content'>Event: {event.eventName}</div>
                 <div className='content'>Topic: {event.eventTopic}</div> */}
-
-                 
-
+                
                 <BrowserRouter>
                     <Routes>
-                        <Route path="/" exact element={<HomePage/>}/>
-                        <Route path="/LandingPage" element={<LandingPage/>}/>
-                        <Route path="/Calendar" element={<Calendar/>}/>
-                        <Route path="/CreateEvent" element={<CreateEvent/>}/>
+                        {/* Static Landing Pages */}
+                        <Route path='/' exact element={<Landing/>} />
+                        <Route path='/resume' element={<Resume/>}/>
+
+                        {/* Synchat Components */}
+                        <Route path="/synchat" exact element={<HomePage/>}/>
+                        <Route path="/synchat/LandingPage" element={<LandingPage/>}/>
+                        <Route path="/synchat/Calendar" element={<Calendar/>}/>
+                        <Route path="/synchat/CreateEvent" element={<CreateEvent/>}/>
                         
                         <Route path="/Login" element={<Login/>}/>
                         <Route path="/Register" element={<Register/>}/>

@@ -2,12 +2,13 @@ import React from "react";
 
 
 
-const Landing = () => {
+const Resume = () => {
+
     return(
         <div>
-            Landing
+            resume
         </div>
     )
 }
 
-export default Landing;
+export default Resume;
