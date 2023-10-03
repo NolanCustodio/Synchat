@@ -67,7 +67,7 @@ function App() {
                 <a className="navbar-brand" href="/">Home</a>
                 <a className="navbar-brand" href="/resume">Resume</a>
                 <a className="navbar-brand" href="/synchat">Synchat</a>
-                <a className="navbar-brand" href="/Synchat/LandingPage">LandingPage</a>
+                {/* <a className="navbar-brand" href="/Synchat/LandingPage">LandingPage</a> */}
                 <a className="navbar-brand" href="/Synchat/CreateEvent">CreateEvent</a>
             </div>
 
