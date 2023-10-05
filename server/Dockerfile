@@ -1,8 +1,8 @@
-FROM node:15.13-alpine
+FROM node:18.18-alpine
 WORKDIR /server
 ENV PATH="./node_modules/.bin:$PATH"
-COPY package.json ./server/package.json
-COPY package-lock.json ./server/package.json
+COPY package.json ./package.json
+COPY package-lock.json ./spackage.json
 RUN npm install
 RUN npm update
 COPY . .

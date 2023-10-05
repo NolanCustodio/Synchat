@@ -16,23 +16,27 @@ const Landing = () => {
             </div>
 
             <div className="row">
+
                 <div className="card">
                     <h1 className="col-sm">Github</h1>
                     <div className="card-body">
-                        <p className="card-text">
+                        <a href="https://github.com/NolanCustodio" target="_blank" className="card-text stretched-link" rel="noopener noreferrer">
                             Here is a link to my Github.
-                        </p>
+                        </a>
                     </div>
                 </div>
 
+                
                 <div className="card">
                     <h1 className="col-sm">Resume</h1>
                     <div className="card-body">
-                        <p className="card-text">
+                        <a href="/resume" target="_blank" className="card-text stretched-link" rel="noopener noreferrer">
                             Here is a link to my Resume.
-                        </p>
+                        </a>
                     </div>
                 </div>
+                
+
                 {/* Github? */}
             </div>
             <div className="card">
@@ -45,8 +49,9 @@ const Landing = () => {
                         This site also holds a small Web App that is currently a work in progress. <br/>
                         Some of tools that I used to make what I have currently are: <br/>
                         React, Nginx, Express, MySQL, and Docker. <br/>
-                        <a href="https://github.com/NolanCustodio/Synchat/tree/initialDeploy">Here is a link to this project if you would 
-                        like to view this project on my Github.</a>
+                        <a href="https://github.com/NolanCustodio/Synchat/tree/initialDeploy" className="stretched-link" target="_blank" rel="noopener noreferrer">
+                            Here is a link to this project if you would like to view this project on my Github.
+                        </a>
                     </p>
                 </div>
             </div>
@@ -62,7 +67,7 @@ const Landing = () => {
                         This was a LAMP Stack Application concept that used multiple Virtual Machines<br/>
                         The project was more for teaching good techniques and tools such as:<br/>
                         RabbitMQ, MVC Model, API Calls, Cron, Linux Services, File Storage, Logging, and more<br/>
-                        <a href="#">
+                        <a href="https://github.com/jcs78/News-Box-Application/tree/afterMidterm" className="stretched-link" target="_blank" rel="noopener noreferrer">
                             This is link to the project
                         </a>
                     </p>

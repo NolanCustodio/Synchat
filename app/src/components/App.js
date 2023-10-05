@@ -29,7 +29,7 @@ import Landing      from './personalInfo/index';
 import Resume       from './personalInfo/resume';
 
 //RabbitMQ
-import sendRabbit from './RabbitMQ/sendRabbit';
+// import sendRabbit from './RabbitMQ/sendRabbit';
 // import clientSocket from 'socket.io-client';
 
 
