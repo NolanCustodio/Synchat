@@ -26,7 +26,7 @@ import Register     from './Synchat/Users/Register';
 
 //Static Info
 import Landing      from './personalInfo/index';
-import Resume       from './personalInfo/resume';
+import Resume       from './personalInfo/resume.js';
 
 //RabbitMQ
 // import sendRabbit from './RabbitMQ/sendRabbit';
