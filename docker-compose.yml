@@ -1,0 +1,55 @@
+version: '3.7' 
+services:
+  client:
+    container_name: client
+    build:
+      context: ./app
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./app:/app
+      - /app/node_modules
+    ports:
+      - 3000:3000
+      - 3002:3002
+    environment:
+      - WATCHPACK_POLLING=true
+  db:
+    container_name: database
+    build:
+      context: ./database
+      dockerfile: ./Dockerfile
+    environment:
+      - MYSQL_ROOT_PASSWORD=root-pass
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+      - MYSQL_DATABASE=testdb
+      # - CHOKIDAR_USEPOLLING=true
+    ports:
+      - "3306:3306"
+    expose:
+      - 3306
+  server:
+    container_name: server
+    build: 
+      context: ./server
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./server:/server
+      - /server/node_modules
+    ports:
+      - 3001:3001
+    environment:
+      # - WATCHPACK_POLLING=true
+      - CHOKIDAR_USEPOLLING=true
+    networks:
+      default:
+        aliases:
+          - server
+  rabbitmq:
+    container_name: rabbitmq
+    build:
+      context: ./rabbitmq
+      dockerfile: ./Dockerfile
+    ports:
+      - 8080:15672
+      - 5672:5672
