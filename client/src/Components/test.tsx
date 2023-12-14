@@ -1,5 +1,6 @@
-export function TestComponent(){
 
+
+export default () =>{
     return(
         <div>
             test component
