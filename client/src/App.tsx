@@ -3,20 +3,18 @@
 // import viteLogo from '/vite.svg';
 import './App.css';
 
-
-//myfiles
-import Test from './Components/Test';
 import Navbar from './Components/Navbar/Navbar';
 
-function App() {
+const App = (props: any) => {
   // const [count, setCount] = createSignal(0)
 
   return (
-    <div>
-      {/* <p>Hi</p> */}
-      <Test/>
+    <>
       <Navbar/>
-    </div>
+
+      {/* Displays routes */}
+      {props.children}
+    </>
   )
 }
 

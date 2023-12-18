@@ -1,13 +1,19 @@
-// import { A } from "@solidjs/router";
+import { A } from "@solidjs/router"
 
 export default () => {
     return(
         <div>
             <button>
-                <a href="/">asdfasdfasdf</a> 
+                <A href="/">index</A> 
             </button>
             <button>
-                <a href="/navbar">asdfsadfasdfasdf</a>  
+                <A href="/HomePage">Home</A>  
+            </button>
+            <button>
+                <A href="/LandingPage">Landing</A>  
+            </button>
+            <button>
+                <A href="/Event">Event</A>  
             </button>
         </div>
     )
