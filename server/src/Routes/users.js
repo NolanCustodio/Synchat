@@ -3,18 +3,20 @@ const express = require("express");
 const mysql = require("mysql");
 const bcrypt = require("bcrypt");
 
+require('dotenv').config();
+
 //My middlewares
 // require("../Middleware/userFunctions");
 
 //Instances
 let router = express.Router();
-const saltRounds = 10;
+const saltRounds = process.env.SALT_ROUNDS;
 
 const db = mysql.createPool({
-    host:       'database',
-    user:       'user',
-    password:   'root-pass',
-    database:   'testdb',
+    host:       'localhost',
+    user:       process.env.DB_USER,
+    password:   process.env.DB_ROOT_PW,
+    database:   process.env.DB_NAME,
 });
 
 

@@ -9,12 +9,12 @@ const App = (props: any) => {
   // const [count, setCount] = createSignal(0)
 
   return (
-    <>
+    <div class="debug-container">
       <Navbar/>
 
       {/* Displays routes */}
       {props.children}
-    </>
+    </div>
   )
 }
 

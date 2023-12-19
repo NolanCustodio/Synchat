@@ -2,7 +2,9 @@
 export default function HomePage() {
     return(
         <div>
-            HomePage
+            <h1>HomePage</h1>
+
+            getEvents
         </div>
     )
 }

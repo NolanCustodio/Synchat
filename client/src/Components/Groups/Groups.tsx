@@ -1,8 +1,10 @@
 
+
+
 const Event = () =>{
     return(
         <div>
-            Event Component
+            Group Component
         </div>
     )
 }

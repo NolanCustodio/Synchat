@@ -3,3 +3,6 @@ server_notes.txt
 /node_modules
 
 .dockerignore
+
+/src/Routes/users.js
+/src/Routes/.env
