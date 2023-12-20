@@ -20,7 +20,7 @@ const db = mysql.createPool({
 });
 
 
-router.route("/createUser").post((require, response) =>{
+router.route("/SignUpUser").post((require, response) =>{
     // console.log('inside new route');
     // response.send("done");
 

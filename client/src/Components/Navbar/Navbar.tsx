@@ -18,6 +18,7 @@ export default () => {
             <NavButton nav_link="HomePage" nav_text="Home"/>
             <NavButton nav_link="LandingPage" nav_text="Landing"/>
             <NavButton nav_link="Groups" nav_text="Groups"/>
+            <NavButton nav_link="SignUp" nav_text="Sign Up"/>
         </div>
     )
 }
