@@ -1,6 +1,8 @@
 import "./SignUp.css"
 
-import { connectToRabbitMQ } from "../Database/User/SignUp";
+// import { connectToRabbitMQ } from "../Database/User/SignUp";
+
+import "../Database/User/SignUp";
 
 export default function SignUp() {
     // const [state, setState] = createStore({
@@ -46,7 +48,7 @@ export default function SignUp() {
                         // alert(e);
 
                         //trying out rabbit
-                        connectToRabbitMQ();
+                        // connectToRabbitMQ();
                     }}
                 >
                     {/* <input type="hidden" name="remember" value="true" /> */}
