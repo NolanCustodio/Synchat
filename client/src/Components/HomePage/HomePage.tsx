@@ -4,7 +4,7 @@ export default function HomePage() {
         <div>
             <h1>HomePage</h1>
 
-            getEvents
+            {/* getEvents */}
         </div>
     )
 }

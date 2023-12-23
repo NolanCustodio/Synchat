@@ -1,15 +1,34 @@
-import { createStore } from "solid-js/store";
-
 import "./SignUp.css"
 
+import { connectToRabbitMQ } from "../Database/User/SignUp";
+
 export default function SignUp() {
-    const [state, setState] = createStore({
-        username: null,
-        email: null,
-        password: null,
-    })
-    
-    
+    // const [state, setState] = createStore({
+    //     username: null,
+    //     email: null,
+    //     password: null,
+    // })
+
+    let newUser = {
+        newUsername: null,
+        newEmail: null,
+        newPassword: null,
+    }
+
+    async function signUp(target: any): Promise<void>{
+        console.log(target[0].value);
+        
+        newUser.newUsername = target[0].value;
+        newUser.newEmail = target[1].value;
+        newUser.newPassword = target[2].value
+
+        console.log(newUser);
+
+        //call function that makes async ajax request
+
+        //direct user to new page
+
+    }
     
     return (
         <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -22,24 +41,25 @@ export default function SignUp() {
                 <form class="mt-8 space-y-6"
                     onSubmit={(e) => {
                         e.preventDefault();
-                        alert("working");
+                        signUp(e.target);
 
-                        //call function to that makes ajax query
+                        // alert(e);
+
+                        //trying out rabbit
+                        connectToRabbitMQ();
                     }}
                 >
                     {/* <input type="hidden" name="remember" value="true" /> */}
                     <div class="rounded-md shadow-sm -space-y-px">
                         <div>
                             <label for="name" class="sr-only">Name</label>
-                            <input id="name" name="name" type="text" class="tailwindInput" placeholder="Name" 
-                                onChange={(e) => {
-                                    // setState();
-                                }}
+                            <input id="name" name="name" type="text" class="tailwindInput" placeholder="Username" 
+                                
                             />
                         </div>
                         <div>
                             <label for="email" class="sr-only">Email address</label>
-                            <input id="email" name="email" type="email"  class="tailwindInput" placeholder="Email address" />
+                            <input id="email" name="email"   class="tailwindInput" placeholder="Email address" />
                         </div>
                         <div>
                             <label for="password" class="sr-only">Password</label>
@@ -48,7 +68,7 @@ export default function SignUp() {
                     </div>
 
                     <div>
-                        <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <button type="submit" class="tailwindSubmit">
                             Sign up
                         </button>
                     </div>
