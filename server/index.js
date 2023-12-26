@@ -12,12 +12,20 @@ var router = express.Router();
 //Routes
 const users = require('./src/Routes/users');
 
-//rabbitmq from danielpdev.io
-// const rabbit = require("./src/Middleware/rabbitmq/recieve")
-// var rabbitMQHandler = require('./connection');
+//Testing Rabbitmq
+const amqp = require('amqplib');
 
-//rabbitmq from rabbit getting started
-// const rabbit = require("./src/Middleware/rabbitmq/recieve")
+async function connect() {
+    try{
+        const connection = await amqp.connect('amqp://rabbitmq:5672')
+        const channel = await connection.createChannel();
+        return channel
+    } catch (error) {
+        console.error('Error connecting to RabbitMQ:', error);
+    }
+}
+
+connect().catch(console.warn);
 
 
 //Instances
@@ -39,19 +47,18 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser());
 
-app.use(session({
-    key: "userID",
-    secret: "secret",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        expires: 60 * 60 * 24 * 7
-    }
-}))
+// app.use(session({
+//     key: "userID",
+//     secret: "secret",
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: {
+//         expires: 60 * 60 * 24 * 7
+//     }
+// }))
 
 var server = require('http').Server(app);
-var socketIO = require('socket.io')(server);
-var calcSocket = socketIO.of('./calc');
+
 
 app.post("/", (req, res) => {
     console.log("connected");
@@ -101,21 +108,20 @@ app.get("/db/event/get", (require, response) => {
 
 });
 
-// app.get("/", (require, response) => {
-//     //try revieve JSON from client/frontend inside of require for db query
+//testing rabbit
 
-//     //create string for query possibly use ``
-//     const sqlQuery = `INSERT INTO ${some_db} VALUES ${some_name}, ${some_password}`;
-
-//     db.query(sqlQuery, (error, result) => {
-//         //send information back
-//         result.send("hello");
-
-//         //try to send back JSON to client/frontend for dynamic webpages
-//     });
-
-//     response.send("Hello world");
-// });
+app.post('/messages', async (req, res) => {
+    try{
+        const msg = await channgel.consume('my_queue', (msg) => {
+            channel.ack(msg);
+            console.log(msg);
+            res.send(msg.content.toString());
+        }, {noAck: false});
+    } catch (err) {
+        console.log(err);
+        res.status(500).send(err.messge);
+    }
+})
 
 app.listen(3001, () => {
     console.log("running in container");

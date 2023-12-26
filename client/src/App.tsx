@@ -3,6 +3,9 @@
 // import viteLogo from '/vite.svg';
 import './App.css';
 
+// import { Buffer } from 'buffer';
+// window.Buffer = Buffer;
+
 import Navbar from './Components/Navbar/Navbar';
 
 const App = (props: any) => {

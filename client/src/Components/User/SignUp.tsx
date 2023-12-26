@@ -1,36 +1,47 @@
+import { createSignal, createEffect } from "solid-js";
+
 import "./SignUp.css"
 
-// import { connectToRabbitMQ } from "../Database/User/SignUp";
+import { testRabbit } from "../Database/User/SignUp";
 
-import "../Database/User/SignUp";
 
 export default function SignUp() {
+    const [data, setData] = createSignal(null);
+
+    createEffect(() => {
+        testRabbit({ name: 'hello' }).then(
+            (responseData) => {setData(responseData).catch(
+                (error: any) => {console.log(error)}
+            )}
+        )
+    })
+
     // const [state, setState] = createStore({
     //     username: null,
     //     email: null,
     //     password: null,
     // })
 
-    let newUser = {
-        newUsername: null,
-        newEmail: null,
-        newPassword: null,
-    }
+    // let newUser = {
+    //     newUsername: null,
+    //     newEmail: null,
+    //     newPassword: null,
+    // }
 
-    async function signUp(target: any): Promise<void>{
-        console.log(target[0].value);
+    // async function signUp(target: any): Promise<void>{
+    //     console.log(target[0].value);
         
-        newUser.newUsername = target[0].value;
-        newUser.newEmail = target[1].value;
-        newUser.newPassword = target[2].value
+    //     newUser.newUsername = target[0].value;
+    //     newUser.newEmail = target[1].value;
+    //     newUser.newPassword = target[2].value
 
-        console.log(newUser);
+    //     console.log(newUser);
 
-        //call function that makes async ajax request
+    //     //call function that makes async ajax request
 
-        //direct user to new page
+    //     //direct user to new page
 
-    }
+    // }
     
     return (
         <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -40,15 +51,16 @@ export default function SignUp() {
                     Sign up
                     </h2>
                 </div>
+
                 <form class="mt-8 space-y-6"
                     onSubmit={(e) => {
                         e.preventDefault();
-                        signUp(e.target);
+                        // signUp(e.target);
 
                         // alert(e);
 
                         //trying out rabbit
-                        // connectToRabbitMQ();
+                        console.log(data);
                     }}
                 >
                     {/* <input type="hidden" name="remember" value="true" /> */}
