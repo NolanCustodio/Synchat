@@ -1,4 +1,4 @@
-import { createSignal, createEffect } from "solid-js";
+import { createStore } from "solid-js/store";
 
 import "./SignUp.css"
 
@@ -6,15 +6,32 @@ import { testRabbit } from "../Database/User/SignUp";
 
 
 export default function SignUp() {
-    const [data, setData] = createSignal(null);
+const [test, setTest] = createStore({
+    body: null,
+})
 
-    createEffect(() => {
-        testRabbit({ name: 'hello' }).then(
-            (responseData) => {setData(responseData).catch(
-                (error: any) => {console.log(error)}
-            )}
-        )
-    })
+    console.log(test.body);
+
+    async function callTestRabbit(): Promise<void>{
+        try{
+            const test: Promise<any> = testRabbit({ name: 'hello'})
+            const result = await test;
+            // console.log(result.body);
+
+            //Solidjs store value update
+            setTest({ body: result.body })
+
+            return result;
+
+            //change value in state
+
+            // const json = JSON.stringify(result);
+            // console.log(json);
+            // return json;
+        } catch (error){
+            console.log(error);
+        }
+    }
 
     // const [state, setState] = createStore({
     //     username: null,
@@ -58,9 +75,10 @@ export default function SignUp() {
                         // signUp(e.target);
 
                         // alert(e);
+                        callTestRabbit();
 
-                        //trying out rabbit
-                        console.log(data);
+                        console.log("because of button");
+                        console.log(test.body);
                     }}
                 >
                     {/* <input type="hidden" name="remember" value="true" /> */}

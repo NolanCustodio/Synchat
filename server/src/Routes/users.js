@@ -1,6 +1,6 @@
 //Node
 const express = require("express");
-const mysql = require("mysql");
+// const mysql = require("mysql");
 const bcrypt = require("bcrypt");
 
 require('dotenv').config();
@@ -12,12 +12,12 @@ require('dotenv').config();
 let router = express.Router();
 const saltRounds = process.env.SALT_ROUNDS;
 
-const db = mysql.createPool({
-    host:       'localhost',
-    user:       process.env.DB_USER,
-    password:   process.env.DB_ROOT_PW,
-    database:   process.env.DB_NAME,
-});
+// const db = mysql.createPool({
+//     host:       'localhost',
+//     user:       process.env.DB_USER,
+//     password:   process.env.DB_ROOT_PW,
+//     database:   process.env.DB_NAME,
+// });
 
 
 router.route("/SignUpUser").post((require, response) =>{

@@ -4,5 +4,7 @@ server_notes.txt
 
 .dockerignore
 
-/src/Routes/users.js
-/src/Routes/.env
+/src/Routes/*
+
+/FastifyTrial
+old_index.js
