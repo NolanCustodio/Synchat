@@ -3,8 +3,8 @@ server_notes.txt
 /node_modules
 
 .dockerignore
+.env
 
 /src/Routes/*
 
 /FastifyTrial
-old_index.js

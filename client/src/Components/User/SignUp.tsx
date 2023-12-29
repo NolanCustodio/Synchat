@@ -1,4 +1,4 @@
-import { createStore } from "solid-js/store";
+// import { createStore } from "solid-js/store";
 
 import "./SignUp.css"
 
@@ -6,60 +6,35 @@ import { testRabbit } from "../Database/User/SignUp";
 
 
 export default function SignUp() {
-const [test, setTest] = createStore({
-    body: null,
-})
+    // const [newUserInfo, setNewUserInfo] = createStore({
+    //     username: '',
+    //     email: '',
+    //     password: '',
+    // })
 
-    console.log(test.body);
-
-    async function callTestRabbit(): Promise<void>{
+    async function callTestRabbit(target: any): Promise<void>{
         try{
-            const test: Promise<any> = testRabbit({ name: 'hello'})
+            console.log(target[0].value);
+
+            const test: Promise<any> = await testRabbit({
+                username: target[0].value,
+                email: target[1].value,
+                password: target[2].value,
+            })
             const result = await test;
-            // console.log(result.body);
 
             //Solidjs store value update
-            setTest({ body: result.body })
+            // setState({ body: result.body });
 
-            return result;
+            //direct user to new page
+            return
 
-            //change value in state
-
-            // const json = JSON.stringify(result);
-            // console.log(json);
-            // return json;
         } catch (error){
             console.log(error);
         }
     }
 
-    // const [state, setState] = createStore({
-    //     username: null,
-    //     email: null,
-    //     password: null,
-    // })
 
-    // let newUser = {
-    //     newUsername: null,
-    //     newEmail: null,
-    //     newPassword: null,
-    // }
-
-    // async function signUp(target: any): Promise<void>{
-    //     console.log(target[0].value);
-        
-    //     newUser.newUsername = target[0].value;
-    //     newUser.newEmail = target[1].value;
-    //     newUser.newPassword = target[2].value
-
-    //     console.log(newUser);
-
-    //     //call function that makes async ajax request
-
-    //     //direct user to new page
-
-    // }
-    
     return (
         <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
             <div class="max-w-md w-full space-y-8">
@@ -72,28 +47,25 @@ const [test, setTest] = createStore({
                 <form class="mt-8 space-y-6"
                     onSubmit={(e) => {
                         e.preventDefault();
-                        // signUp(e.target);
 
-                        // alert(e);
-                        callTestRabbit();
+                        callTestRabbit(e.target);
 
-                        console.log("because of button");
-                        console.log(test.body);
+                        // console.log("button press");
                     }}
                 >
                     {/* <input type="hidden" name="remember" value="true" /> */}
                     <div class="rounded-md shadow-sm -space-y-px">
-                        <div>
-                            <label for="name" class="sr-only">Name</label>
-                            <input id="name" name="name" type="text" class="tailwindInput" placeholder="Username" 
+                        <div class="form-input">
+                            <label for="username" class="sr-only">Name</label>
+                            <input id="username" name="username" type="text" class="tailwindInput" placeholder="Username" 
                                 
                             />
                         </div>
-                        <div>
+                        <div class="form-input">
                             <label for="email" class="sr-only">Email address</label>
                             <input id="email" name="email"   class="tailwindInput" placeholder="Email address" />
                         </div>
-                        <div>
+                        <div class="form-input">
                             <label for="password" class="sr-only">Password</label>
                             <input id="password" name="password" type="password" class="tailwindInput" placeholder="Password" />
                         </div>
