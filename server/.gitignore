@@ -3,7 +3,7 @@ server_notes.txt
 /node_modules
 
 .dockerignore
-.env
+# .env
 
 /src/Routes/*
 

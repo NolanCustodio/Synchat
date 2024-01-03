@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+       "target": "es2016",
+       "module": "NodeNext",
+       "strict": true,
+       "moduleResolution": "NodeNext",
+       "esModuleInterop": true,
+       "noEmit": true,
+       "forceConsistentCasingInFileNames": true,
+       "allowImportingTsExtensions": true
+    },
+    "include": [
+       "src/**/*.ts", 
+       "index.ts"   
+    ],
+    "exclude": [
+       "node_modules"
+    ]
+ }
