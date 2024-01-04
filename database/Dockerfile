@@ -1,15 +1,29 @@
-# Database
-FROM mysql:8
+#install Linux
+FROM ubuntu:22.04
 
-COPY init.sql /docker-entrypoint-initdb.d/
-COPY ./script /docker-entrypoint-initdb.d/
+#create mysql instance
+#run mysql
+#init database and tables
+RUN apt-get update 
+RUN apt-get install -y mysql-server 
+RUN apt-get install -y curl 
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - 
+RUN apt-get install -y nodejs 
+RUN rm -rf /var/lib/apt/lists/*
 
-# Node for RabbitMQ
-FROM node:18.18-alpine
+#mysql setup
+COPY ./mysql/init.sql /docker-entrypoint-initdb.d/
+COPY ./mysql/script /docker-entrypoint-initdb.d/
 
-WORKDIR /rabbit
+WORKDIR /database
 COPY package*.json ./
 RUN npm install
 COPY . .
 
-CMD ["npm", "run", "devStart"]
+#running both servers
+COPY init.sh /init.sh
+RUN chmod +x /init.sh
+
+#runs the mysql server and node server
+# CMD ["npm", "run", "devStart"]
+ENTRYPOINT [ "/bin/sh","/init.sh" ]

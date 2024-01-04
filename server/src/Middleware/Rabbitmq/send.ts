@@ -1,8 +1,8 @@
 import client, { Connection, Channel, ConsumeMessage } from 'amqplib';
 import dotenv from 'dotenv'; dotenv.config();
 
-const rabbitUser = process.env.RABBIT_USER;
-const rabbitmqPassword = process.env.RABBIT_PASSWORD;
+const rabbitUser = process.env.TEST_RABBIT_USER;
+const rabbitmqPassword = process.env.TEST_RABBIT_PASSWORD;
 console.log(rabbitUser , rabbitmqPassword);
 
 const rabbitmq = async () => {
