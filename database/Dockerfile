@@ -15,6 +15,10 @@ RUN rm -rf /var/lib/apt/lists/*
 COPY ./mysql/init.sql /docker-entrypoint-initdb.d/
 COPY ./mysql/script /docker-entrypoint-initdb.d/
 
+#Create user
+RUN auser
+
+#Node
 WORKDIR /database
 COPY package*.json ./
 RUN npm install
