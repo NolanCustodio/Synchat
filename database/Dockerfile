@@ -16,18 +16,19 @@ COPY ./mysql/init.sql /docker-entrypoint-initdb.d/
 COPY ./mysql/script /docker-entrypoint-initdb.d/
 
 #Create user
-RUN auser
+# RUN auser
 
 #Node
 WORKDIR /database
 COPY package*.json ./
 RUN npm install
 COPY . .
+RUN chmod +x ./init.sh
 
 #running both servers
-COPY init.sh /init.sh
-RUN chmod +x /init.sh
+# COPY init.sh /init.sh
+# RUN chmod +x /init.sh
 
 #runs the mysql server and node server
 # CMD ["npm", "run", "devStart"]
-ENTRYPOINT [ "/bin/sh","/init.sh" ]
+ENTRYPOINT [ "/bin/sh","/database/init.sh" ]

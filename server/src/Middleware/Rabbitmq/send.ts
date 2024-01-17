@@ -5,7 +5,13 @@ const rabbitUser = process.env.TEST_RABBIT_USER;
 const rabbitmqPassword = process.env.TEST_RABBIT_PASSWORD;
 console.log(rabbitUser , rabbitmqPassword);
 
-const rabbitmq = async () => {
+interface User{
+    username: string,
+    email: string,
+    password: string,
+}
+
+const rabbitmq = async (NewUser: User) => {
     const connection: Connection = await client.connect(
         `amqp://${rabbitUser}:${rabbitmqPassword}@rabbitmq:5672`
     );
@@ -14,16 +20,8 @@ const rabbitmq = async () => {
 
     await channel.assertQueue('myQueue');
 
-    channel.sendToQueue('myQueue', Buffer.from('message'));
+    channel.sendToQueue('myQueue', Buffer.from(JSON.stringify(NewUser)));
 
-    const consumer = (msg: ConsumeMessage | null): void => {
-        if (msg){
-            console.log(`Recived: ${msg.content.toString()}`);
-            channel.ack(msg);
-        }
-    };
-
-    await channel.consume('myQueue', consumer);
 }
 
 export default rabbitmq;
