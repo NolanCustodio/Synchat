@@ -14,7 +14,7 @@ export default function SignUp() {
 
     async function callTestRabbit(target: any): Promise<void>{
         try{
-            console.log(target[0].value);
+            // console.log(target[0].value);
 
             const test: Promise<any> = await testRabbit({
                 username: target[0].value,
@@ -22,6 +22,7 @@ export default function SignUp() {
                 password: target[2].value,
             })
             const result = await test;
+            console.log(result);
 
             //Solidjs store value update
             // setState({ body: result.body });
