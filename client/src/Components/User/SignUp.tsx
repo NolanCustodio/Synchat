@@ -1,4 +1,4 @@
-// import { createStore } from "solid-js/store";
+import { createStore } from "solid-js/store";
 
 import "./SignUp.css"
 
@@ -6,11 +6,11 @@ import { testRabbit } from "../Database/User/SignUp";
 
 
 export default function SignUp() {
-    // const [newUserInfo, setNewUserInfo] = createStore({
-    //     username: '',
-    //     email: '',
-    //     password: '',
-    // })
+    const [newUserInfo, setNewUserInfo] = createStore({
+        username: 'something',
+        email: '',
+        password: '',
+    })
 
     async function callTestRabbit(target: any): Promise<void>{
         try{
@@ -22,10 +22,10 @@ export default function SignUp() {
                 password: target[2].value,
             })
             const result = await test;
-            console.log(result);
+            console.log('rabbit test success',result);
 
             //Solidjs store value update
-            // setState({ body: result.body });
+            setNewUserInfo({ username: result.username });
 
             //direct user to new page
             return
@@ -43,6 +43,10 @@ export default function SignUp() {
                     <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
                     Sign up
                     </h2>
+
+                    <h3>
+                        {newUserInfo.username}
+                    </h3>
                 </div>
 
                 <form class="mt-8 space-y-6"
