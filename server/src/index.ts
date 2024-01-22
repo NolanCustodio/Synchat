@@ -7,7 +7,7 @@ dotenv.config();
 import session from 'express-session';
 
 //Route Paths
-import SignUp from './src/Routes/Users/SignUp.ts';
+import SignUp from './Routes/Users/SignUp';
 
 //Env
 const clientPort = process.env.CLIENT_PORT;
@@ -21,8 +21,9 @@ const app = express();
 app.use(cors({
     origin: [`http://localhost:${clientPort}`],
     methods: ["GET", "POST"],
-    credentials: true
+    // credentials: true
 }));
+// app.use(cors());s
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
@@ -32,12 +33,11 @@ app.use(session({
 }))
 
 
-// //Routes
+//Routes
 app.use('/users', SignUp);
 
 app.listen(listeningPort, () => {
-    console.log("running in container");
+    console.log(`running in container on port ${listeningPort}`);
 });
-
 
 
