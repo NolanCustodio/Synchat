@@ -5,6 +5,6 @@ server_notes.txt
 .dockerignore
 # .env
 
-/src/Routes/*
+/src/Services/*
 
 /FastifyTrial

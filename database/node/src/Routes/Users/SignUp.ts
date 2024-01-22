@@ -1,6 +1,6 @@
 //import mysql stuff
 
-import RecieveSignUp from "../../Middleware/RabbitMQ/Users/RecieveSignUp";
+import RecieveSignUp from "../../Services/RabbitMQ/Users/RecieveSignUp";
 
 //function to call in index
 async function SignUp(): Promise<any | void>{
