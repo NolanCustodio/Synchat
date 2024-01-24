@@ -31,7 +31,7 @@ router.post('/signUp', async (req, res) => {
                 username: req.body.username,
                 email: req.body.email,
                 password: password,
-                sessionId: randomUUID()
+                sessionId: randomUUID()// this does not belong here
             }
 
             console.log(NewUser);

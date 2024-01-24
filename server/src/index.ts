@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 dotenv.config();
 import session from 'express-session';
+import RabbitmqClient from './Services/RabbitMQ/client'
 
 //Route Paths
 import SignUp from './Routes/Users/SignUp';
@@ -12,7 +13,7 @@ import SignUp from './Routes/Users/SignUp';
 //Env
 const clientPort = process.env.CLIENT_PORT;
 const listeningPort = process.env.LISTENING_PORT;
-const secret: string = process.env.SECRET!;
+const secret = process.env.SECRET!;
 
 console.log(typeof(secret))
 
@@ -23,7 +24,7 @@ app.use(cors({
     methods: ["GET", "POST"],
     // credentials: true
 }));
-// app.use(cors());s
+// app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
@@ -32,12 +33,14 @@ app.use(session({
     saveUninitialized: true
 }))
 
-
 //Routes
 app.use('/users', SignUp);
 
+//Rabbit Testing
+
 app.listen(listeningPort, () => {
     console.log(`running in container on port ${listeningPort}`);
+    RabbitmqClient.initialize();
 });
 
 

@@ -3,6 +3,7 @@
        "target": "es2016",
        "module": "NodeNext",
        "strict": true,
+       "strictPropertyInitialization": false,
        "moduleResolution": "NodeNext",
        "esModuleInterop": true,
        "noEmit": true,

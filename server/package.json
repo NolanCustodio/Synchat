@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "nodemon index.ts",
+    "start": "nodemon src/index.ts",
     "devStart": "nodemon --esm src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tsc --noEmit false"
