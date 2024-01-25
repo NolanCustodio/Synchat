@@ -1,4 +1,6 @@
 import { Channel, ConsumeMessage } from "amqplib";
+import RabbitmqClient from "./RabbitmqClient";
+import handleMessage from "./Handler/index";
 
 export default class Consumer{
 
@@ -8,31 +10,35 @@ export default class Consumer{
     }
 
     async consumeMessages(){
-        console.log("Waiting for messages");
+        console.log("DB: Waiting for messages");
 
         this.channel.consume(
             this.rpcQueue, 
-            (message: ConsumeMessage | null) => {
+            async (message: ConsumeMessage | null) => {
                 if (message === null){
                     //learn how to end gracefully
                     console.log("Error: message does not exist");
                     return;
                 }
                 
+                // console.log('Database incoming message: ', message.content.toString());
                 const {correlationId, replyTo} = message.properties
+                // console.log(correlationId, replyTo);
 
                 if (!correlationId || !replyTo){
                     console.log("Missing correlationId or replyTo");
-                }else{
-                    
-                    //parse data
-                    //get reply_queue
-                    //getcorrelationId
-
-                    //sendToQueue with correct response
+                    return
                 }
 
-                console.log('the reply', JSON.parse(message.content.toString()));
+                //call helper function/handler to execute operation
+                const rtnData = await handleMessage(message.content.toString());
+
+                // console.log('the reply', rtnData.toString());
+
+                //sendToQueue
+                await RabbitmqClient.produce(rtnData, correlationId, replyTo);
+
+                
             },{
             noAck: true
             }

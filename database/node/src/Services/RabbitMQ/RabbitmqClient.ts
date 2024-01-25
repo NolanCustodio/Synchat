@@ -1,7 +1,8 @@
 import { Channel, Connection, connect } from 'amqplib';
 import Consumer from './consumer';
 import Producer from './producer';
-
+import dotenv from 'dotenv';
+dotenv.config();
 
 class RabbitmqClient{
     private constructor(){};
@@ -37,8 +38,9 @@ class RabbitmqClient{
             this.consumerChannel = await this.connection.createChannel();
 
             const {queue: rpc_queue} = await this.consumerChannel.assertQueue(
-                'rpc_queue', 
-                {exclusive: true});
+                process.env.RPC_QUEUE!, 
+                {exclusive: true}
+            );
 
             this.producer = new Producer(this.producerChannel);
             this.consumer = new Consumer(this.consumerChannel, rpc_queue);

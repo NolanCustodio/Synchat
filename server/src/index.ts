@@ -5,7 +5,7 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 dotenv.config();
 import session from 'express-session';
-import RabbitmqClient from './Services/RabbitMQ/client'
+import RabbitmqClient from './Services/RabbitMQ/RabbitClient'
 
 //Route Paths
 import SignUp from './Routes/Users/SignUp';
@@ -37,10 +37,10 @@ app.use(session({
 app.use('/users', SignUp);
 
 //Rabbit Testing
+RabbitmqClient.initialize();
 
 app.listen(listeningPort, () => {
     console.log(`running in container on port ${listeningPort}`);
-    RabbitmqClient.initialize();
 });
 
 

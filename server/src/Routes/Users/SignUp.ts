@@ -1,64 +1,69 @@
 import express from 'express';
 import EventEmitter from 'events';
-import { randomUUID } from 'crypto';
+
 const router = express.Router();
 
-//Services
-import rabbitmqSend from '../../Services/RabbitMQ/rabbitmqSend';
-import hashPassword from '../../Services/Encrypt/Users/passwordEncrypt';
-
-import NewUser from '../../Models/NewUser.ts';
+import signUp from '../../Services/RabbitMQ/Users/SignUp';
 
 router.post('/signUp', async (req, res) => {
+
     try{
-        let NewUser: NewUser = {
-            username: '',
-            email: '',
-            password: '',
-            sessionId: ''
+        const newUser = {
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password,
+            eventUUID: ''
         }
+        await signUp(newUser);
 
-        const eventEmitter = new EventEmitter();
-
-        //setup/use interface/object hash password
-        hashPassword(req.body.password, eventEmitter);
-
-        //create a session and sessionId
-            // add sessionId to the new user
-        
-        eventEmitter.on('encryptedPassword', (password) => {
-            NewUser = {
-                username: req.body.username,
-                email: req.body.email,
-                password: password,
-                sessionId: randomUUID()// this does not belong here
-            }
-
-            console.log(NewUser);
-
-            if (NewUser.password === ''){
-                //create proper redirection
-                res.redirect('/404');
-            }
-
-            //valid user info, but still not verified for unique values
-            rabbitmqSend(NewUser, eventEmitter);
-        })
-
-        //user information was already taken
-        eventEmitter.on('usernameTaken', (message) => {
-            console.log('username taken')
-            res.send(message)
-        })
-
-        //getting data from rabbitmq rpc chain
-        eventEmitter.on('signUp', (message) => {
-            console.log('successful emit',message);
-            res.send(message);
-        })
-    } catch (error) {
+    }catch (error){
         console.log(error);
     }
+
+    // try{
+    //     const uuid = randomUUID();
+    //     const passwordUUID = randomUUID();
+    //     let newUser= {
+    //         username: '',
+    //         email: '',
+    //         password: '',
+    //         eventUUID: ''
+    //     }
+
+    //     const eventEmitter = new EventEmitter();
+
+    //     //setup/use interface/object hash password
+    //     hashPassword(req.body.password, passwordUUID, eventEmitter);
+        
+    //     //make sure to use a uuid for event
+    //     eventEmitter.on(passwordUUID, (password) => {
+    //         newUser = {
+    //             username: req.body.username,
+    //             email: req.body.email,
+    //             password: password,
+    //             eventUUID: uuid
+    //         }
+
+    //         console.log("new user info ",newUser);
+
+    //         if (newUser.password === ''){
+    //             //create proper redirection
+    //             res.redirect('/404');
+    //         }
+
+    //         //valid user info, but still not verified for unique values
+    //         rabbitmqClient.produce(newUser)
+    //     });
+
+    //     const eventEmitter2 = new EventEmitter();
+    //     console.log("event emitter uuid in signUp is:", uuid, typeof(uuid));
+    //     eventEmitter2.on(newUser.eventUUID, (data) => {
+    //         console.log("End of data flow",  data);
+    //     });
+
+    // } catch (error) {
+    //     console.log(error);
+    // }
 });
 
 export default router;
