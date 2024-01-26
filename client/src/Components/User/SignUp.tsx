@@ -22,7 +22,7 @@ export default function SignUp() {
                 password: target[2].value,
             })
             const result = await test;
-            console.log('rabbit test success',result);
+            console.log('rabbit test success', result);
 
             //Solidjs store value update
             setNewUserInfo({ username: result.username });

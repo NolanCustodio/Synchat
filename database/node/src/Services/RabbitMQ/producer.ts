@@ -16,7 +16,6 @@ export default class Producer{
                 {
                     correlationId: correlationId
                 }
-                
             );
-    }
+        }
 }

@@ -5,6 +5,6 @@ server_notes.txt
 .dockerignore
 # .env
 
-/src/Services/*
+/src/Services/Encrypt
 
 /dist
