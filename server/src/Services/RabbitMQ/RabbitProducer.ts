@@ -15,7 +15,8 @@ export default class Producer{
     async produceMessages(data:any): Promise<string>{
         if (!data.eventUUID){
             console.log('creating new uuid');
-            const uuid = randomUUID();
+            // const uuid = randomUUID();
+            data.eventUUID = randomUUID();
         }
         
         //probably needs to be more robust when handling non user auth requests
@@ -26,7 +27,10 @@ export default class Producer{
             Buffer.from(JSON.stringify(data)),
             {
                 replyTo: this.replyQueueName,
-                correlationId: uuid
+                correlationId: uuid,
+                headers:{
+                    action: data.action
+                }
             }
         );
 

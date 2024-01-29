@@ -2,7 +2,7 @@ import { createStore } from "solid-js/store";
 
 import "./SignUp.css"
 
-import { testRabbit } from "../Database/User/SignUp";
+import { signUp } from "../Database/User/SignUp";
 
 
 export default function SignUp() {
@@ -16,11 +16,14 @@ export default function SignUp() {
         try{
             // console.log(target[0].value);
 
-            const test: Promise<any> = await testRabbit({
+            const newUser = {
                 username: target[0].value,
                 email: target[1].value,
                 password: target[2].value,
-            })
+                action: 'signUp'
+            }
+
+            const test: Promise<any> = await signUp(newUser)
             const result = await test;
             console.log('rabbit test success', result);
 

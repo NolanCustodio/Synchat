@@ -11,6 +11,7 @@ router.post('/signUp', async (req, res) => {
             username: req.body.username,
             email: req.body.email,
             password: req.body.password,
+            action: req.body.action,
             eventUUID: ''
         }
 

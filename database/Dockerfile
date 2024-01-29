@@ -10,6 +10,9 @@ RUN apt-get install -y curl
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - 
 RUN apt-get install -y nodejs 
 RUN rm -rf /var/lib/apt/lists/*
+RUN sudo npm cache clean -f
+RUN sudo npm install -g n
+RUN sudo n stable
 
 #mysql setup
 COPY ./mysql/init.sql /docker-entrypoint-initdb.d/
