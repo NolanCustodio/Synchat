@@ -1,13 +1,33 @@
-import { exec } from 'child_process';
+import { prisma } from '../../Services/Prisma/index';
 
 
 export default async function SignUp(data: any){
-    //create mysql connection and user auth
-    // console.log("in helper function",data);
+    let rtnData;
+    console.log(data);
 
-    
+    try{
+        
+        const isUnique = await prisma.users.findUnique({
+            where:{
+                email: data.email,
+            },
+        });
 
-    const rtnData = data;
+        if (isUnique === null){
+            rtnData = await prisma.users.create({
+                data:{
+                    username: data.username,
+                    email: data.email,
+                    password: data.password
+                }
+            })
+        }
+
+    }catch(error){
+        console.log('The error is:',error);
+    }
+
+    rtnData = data;
 
     return rtnData;
 }

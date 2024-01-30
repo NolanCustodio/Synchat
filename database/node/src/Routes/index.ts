@@ -1,5 +1,7 @@
+import { PrismaClient } from '@prisma/client';
 
 import signUp from './User/SignUp';
+
 
 export default async function handleMessage(action: string, data: any){
     let rtnData;

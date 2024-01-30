@@ -12,6 +12,7 @@ const HomePage = lazy(() => import("./Components/HomePage/HomePage"));
 const LandingPage = lazy(() => import("./Components/LandingPage/LandingPage"));
 const Groups = lazy(() => import("./Components/Groups/Groups"));
 const SignUp = lazy(() => import ("./Components/User/SignUp"));
+const Error = lazy(() => import("./Components/Error/Error"))
 
 const root = document.getElementById('root')
 
@@ -22,6 +23,7 @@ render(() => (
         <Route path="/HomePage" component={HomePage}/>
         <Route path="/Groups" component={Groups}/>
         <Route path="/SignUp" component={SignUp}/>
+        <Route path="/Error" component={Error}/>
     </Router>
 ), 
 root!);
