@@ -2,7 +2,7 @@ import { createStore } from "solid-js/store";
 
 import "./SignUp.css"
 
-import { signUp } from "../Database/User/SignUp";
+import { signUp } from "../../API/User/SignUp";
 
 
 export default function SignUp() {
@@ -16,10 +16,16 @@ export default function SignUp() {
         try{
             // console.log(target[0].value);
 
+            // const newUser = {
+            //     username: target[0].value,
+            //     email: target[1].value,
+            //     password: target[2].value,
+            //     action: 'signUp'
+            // }
             const newUser = {
-                username: target[0].value,
-                email: target[1].value,
-                password: target[2].value,
+                username: 'a',
+                email: 'a',
+                password: 'a',
                 action: 'signUp'
             }
 
@@ -31,13 +37,14 @@ export default function SignUp() {
                 setNewUserInfo({ username: test.username });
                 console.log('working weird');
             }else{
-                let output = "";
-                for (let i = 0; i < test.duplicateFields.lengh; i++){
-                    output.concat(test.duplicateFields[i]);
-                    console.log(test.duplicateFields[i]);
+                let output = ``;
+                
+                for (let i = 0; i < test.duplicateFields.length; i++){
+                    output.concat(test.duplicateFields[i], " ");
+                    console.log('single field',test.duplicateFields[i]);
                 }
                 output.concat("are already taken");
-                console.log(output);
+                console.log('output =',output);
                 // window.alert(output)
             }
 
@@ -52,7 +59,7 @@ export default function SignUp() {
         }
     }
 
-
+    
     return (
         <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
             <div class="max-w-md w-full space-y-8">
