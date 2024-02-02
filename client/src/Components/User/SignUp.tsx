@@ -23,12 +23,26 @@ export default function SignUp() {
                 action: 'signUp'
             }
 
-            const test: Promise<any> = await signUp(newUser)
-            const result = await test;
-            console.log('rabbit test success', result);
+            const test = await signUp(newUser)
+            // const result = await test;
+            console.log('rabbit test success', test);
+
+            if (test.duplicateFields.lenth === 0){
+                setNewUserInfo({ username: test.username });
+                console.log('working weird');
+            }else{
+                let output = "";
+                for (let i = 0; i < test.duplicateFields.lengh; i++){
+                    output.concat(test.duplicateFields[i]);
+                    console.log(test.duplicateFields[i]);
+                }
+                output.concat("are already taken");
+                console.log(output);
+                // window.alert(output)
+            }
 
             //Solidjs store value update
-            setNewUserInfo({ username: result.username });
+            // setNewUserInfo({ username: test.username });
 
             //direct user to new page
             return

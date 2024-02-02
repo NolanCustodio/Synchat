@@ -2,32 +2,54 @@ import { prisma } from '../../Services/Prisma/index';
 
 
 export default async function SignUp(data: any){
-    let rtnData;
-    console.log(data);
+    let rtnData = data;
+    rtnData.duplicateFields = [];
+    rtnData.isSuccess = true;
+    console.log('db query',data);
 
     try{
         
-        const isUnique = await prisma.users.findUnique({
+        const emailIsUnique = await prisma.users.findUnique({
             where:{
                 email: data.email,
             },
         });
 
-        if (isUnique === null){
-            rtnData = await prisma.users.create({
+        const usernameIsUnique = await prisma.users.findUnique({
+            where:{
+                username: data.username,
+            }
+        })
+
+        console.log(emailIsUnique, usernameIsUnique);
+
+        if (emailIsUnique !== null){
+            rtnData.duplicateFields.push('email');
+            rtnData.isSuccess = false;
+        }
+
+        if (usernameIsUnique !== null){
+            rtnData.duplicateFields.push('username');
+            rtnData.isSuccess = false;
+        }
+
+        if (rtnData.isSuccess){
+            await prisma.users.create({
                 data:{
                     username: data.username,
                     email: data.email,
-                    password: data.password
+                    password: data.password,
                 }
             })
         }
+
+        delete rtnData.password;
 
     }catch(error){
         console.log('The error is:',error);
     }
 
-    rtnData = data;
+    // rtnData = data;
 
     return rtnData;
 }

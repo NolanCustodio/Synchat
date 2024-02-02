@@ -16,6 +16,10 @@ router.post('/signUp', async (req, res) => {
         }
 
         let rtn = await signUp(newUser);
+        const isSuccess = rtn.isSuccess;
+        
+        console.log('the return data from post',isSuccess)
+
 
         res.send(rtn);
 
