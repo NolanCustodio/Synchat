@@ -25,3 +25,4 @@ dist-ssr
 
 #my-files
 /src/Components/Database
+*.myNotes
