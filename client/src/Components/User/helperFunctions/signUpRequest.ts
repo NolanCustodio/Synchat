@@ -1,6 +1,6 @@
 import { newUser, setNewUser } from "../../../stores/userStore";
 
-import { signUp } from "../../../API/User/SignUp"
+import { signUp } from "../../../API/User/userAuth"
 
 export async function signUpRequest(){
     try{
@@ -10,12 +10,15 @@ export async function signUpRequest(){
             password: newUser.password,
             action: 'signUp'
         }
+
+        setNewUser(() => ({ password: undefined}));
         
         const response = await signUp(makeNewUser);
+        // console.log(response);
 
         if (response.duplicateFields.length === 0){
-            setNewUser({ username: response.username })
-            console.log(response);
+            setNewUser(response);
+            // console.log(response);
         }else{
             let output = ``;
 

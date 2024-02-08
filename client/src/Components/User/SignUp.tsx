@@ -1,19 +1,22 @@
-import { createSignal } from "solid-js";
 import { newUser, setNewUser } from "../../stores/userStore";
 
-import "./SignUp.css";
+import { signUpRequest } from "./helperFunctions/signUpRequest";
 
-import { signUpRequest } from "./helperFunctions/CallRabbit";
+
+import "./userAuth.css";
+
 
 export default function SignUp() {
-    const [inputValue, setInputValue] = createSignal('');
-    
-    const handleInput = (event: InputEvent) => {
-        setInputValue((event.currentTarget as HTMLInputElement).value);
-    };
-    const handleSubmit = (event: any) => {
+
+    const handleSubmit = async (event: any) => {
         event.preventDefault();
-        console.log(inputValue());
+        setNewUser(() => ({
+            username: event.target[0].value,
+            email: event.target[1].value,
+            password: event.target[2].value,
+        }))
+        await signUpRequest();
+        console.log("newst user",newUser);
     }
     
 
@@ -35,23 +38,9 @@ export default function SignUp() {
                     
                     onSubmit={handleSubmit}
 
-                    // onSubmit={(e) => {
-                        // e.preventDefault();
-                        
-           
-                        // setNewUser(() =>({
-                        //     username: e.target[0].value,
-                        //     email: e.target[1].value,
-                        //     password: e.target[2].value
-                        // }));
-
-                        
-                        //calling from helpFunction
-                        // signUpRequest();
-                    // }}
                 >
                     {/* <input type="hidden" name="remember" value="true" /> */}
-                    <div class="rounded-md shadow-sm -space-y-px">
+                    <div class="rounded-md shadow-sm -space-y-px">          
                         <div class="form-input">
                             <label for="username" class="sr-only">Name</label>
                             <input 
@@ -60,11 +49,10 @@ export default function SignUp() {
                                 type="text" 
                                 class="tailwindInput" 
                                 placeholder="Username" 
-                                value={inputValue()}
-                                onInput={handleInput}
                                 
                             />
                         </div>
+
                         <div class="form-input">
                             <label for="email" class="sr-only">Email address</label>
                             <input id="email" name="email"   class="tailwindInput" placeholder="Email address" />

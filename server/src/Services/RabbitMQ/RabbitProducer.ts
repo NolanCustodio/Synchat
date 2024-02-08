@@ -36,6 +36,7 @@ export default class Producer{
 
         return new Promise((resolve, reject) => {
             this.eventEmitter.once(uuid, async (data) => {
+                delete data.eventUUID;
                 resolve(data);
             })
         })

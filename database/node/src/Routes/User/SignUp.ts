@@ -5,7 +5,7 @@ export default async function SignUp(data: any){
     let rtnData = data;
     rtnData.duplicateFields = [];
     rtnData.isSuccess = true;
-    console.log('db query',data);
+    // console.log('db query',data);
 
     try{
         
@@ -21,7 +21,7 @@ export default async function SignUp(data: any){
             }
         })
 
-        console.log(emailIsUnique, usernameIsUnique);
+        // console.log(emailIsUnique, usernameIsUnique);
 
         if (emailIsUnique !== null){
             rtnData.duplicateFields.push('email');
@@ -44,6 +44,7 @@ export default async function SignUp(data: any){
         }
 
         delete rtnData.password;
+        delete rtnData.action;
 
     }catch(error){
         console.log('The error is:',error);

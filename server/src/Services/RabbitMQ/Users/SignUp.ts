@@ -9,21 +9,8 @@ export default async function signUp(newUser: any): Promise<any>{
     try{
         const uuid = randomUUID();
 
-        //setup/use interface/object hash password
-        const hashedPassword = await hashPassword(newUser.password);
-        newUser.password = hashedPassword;
         newUser.eventUUID = uuid;
 
-        // if (newUser.password === ''){
-        //     //create proper redirection
-        //     res.redirect('/404');
-        // }
-
-        //     //valid user info, but still not verified for unique values
-        //     RabbitClient.produce(newUser)
-        // });
-
-        
         rtnData = await RabbitClient.produce(newUser);
 
     } catch (error) {

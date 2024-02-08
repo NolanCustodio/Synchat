@@ -8,7 +8,7 @@ import session from 'express-session';
 import RabbitmqClient from './Services/RabbitMQ/RabbitClient'
 
 //Route Paths
-import SignUp from './Routes/Users/SignUp';
+import auth from './Routes/Users/userAuth';
 
 //Env
 const clientPort = process.env.CLIENT_PORT;
@@ -34,7 +34,7 @@ app.use(session({
 }))
 
 //Routes
-app.use('/users', SignUp);
+app.use('/users', auth);
 
 //Rabbit Testing
 RabbitmqClient.initialize();
