@@ -1,7 +1,7 @@
 import { prisma } from '../../Services/Prisma/index';
 
 
-export default async function SignUp(data: any){
+export default async function signUp(data: any){
     let rtnData = data;
     rtnData.duplicateFields = [];
     rtnData.isSuccess = true;

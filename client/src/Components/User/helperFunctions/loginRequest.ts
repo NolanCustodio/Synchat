@@ -7,7 +7,7 @@ export async function loginRequest(){
         const verifyUser ={
             username: user.username,
             password: user.password,
-            action: 'verify'
+            action: 'login'
         }
 
         setUser(() => ({password: undefined}));
