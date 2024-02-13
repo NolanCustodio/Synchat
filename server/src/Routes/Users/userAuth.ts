@@ -19,10 +19,6 @@ router.post('/signUp', async (req, res) => {
         }
 
         let rtn = await DatabaseRequest(newUser);
-        const isSuccess = rtn.isSuccess;
-        
-        console.log('the return data from post',isSuccess)
-
 
         res.send(rtn);
 
@@ -45,7 +41,7 @@ router.post("/login", async (req, res) =>{
         let rtn = await DatabaseRequest(verifyUser);
 
         const bool = await comparePasswords(req.body.password, rtn.userInfo.password);
-        console.log(bool);
+        console.log(rtn);
         //return hashed password
 
         res.send({});

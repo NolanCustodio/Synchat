@@ -3,11 +3,20 @@ import { prisma } from '../../Services/Prisma/index';
 
 export default async function signUp(data: any){
     let rtnData = data;
-    rtnData.duplicateFields = [];
-    rtnData.isSuccess = true;
+    rtnData.takenFields = {
+        username: true,
+        email: true,
+    };
+    rtnData.action = false
     // console.log('db query',data);
 
     try{
+
+        const usernameIsUnique = await prisma.users.findUnique({
+            where:{
+                username: data.username,
+            }
+        })
         
         const emailIsUnique = await prisma.users.findUnique({
             where:{
@@ -15,25 +24,20 @@ export default async function signUp(data: any){
             },
         });
 
-        const usernameIsUnique = await prisma.users.findUnique({
-            where:{
-                username: data.username,
-            }
-        })
-
-        // console.log(emailIsUnique, usernameIsUnique);
-
-        if (emailIsUnique !== null){
-            rtnData.duplicateFields.push('email');
-            rtnData.isSuccess = false;
+        // console.log('checking prisma bools',emailIsUnique, usernameIsUnique);
+ 
+        if (usernameIsUnique === null){
+            rtnData.takenFields.username = false;
+            rtnData.action = true;
         }
 
-        if (usernameIsUnique !== null){
-            rtnData.duplicateFields.push('username');
-            rtnData.isSuccess = false;
+        if (emailIsUnique === null){
+            rtnData.takenFields.email = false;
+            rtnData.action = true;
         }
 
-        if (rtnData.isSuccess){
+
+        if (rtnData.action){
             await prisma.users.create({
                 data:{
                     username: data.username,
@@ -44,13 +48,12 @@ export default async function signUp(data: any){
         }
 
         delete rtnData.password;
-        delete rtnData.action;
 
     }catch(error){
         console.log('The error is:',error);
     }
 
-    // rtnData = data;
+    // console.log(rtnData);
 
     return rtnData;
 }

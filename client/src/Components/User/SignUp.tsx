@@ -10,6 +10,9 @@ export default function SignUp() {
 
     const handleSubmit = async (event: any) => {
         event.preventDefault();
+
+        //call function to check if fields are blank
+
         setNewUser(() => ({
             username: event.target[0].value,
             email: event.target[1].value,
