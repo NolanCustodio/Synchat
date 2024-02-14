@@ -5,6 +5,8 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 dotenv.config();
 import session from 'express-session';
+
+
 import RabbitmqClient from './Services/RabbitMQ/RabbitClient'
 
 //Route Paths
@@ -15,22 +17,26 @@ const clientPort = process.env.CLIENT_PORT;
 const listeningPort = process.env.LISTENING_PORT;
 const secret = process.env.SECRET!;
 
-console.log(typeof(secret))
-
 //Instance of Express
 const app = express();
 app.use(cors({
+    credentials: true,
     origin: [`http://localhost:${clientPort}`],
     methods: ["GET", "POST"],
-    // credentials: true
 }));
-// app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(session({
+    name: "qid",
     secret: secret,
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: false,
+    cookie:{
+        httpOnly: true,
+        secure: true,
+        maxAge: 1000 * 60 * 60 * 24 * 7 //7 days
+    }
 }))
 
 //Routes

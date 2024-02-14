@@ -3,9 +3,9 @@ import { prisma } from '../../Services/Prisma/index';
 
 export default async function signUp(data: any){
     let rtnData = data;
-    rtnData.takenFields = {
-        username: true,
-        email: true,
+    rtnData.uniqueFields = {
+        username: false,
+        email: false,
     };
     rtnData.action = false
     // console.log('db query',data);
@@ -27,12 +27,14 @@ export default async function signUp(data: any){
         // console.log('checking prisma bools',emailIsUnique, usernameIsUnique);
  
         if (usernameIsUnique === null){
-            rtnData.takenFields.username = false;
-            rtnData.action = true;
+            rtnData.uniqueFields.username = true;
         }
 
         if (emailIsUnique === null){
-            rtnData.takenFields.email = false;
+            rtnData.uniqueFields.email = true;
+        }
+
+        if (emailIsUnique === null && usernameIsUnique === null){
             rtnData.action = true;
         }
 
@@ -48,6 +50,8 @@ export default async function signUp(data: any){
         }
 
         delete rtnData.password;
+        delete rtnData.username;
+        delete rtnData.email;
 
     }catch(error){
         console.log('The error is:',error);

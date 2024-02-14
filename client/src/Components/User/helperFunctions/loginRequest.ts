@@ -10,7 +10,11 @@ export async function loginRequest(){
             action: 'login'
         }
 
-        setUser(() => ({password: undefined}));
+        setUser(() => ({
+            username: undefined,
+            password: undefined,
+            email: undefined
+        }));
 
         const response = await login(verifyUser);
 

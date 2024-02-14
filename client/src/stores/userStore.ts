@@ -1,13 +1,13 @@
 import { createStore } from "solid-js/store";
 
 export const [newUser, setNewUser] = createStore({
-    username: 'something',
+    username: '',
     email: '',
     password: '',
     action: false,
-    takenFields: {
-        username: true,
-        email: true
+    uniqueFields: {
+        username: false,
+        email: false
     },
 })
 

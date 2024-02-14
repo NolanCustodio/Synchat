@@ -14,19 +14,18 @@ export async function signUpRequest(): Promise<boolean>{
         }
 
         setNewUser(() => ({
-            username: '',
-            email: '', 
+            username: undefined,
+            email: undefined, 
             password: undefined,
         }));
         
         const response = await signUp(makeNewUser);
-        // setNewUser(() => ({action: response.isSuccess}))
         // console.log(response);
 
         setNewUser(() => ({
-            takenFields:{
-                username: response.takenFields.username,
-                email: response.takenFields.email
+            uniqueFields:{
+                username: response.uniqueFields.username,
+                email: response.uniqueFields.email
             },
             action: response.action
         }))

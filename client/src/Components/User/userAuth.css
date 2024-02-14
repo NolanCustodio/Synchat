@@ -11,3 +11,8 @@
     padding-top: 5px;
     padding-bottom: 5px;
 }
+
+.input-error{
+    @apply appearance-none rounded-none relative block w-full px-3 py-2 border border-red-500 placeholder-red-500 text-red-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-red-500 focus:z-10 sm:text-sm;       
+
+}
