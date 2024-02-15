@@ -5,6 +5,7 @@ const router = express.Router();
 import DatabaseRequest from '../../Services/RabbitMQ/Users/DatabaseRequest';
 import hashPassword from '../../Services/Encrypt/Users/passwordEncrypt';
 import comparePasswords from '../../Services/Encrypt/Users/comparePassword';
+import { sessionCheck } from '../../Middleware/Users/sessionAuth';
 
 router.post('/signUp', async (req, res) => {
     try{
@@ -41,10 +42,20 @@ router.post("/login", async (req, res) =>{
         let rtn = await DatabaseRequest(verifyUser);
 
         const bool = await comparePasswords(req.body.password, rtn.userInfo.password);
-        console.log(rtn);
+        console.log('trying user id', req.session);
         //return hashed password
 
-        res.send({});
+        console.log(bool);
+
+        // if (bool){
+        //     req.session.userId = await sessionCheck(req.session.userId);
+        // }
+        
+        // req.session.userId = await sessionCheck(req.session.userId);
+
+        // console.log(req.session.userId);
+
+        res.send(req.session);
 
     }catch(error){
 
@@ -52,3 +63,4 @@ router.post("/login", async (req, res) =>{
 })
 
 export default router;
+// module.exports = router

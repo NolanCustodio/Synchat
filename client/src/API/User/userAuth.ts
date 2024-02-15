@@ -44,7 +44,11 @@ export async function login(data: verifyUser){
 
     try{
         const response = await fetch(`http://localhost:${REQUEST_PORT}/users/login`, options);
-        return response.json();
+
+        console.log(response);
+        return response;
+
+        // return response.json();
     }catch (error){
         return {error: error};
     }

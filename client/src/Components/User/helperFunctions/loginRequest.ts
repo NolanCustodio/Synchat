@@ -18,7 +18,7 @@ export async function loginRequest(){
 
         const response = await login(verifyUser);
 
-        console.log(response);
+        // console.log(response);
     }catch(error){
         console.log(error);
     }

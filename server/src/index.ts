@@ -2,15 +2,17 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+
 import dotenv from 'dotenv';
 dotenv.config();
-import session from 'express-session';
 
+import session from 'express-session';
 
 import RabbitmqClient from './Services/RabbitMQ/RabbitClient'
 
 //Route Paths
 import auth from './Routes/Users/userAuth';
+// const auth = require("./Routes/Users/userAuth");
 
 //Env
 const clientPort = process.env.CLIENT_PORT;
@@ -31,10 +33,10 @@ app.use(session({
     name: "qid",
     secret: secret,
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     cookie:{
         httpOnly: true,
-        secure: true,
+        secure: false,
         maxAge: 1000 * 60 * 60 * 24 * 7 //7 days
     }
 }))
