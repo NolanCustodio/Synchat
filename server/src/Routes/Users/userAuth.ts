@@ -16,7 +16,6 @@ router.post('/signUp', async (req, res) => {
             email: req.body.email,
             password: hashedPassword,
             action: req.body.action,
-            eventUUID: ''
         }
 
         let rtn = await DatabaseRequest(newUser);
@@ -35,7 +34,6 @@ router.post("/login", async (req, res) =>{
         const verifyUser = {
             username: req.body.username,
             action: req.body.action,
-            eventUUID: ''
         }
 
         //send username and action to database

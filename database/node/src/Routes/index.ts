@@ -1,5 +1,3 @@
-import { PrismaClient } from '@prisma/client';
-
 import signUp from './User/SignUp';
 import login from './User/Login';
 

@@ -13,11 +13,7 @@ export default class Producer{
     ) {}
 
     async produceMessages(data:any): Promise<string>{
-        if (!data.eventUUID){
-            console.log('creating new uuid');
-            // const uuid = randomUUID();
-            data.eventUUID = randomUUID();
-        }
+        data.eventUUID = randomUUID();
         
         //probably needs to be more robust when handling non user auth requests
         const uuid = data.eventUUID;

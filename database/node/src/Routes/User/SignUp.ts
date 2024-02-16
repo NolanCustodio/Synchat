@@ -1,4 +1,5 @@
 import { prisma } from '../../Services/Prisma/index';
+import { createUUID } from '../../Services/Crypto/createUUID';
 
 
 export default async function signUp(data: any){
@@ -39,12 +40,19 @@ export default async function signUp(data: any){
         }
 
 
+        const newUserId = createUUID();
+        const newUserSession = createUUID();
+
+        console.log(newUserId, newUserSession);
+
         if (rtnData.action){
             await prisma.users.create({
                 data:{
+                    //userId: data.userId
                     username: data.username,
                     email: data.email,
                     password: data.password,
+                    //session: data.session
                 }
             })
         }

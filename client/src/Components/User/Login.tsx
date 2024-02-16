@@ -5,7 +5,6 @@ import { loginRequest } from "./helperFunctions/loginRequest";
 import "./userAuth.css"
 
 export default function Login(){
-    sessionStorage.setItem("test", "session");
     
     const handleSubmit = async (event: any) => {
         event.preventDefault();
