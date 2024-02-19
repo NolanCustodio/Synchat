@@ -16,8 +16,9 @@ interface verifyUser{
 
 export async function signUp(data: newUserSignUp): Promise<any>{
 
-    const options = {
+    const options: any = {
         method: 'POST',
+        credentials:'include',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -34,8 +35,9 @@ export async function signUp(data: newUserSignUp): Promise<any>{
 }
 
 export async function login(data: verifyUser){
-    const options = {
+    const options: any = {
         method: "POST",
+        credentials: 'include',
         headers: {
             "Content-Type": "application/json"
         },

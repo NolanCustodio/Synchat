@@ -31,12 +31,12 @@ export async function signUpRequest(): Promise<boolean>{
             action: response.action
         }))
     
-        if (response.action){
-            setUser(() => ({
-                session: response.session
-            }))
-            setSession();
-        }
+        // if (response.action){
+        //     setUser(() => ({
+        //         session: response.session
+        //     }))
+        //     setSession();
+        // }
 
         // if (Object.keys(response.takenFields).length === 0){
         //     setNewUser(response);

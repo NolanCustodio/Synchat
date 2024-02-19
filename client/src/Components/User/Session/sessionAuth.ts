@@ -2,8 +2,10 @@ import { user } from "../../../stores/userStore";
 
 
 export function setSession(){
+    console.log('in setSession');
     if (user.session !== null){
-        sessionStorage.setItem('session', user.session);
+        // sessionStorage.setItem('session', user.session);
+        
     }
 }
 

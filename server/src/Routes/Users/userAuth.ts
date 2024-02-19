@@ -20,6 +20,7 @@ router.post('/signUp', async (req, res) => {
 
         let rtn = await DatabaseRequest(newUser);
 
+        console.log(rtn.session);
         res.send(rtn);
 
     }catch (error){
@@ -29,7 +30,7 @@ router.post('/signUp', async (req, res) => {
 
 router.post("/login", async (req, res) =>{
     try{
-        console.log(req.body);
+        console.log(req.cookies);
 
         const verifyUser = {
             username: req.body.username,
@@ -43,7 +44,7 @@ router.post("/login", async (req, res) =>{
         console.log('trying user id', req.session);
         //return hashed password
 
-        console.log(bool);
+        // console.log(bool);
 
         // if (bool){
         //     req.session.userId = await sessionCheck(req.session.userId);
@@ -53,6 +54,7 @@ router.post("/login", async (req, res) =>{
 
         // console.log(req.session.userId);
 
+        res.cookie('sessionKey', 'test');
         res.send(req.session);
 
     }catch(error){
