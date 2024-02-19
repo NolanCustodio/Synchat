@@ -1,4 +1,4 @@
-import { newUser, setNewUser } from "../../stores/userStore";
+import { newUser, setNewUser, user } from "../../stores/userStore";
 import { createSignal } from "solid-js";
 import { useNavigate } from "@solidjs/router";
 
@@ -10,6 +10,9 @@ import "./userAuth.css";
 export default function SignUp() {
     const [requestOutput, setRequestOutput] = createSignal('');
     const [inputClass, setInputClass] = createSignal(`tailwindInput`);
+
+    console.log('current session',user.session);
+    console.log('checking session value',sessionStorage.getItem('session'))
 
     const navigate = useNavigate();
     const handleSubmit = async (event: any) => {
@@ -25,6 +28,7 @@ export default function SignUp() {
         await signUpRequest();
         console.log("newst user",newUser);
 
+        //maybe change this to look for session
         if(newUser.action){
             setRequestOutput(() => ('Success - Redirecting'))
             setTimeout(() => {navigate('/Login')}, 2000);

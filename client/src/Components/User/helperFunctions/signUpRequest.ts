@@ -1,6 +1,7 @@
-import { newUser, setNewUser } from "../../../stores/userStore";
+import { newUser, setNewUser, setUser } from "../../../stores/userStore";
 
 import { signUp } from "../../../API/User/userAuth"
+import { setSession } from "../Session/sessionAuth";
 
 export async function signUpRequest(): Promise<boolean>{
     let rtnBool = false;
@@ -30,6 +31,12 @@ export async function signUpRequest(): Promise<boolean>{
             action: response.action
         }))
     
+        if (response.action){
+            setUser(() => ({
+                session: response.session
+            }))
+            setSession();
+        }
 
         // if (Object.keys(response.takenFields).length === 0){
         //     setNewUser(response);

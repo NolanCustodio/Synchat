@@ -4,7 +4,6 @@ import login from './User/Login';
 
 export default async function handleMessage(action: string, data: any){
     let rtnData;
-    // console.log('current test',action);
     // const action = data.action;
 
     switch (action){

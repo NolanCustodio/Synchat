@@ -5,3 +5,5 @@ database_notes.txt
 /mysql
 
 /node_modules
+
+/prisma/*

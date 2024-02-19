@@ -1,9 +1,11 @@
 import { prisma } from '../../Services/Prisma/index';
-import { createUUID } from '../../Services/Crypto/createUUID';
+import { randomUUID } from 'crypto';
 
 
 export default async function signUp(data: any){
-    let rtnData = data;
+    let rtnData: any = {};
+    
+    rtnData.eventUUID = data.eventUUID
     rtnData.uniqueFields = {
         username: false,
         email: false,
@@ -39,27 +41,24 @@ export default async function signUp(data: any){
             rtnData.action = true;
         }
 
-
-        const newUserId = createUUID();
-        const newUserSession = createUUID();
-
-        console.log(newUserId, newUserSession);
+        const newUserSession = randomUUID().toString();
 
         if (rtnData.action){
             await prisma.users.create({
                 data:{
-                    //userId: data.userId
                     username: data.username,
                     email: data.email,
                     password: data.password,
-                    //session: data.session
+                    session: {
+                        create: {
+                            sessionId: newUserSession
+                        }
+                    }
                 }
             })
-        }
 
-        delete rtnData.password;
-        delete rtnData.username;
-        delete rtnData.email;
+            rtnData.session = newUserSession;
+        }
 
     }catch(error){
         console.log('The error is:',error);
