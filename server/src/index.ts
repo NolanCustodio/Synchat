@@ -31,17 +31,17 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use(session({
-    name: "qid",
-    secret: secret,
-    resave: false,
-    saveUninitialized: true,
-    cookie:{
-        httpOnly: true,
-        secure: false,
-        maxAge: 1000 * 60 * 60 * 24 * 7 //7 days
-    }
-}))
+// app.use(session({
+//     name: "qid",
+//     secret: secret,
+//     resave: false,
+//     saveUninitialized: true,
+//     // cookie:{
+//     //     httpOnly: true,
+//     //     secure: false,
+//     //     maxAge: 1000 * 60 * 60 * 24 * 7 //7 days
+//     // }
+// }))
 
 //Routes
 app.use('/users', auth);

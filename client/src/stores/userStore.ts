@@ -13,5 +13,6 @@ export const [newUser, setNewUser] = createStore({
 
 export const [user, setUser] = createStore({
     username: 'again',
+    password: '',
     session: ''
 })

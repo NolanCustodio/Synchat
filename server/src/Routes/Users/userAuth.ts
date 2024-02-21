@@ -30,21 +30,23 @@ router.post('/signUp', async (req, res) => {
 
 router.post("/login", async (req, res) =>{
     try{
-        console.log(req.cookies);
+        console.log(req.body);
 
         const verifyUser = {
             username: req.body.username,
+            password: req.body.password,
             action: req.body.action,
         }
 
         //send username and action to database
         let rtn = await DatabaseRequest(verifyUser);
+        // console.log('requst done');
 
-        const bool = await comparePasswords(req.body.password, rtn.userInfo.password);
-        console.log('trying user id', req.session);
+        const bool = await comparePasswords(req.body.password, rtn.password);
+        // console.log('trying user id', req.session);
         //return hashed password
 
-        // console.log(bool);
+        console.log(bool);
 
         // if (bool){
         //     req.session.userId = await sessionCheck(req.session.userId);
@@ -54,7 +56,10 @@ router.post("/login", async (req, res) =>{
 
         // console.log(req.session.userId);
 
-        res.cookie('sessionKey', 'test');
+        res.cookie('sessionId', rtn.session, {
+            maxAge: 1000 * 60 * 60 * 24 * 7, //7 days
+            httpOnly: true, 
+            secure: true});
         res.send(req.session);
 
     }catch(error){
