@@ -7,7 +7,7 @@ export default async function login(data: any){
         email: '',
         password: '',
         session: '',
-        eventUUID: ''
+        eventUUID: data.eventUUID
     }
 
     // console.log('current test',data.username);

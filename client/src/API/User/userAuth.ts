@@ -13,6 +13,7 @@ interface verifyUser{
     action: string
 }
 
+let route = `http://localhost:${REQUEST_PORT}/users`
 
 export async function signUp(data: newUserSignUp): Promise<any>{
 
@@ -26,7 +27,7 @@ export async function signUp(data: newUserSignUp): Promise<any>{
     }
 
     try {
-        const response = await fetch(`http://localhost:${REQUEST_PORT}/users/signUp`, options);
+        const response = await fetch(`${route}/signUp`, options);
         // console.log("signup helper:", response.json());
         return response.json();
     } catch (error) {
@@ -45,7 +46,7 @@ export async function login(data: verifyUser){
     }
 
     try{
-        const response = await fetch(`http://localhost:${REQUEST_PORT}/users/login`, options);
+        const response = await fetch(`${route}/login`, options);
 
         console.log(response);
         return response;
@@ -53,5 +54,27 @@ export async function login(data: verifyUser){
         // return response.json();
     }catch (error){
         return {error: error};
+    }
+}
+
+export async function cookieCheck(): Promise<any>{
+    let rtnBool: boolean;
+    const options: any = {
+        method: "GET",
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }
+
+    try{
+        const response = await fetch(`${route}/cookieCheck`, options);
+
+        console.log('test',response);
+
+        // if (response.sessionId)
+
+    }catch(error){
+
     }
 }

@@ -17,12 +17,10 @@ export async function loginRequest(){
         }));
 
         const response = await login(verifyUser);
+        //response: bool
 
-        //creation
-        // sessionStorage.setItem("username", "a");
-        
-        //finding uninstantiated value returns null
-        // console.log(sessionStorage.getItem("none"));
+        //if response redirect accordingly
+
         
 
         // console.log(response);

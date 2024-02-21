@@ -59,12 +59,33 @@ router.post("/login", async (req, res) =>{
         res.cookie('sessionId', rtn.session, {
             maxAge: 1000 * 60 * 60 * 24 * 7, //7 days
             httpOnly: true, 
-            secure: true});
+            secure: true,
+            sameSite: 'strict',
+        });
         res.send(req.session);
 
     }catch(error){
-
+        console.log(error);
     }
+})
+
+router.get("/cookieCheck", async (req, res) => {
+    // let rtnBool: boolean = false;
+    let rtn: any
+    try{
+        if (req.cookies.sessionId){
+            const cookieData ={
+                sessionId: req.cookies.sessionId,
+                action: 'cookieCheck',
+            }
+            rtn = await DatabaseRequest(cookieData);
+            
+        }
+
+    }catch(error){
+        console.log(error);
+    }
+    res.send(rtn)
 })
 
 export default router;

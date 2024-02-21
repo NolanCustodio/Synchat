@@ -13,6 +13,9 @@ const LandingPage = lazy(() => import("./Components/LandingPage/LandingPage"));
 const Groups = lazy(() => import("./Components/Groups/Groups"));
 
 //user auth
+import { cookieCheck } from './API/User/userAuth'
+cookieCheck();
+
 const SignUp = lazy(() => import ("./Components/User/SignUp"));
 const Login = lazy(() => import ("./Components/User/Login"))
 

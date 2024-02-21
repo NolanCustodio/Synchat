@@ -1,5 +1,5 @@
 import { user } from "../../../stores/userStore";
-
+import { cookieCheck } from "../../../API/User/userAuth";
 
 export function setSession(){
     console.log('in setSession');
@@ -10,8 +10,8 @@ export function setSession(){
 }
 
 
-export function getSession(){
-    //probably need to do this on login
+export async function cookieRequest(){
+    const isCookieSaved = await cookieCheck();
 }
 
 export function deleteSession(){

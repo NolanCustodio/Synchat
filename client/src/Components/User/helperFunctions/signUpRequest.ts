@@ -1,7 +1,6 @@
 import { newUser, setNewUser, setUser } from "../../../stores/userStore";
 
 import { signUp } from "../../../API/User/userAuth"
-import { setSession } from "../Session/sessionAuth";
 
 export async function signUpRequest(): Promise<boolean>{
     let rtnBool = false;
