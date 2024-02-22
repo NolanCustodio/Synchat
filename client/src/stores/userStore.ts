@@ -1,5 +1,6 @@
 import { createStore } from "solid-js/store";
 
+//get rid of this
 export const [newUser, setNewUser] = createStore({
     username: '',
     email: '',
@@ -11,8 +12,13 @@ export const [newUser, setNewUser] = createStore({
     },
 })
 
+//get rid of this
 export const [user, setUser] = createStore({
     username: 'again',
     password: '',
     session: ''
+})
+
+export const [isLoggedIn, setIsLoggedIn] = createStore({
+    state: false
 })

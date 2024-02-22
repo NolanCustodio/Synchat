@@ -11,9 +11,6 @@ export default function SignUp() {
     const [requestOutput, setRequestOutput] = createSignal('');
     const [inputClass, setInputClass] = createSignal(`tailwindInput`);
 
-    // console.log('current session',user.session);
-    console.log('checking cookie value', document.cookie);
-
     const navigate = useNavigate();
     const handleSubmit = async (event: any) => {
         event.preventDefault();

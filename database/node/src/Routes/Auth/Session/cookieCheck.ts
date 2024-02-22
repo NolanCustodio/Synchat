@@ -14,10 +14,11 @@ export default async function cookieCheck(data: any){
 
     const currnetDate = new Date();
 
-    console.log((currnetDate.getTime() - cookieExists!.creationDate.getTime()) / (1000 * 60 * 60 * 24));
+    const ageOfSession = (currnetDate.getTime() - cookieExists!.creationDate.getTime()) / (1000 * 60 * 60 * 24);
 
-    if (cookieExists!.creationDate < currnetDate){
-        console.log('creation date younger');
+    if (ageOfSession < 7){
+        //if session is less then 7 days old
+        rtnData.isCookieUsed = true;
     }else{
         console.log('creation date older');
     }

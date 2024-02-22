@@ -58,7 +58,6 @@ export async function login(data: verifyUser){
 }
 
 export async function cookieCheck(): Promise<any>{
-    let rtnBool: boolean;
     const options: any = {
         method: "GET",
         credentials: 'include',
@@ -69,12 +68,7 @@ export async function cookieCheck(): Promise<any>{
 
     try{
         const response = await fetch(`${route}/cookieCheck`, options);
-
-        console.log('test',response);
-
-        // if (response.sessionId)
-
+        return response.json();
     }catch(error){
-
     }
 }

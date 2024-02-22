@@ -1,17 +1,12 @@
-import { user } from "../../../stores/userStore";
+import { setIsLoggedIn } from "../../../stores/userStore";
 import { cookieCheck } from "../../../API/User/userAuth";
 
-export function setSession(){
-    console.log('in setSession');
-    if (user.session !== null){
-        // sessionStorage.setItem('session', user.session);
-        
-    }
-}
-
-
 export async function cookieRequest(){
-    const isCookieSaved = await cookieCheck();
+    const rtn = await cookieCheck();
+    
+    if(rtn.isCookieUsed){
+        setIsLoggedIn({state: rtn.isCookieUsed})
+    }
 }
 
 export function deleteSession(){

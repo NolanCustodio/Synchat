@@ -70,8 +70,10 @@ router.post("/login", async (req, res) =>{
 })
 
 router.get("/cookieCheck", async (req, res) => {
-    // let rtnBool: boolean = false;
-    let rtn: any
+    let rtn = {
+        isCookieUsed: false
+    }
+
     try{
         if (req.cookies.sessionId){
             const cookieData ={
@@ -79,14 +81,13 @@ router.get("/cookieCheck", async (req, res) => {
                 action: 'cookieCheck',
             }
             rtn = await DatabaseRequest(cookieData);
-            
         }
 
     }catch(error){
         console.log(error);
     }
-    res.send(rtn)
+    // console.log(rtn);
+    res.send(rtn);
 })
 
 export default router;
-// module.exports = router
