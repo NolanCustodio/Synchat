@@ -1,22 +1,15 @@
 import { createStore } from "solid-js/store";
 
-//get rid of this
-export const [newUser, setNewUser] = createStore({
-    username: '',
-    email: '',
-    password: '',
-    action: false,
-    uniqueFields: {
-        username: false,
-        email: false
-    },
-})
+interface userAuthInput{
+    username: {value: string, isUnique: boolean},
+    email: {value: string, isUnique: boolean},
+    password: {value: string},
+}
 
-//get rid of this
-export const [user, setUser] = createStore({
-    username: 'again',
-    password: '',
-    session: ''
+export const [userInput, setUserInput] = createStore<userAuthInput>({
+    username: {value: '', isUnique:false},
+    email: {value: '', isUnique:false},
+    password: {value: ''}
 })
 
 export const [isLoggedIn, setIsLoggedIn] = createStore({

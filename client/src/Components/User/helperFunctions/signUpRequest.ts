@@ -1,34 +1,28 @@
-import { newUser, setNewUser, setUser } from "../../../stores/userStore";
-
 import { signUp } from "../../../API/User/userAuth"
 
-export async function signUpRequest(): Promise<boolean>{
+interface verifyUserSignUp{
+    username: string,
+    email: string,
+    password: string
+}
+
+export async function signUpRequest(userInput: verifyUserSignUp): Promise<boolean>{
     let rtnBool = false;
 
     try{
-        const makeNewUser = {
-            username: newUser.username,
-            email: newUser.email,
-            password: newUser.password,
-            action: 'signUp'
+        const verifyUserSignUp = {
+            ...userInput,
+            action :'signUp'
         }
-
-        setNewUser(() => ({
-            username: undefined,
-            email: undefined, 
-            password: undefined,
-        }));
         
-        const response = await signUp(makeNewUser);
-        // console.log(response);
+        const response = await signUp(verifyUserSignUp);
+        console.log(response.uniqueFields);
 
-        setNewUser(() => ({
-            uniqueFields:{
-                username: response.uniqueFields.username,
-                email: response.uniqueFields.email
-            },
-            action: response.action
+        setIsUserInputUnique(() => ({
+            username: response.uniqueFields.username,
+            email: response.uniqueFields.email
         }))
+        
     
         // if (response.action){
         //     setUser(() => ({

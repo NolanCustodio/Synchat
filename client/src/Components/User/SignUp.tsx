@@ -1,8 +1,9 @@
-import { newUser, setNewUser, user } from "../../stores/userStore";
 import { createSignal } from "solid-js";
 import { useNavigate } from "@solidjs/router";
 
 import { signUpRequest } from "./helperFunctions/signUpRequest";
+import { userInput, setUserInput } from "../../stores/userStore";
+import { emptyFields } from "./helperFunctions/formChecks";
 
 import "./userAuth.css";
 
@@ -11,31 +12,59 @@ export default function SignUp() {
     const [requestOutput, setRequestOutput] = createSignal('');
     const [inputClass, setInputClass] = createSignal(`tailwindInput`);
 
+    const [isInputUsed, setIsInputUsed] = createSignal({
+        flag: true,
+        username: true,
+        email: true,
+        password: true,
+    })
+
+
     const navigate = useNavigate();
+
     const handleSubmit = async (event: any) => {
         event.preventDefault();
 
-        //call function to check if fields are blank
-
-        setNewUser(() => ({
-            username: event.target[0].value,
-            email: event.target[1].value,
-            password: event.target[2].value,
+        setUserInput((state) => ({
+            username: {value: event.target[0].value, isUnique: state.username.isUnique},
+            email: {value: event.target[1].value, isUnique: state.username.isUnique},
+            password: {value: event.target[2].value}
+            
         }))
-        await signUpRequest();
-        console.log("newst user",newUser);
 
-        //maybe change this to look for session
-        if(newUser.action){
-            setRequestOutput(() => ('Success - Redirecting'))
-            setTimeout(() => {navigate('/Login')}, 2000);
-        }else{
-            setRequestOutput(() => ('Problem'))
+        Object.entries(userInput).forEach(([key, value]) => {
+            if(value.value === ''){
+                setIsInputUsed((state) => ({
+                    ...state,
+                    [key]: false,
+                    flag: false
+                }))
+            }
+        })
 
-            //call function with each problem area
-            badInput();
+        console.log(isInputUsed());
+
+        // const response = await signUpRequest(verifyUserSignUp);
+
+        if (isInputUsed().flag){
+            console.log('weeo')
         }
 
+        //maybe change this to look for session
+        // if(newUser.action){
+        //     setRequestOutput(() => ('Success - Redirecting'))
+        //     setTimeout(() => {navigate('/Login')}, 2000);
+        // }else{
+        //     setRequestOutput(() => ('Problem'))
+
+        //     //call function with each problem area
+        //     badInput();
+        // }
+
+        setIsInputUsed((state) => ({
+            ...state,
+            flag: true
+        }))
     }
 
     function badInput(){
@@ -71,7 +100,7 @@ export default function SignUp() {
 
                         <div class="form-input">
                             <label for="email" class="sr-only">Email address</label>
-                            <input id="email" name="email"   class={inputClass()} placeholder="Email address" />
+                            <input id="email" name="email"   class={isInputUsed().email ? "tailwindInput" : "input-error"} placeholder="Email address" />
                         </div>
                         <div class="form-input">
                             <label for="password" class="sr-only">Password</label>

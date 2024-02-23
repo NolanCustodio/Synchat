@@ -8,6 +8,9 @@ export default ({mode}) => {
 
   return defineConfig({
     plugins: [solid()],
+    build: {
+      sourcemap: true
+    },
     server: { 
       host: "0.0.0.0",
       hmr:{

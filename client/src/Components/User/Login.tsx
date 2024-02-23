@@ -1,18 +1,23 @@
-import {user, setUser} from '../../stores/userStore';
+import { useNavigate } from '@solidjs/router';
+
+
 
 import { loginRequest } from "./helperFunctions/loginRequest";
 
 import "./userAuth.css"
 
 export default function Login(){
+    const navigate = useNavigate();
     
     const handleSubmit = async (event: any) => {
         event.preventDefault();
-        setUser(() => ({
+        
+        const verifyUserInput = {
             username: event.target[0].value,
             password: event.target[1].value
-        }))
-        await loginRequest();
+        } 
+
+        await loginRequest(verifyUserInput);
     }
 
     return(
@@ -22,10 +27,6 @@ export default function Login(){
                     <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
                         Login
                     </h2>
-
-                    <h3>
-                        {user.username}
-                    </h3>
                 </div>
 
                 <form 

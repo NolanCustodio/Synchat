@@ -1,20 +1,14 @@
-import { newUser, setNewUser } from "../../../stores/userStore";
+import { userInput } from "../../../stores/userStore";
 
-export function emptyInputs(){
-    if(
-        newUser.username === null ||
-        newUser.email === null ||
-        newUser.password === null
-    ){
-        setNewUser(() => ({
-            username: '',
-            email: '',
-            password: ''
-        }))
-    }
+
+export function emptyFields(){
+    
+    Object.keys(userInput).forEach(key => {
+        if (userInput[key] === null){
+             
+        }
+    })
 }
-
-//check password function
 
 
 

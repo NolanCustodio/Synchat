@@ -20,7 +20,7 @@ router.post('/signUp', async (req, res) => {
 
         let rtn = await DatabaseRequest(newUser);
 
-        console.log(rtn.session);
+        console.log(';',rtn.session);
         res.send(rtn);
 
     }catch (error){

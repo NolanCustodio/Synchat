@@ -1,21 +1,16 @@
-import { user, setUser } from "../../../stores/userStore";
-
 import { login } from "../../../API/User/userAuth";
 
-export async function loginRequest(){
+interface verifyUserInput{
+    username: string,
+    password: string
+}
+
+export async function loginRequest(verifyUserInput: verifyUserInput){
     try{
         const verifyUser ={
-            username: user.username,
-            password: user.password,
+            ...verifyUserInput,
             action: 'login'
         }
-
-        setUser(() => ({
-            username: undefined,
-            password: undefined,
-            email: undefined
-        }));
-
         const response = await login(verifyUser);
         //response: bool
 
