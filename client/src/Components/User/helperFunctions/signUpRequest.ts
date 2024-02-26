@@ -1,65 +1,37 @@
 import { signUp } from "../../../API/User/userAuth"
 
 interface verifyUserSignUp{
-    username: string,
-    email: string,
-    password: string
+    username: {value: string, isUnique: boolean},
+    email: {value: string, isUnique: boolean},
+    password: {value: string}
 }
 
-export async function signUpRequest(userInput: verifyUserSignUp): Promise<boolean>{
-    let rtnBool = false;
+export async function signUpRequest(userInput: verifyUserSignUp): Promise<any>{
+    let rtnObj = {
+        flag: false,
+        username: false,
+        email: false
+    };
 
     try{
-        const verifyUserSignUp = {
-            ...userInput,
-            action :'signUp'
+        const verifySignUp = {
+            username: userInput.username.value,
+            email: userInput.email.value,
+            password: userInput.password.value,
+            action:'signUp'
         }
         
-        const response = await signUp(verifyUserSignUp);
-        console.log(response.uniqueFields);
+        const response = await signUp(verifySignUp);
 
-        setIsUserInputUnique(() => ({
+        rtnObj = {
+            flag: response.action,
             username: response.uniqueFields.username,
-            email: response.uniqueFields.email
-        }))
-        
-    
-        // if (response.action){
-        //     setUser(() => ({
-        //         session: response.session
-        //     }))
-        //     setSession();
-        // }
-
-        // if (Object.keys(response.takenFields).length === 0){
-        //     setNewUser(response);
-        //     // console.log(response);
-        // }else{
-        //     setNewUser(() => ({
-        //         takenFields:{
-        //             username: response.takenFields.username,
-        //             email: response.takenFields.email
-        //         },
-        //         action: response.action
-        //     }))
-
-        //     // setNewUser(() => ({duplicateFields: response.duplicateFields}))
-
-        //     //prod does not need below logic
-        //     let output = ``;
-
-        //     response.takenFields.forEach((duplicate: string) => {
-        //         // setNewUser(() => ({duplicateFields: response.takenFields}))
-        //         output += duplicate + " ";
-        //     });
-
-        //     output += "are already taken";
-        //     console.log(output);
-        // }
+            email: response.uniqueFields.email,
+        }
 
     }catch (error){
         console.log(error);
     }
 
-    return rtnBool;
+    return rtnObj;
 }

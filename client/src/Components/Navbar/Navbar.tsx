@@ -20,7 +20,7 @@ export default () => {
             <NavButton nav_link="/" nav_text="Landing"/>
             
             <Show when={isLoggedIn.state}>
-                <NavButton nav_link="HomePage" nav_text="Home"/>
+                <NavButton nav_link="Home" nav_text="Home"/>
                 <NavButton nav_link="Groups" nav_text="Groups"/>
             </Show>
 

@@ -47,9 +47,7 @@ export async function login(data: verifyUser){
 
     try{
         const response = await fetch(`${route}/login`, options);
-
-        console.log(response);
-        return response;
+        return response.json();
 
         // return response.json();
     }catch (error){

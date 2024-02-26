@@ -26,7 +26,7 @@ const root = document.getElementById('root')
 render(() => (
     <Router root={App}>
         <Route path="/" component={LandingPage}/>
-        <Route path="/HomePage" component={HomePage}/>
+        <Route path="/Home" component={HomePage}/>
         <Route path="/Groups" component={Groups}/>
         
         <Route path="/SignUp" component={SignUp}/>

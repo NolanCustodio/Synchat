@@ -1,23 +1,69 @@
+import { createSignal, Show } from 'solid-js';
 import { useNavigate } from '@solidjs/router';
-
-
 
 import { loginRequest } from "./helperFunctions/loginRequest";
 
 import "./userAuth.css"
 
 export default function Login(){
+    const [requestOutput, setRequestOutput] = createSignal('');
+
+    const [isInputUsed, setIsInputUsed] = createSignal({
+        flag: true,
+        username: true,
+        password: true,
+    })
+
+    const [userInput, setUserInput] = createSignal({
+        flag: true,
+        username: '',
+        password: ''
+    })
+
     const navigate = useNavigate();
     
+    const changeInputStateToTrue = (inputField: string): void => {
+        setIsInputUsed((state) => ({
+            ...state,
+            [inputField] : true
+        }))
+    }
+
     const handleSubmit = async (event: any) => {
         event.preventDefault();
-        
-        const verifyUserInput = {
-            username: event.target[0].value,
-            password: event.target[1].value
-        } 
 
-        await loginRequest(verifyUserInput);
+        setUserInput((state) => ({
+            ...state,
+            username: event.target[0].value,
+            password: event.target[1].value,
+        }))
+
+        Object.entries(userInput()).forEach(([key, value]) => {
+            if (value === '') {
+                setIsInputUsed((state) => ({
+                    ...state,
+                    [key]: false,
+                    flag: false
+                }))
+            }
+        })
+
+        if (isInputUsed().flag === false){
+            changeInputStateToTrue('flag');
+            return;
+        }
+
+        const response = await loginRequest({username: userInput().username, password: userInput().password});
+
+        if (response.flag){
+            setRequestOutput(() => ('Success - Redirecting'));
+            setTimeout(() => {navigate('/Home')}, 2000);
+        }
+
+        setUserInput((state) => ({
+            ...state,
+            flag: response.flag
+        }))
     }
 
     return(
@@ -25,7 +71,7 @@ export default function Login(){
             <div class="max-w-md w-full space-y-8">
                 <div>
                     <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-                        Login
+                        {`Login ${requestOutput()}`}
                     </h2>
                 </div>
 
@@ -42,17 +88,30 @@ export default function Login(){
                                 id="username" 
                                 name="username" 
                                 type="text" 
-                                class="tailwindInput" 
+                                class={isInputUsed().username ? "tailwindInput" : "input-error"}
                                 placeholder="Username" 
-                                
+                                onClick={()=>changeInputStateToTrue('username')}
                             />
                         </div>
 
                         <div class="form-input">
                             <label for="password" class="sr-only">Password</label>
-                            <input id="password" name="password" type="password" class="tailwindInput" placeholder="Password" />
+                            <input 
+                                id="password" 
+                                name="password" 
+                                type="password" 
+                                class={isInputUsed().password ? "tailwindInput" : "input-error"} 
+                                placeholder="Password"
+                                onClick={()=>changeInputStateToTrue('password')}
+                            />
                         </div>
                     </div>
+
+                    <Show when={userInput().flag === false}>
+                        <div class='input-error'>
+                            Wrong Username or Password
+                        </div>
+                    </Show>
 
                     <div>
                         <button type="submit" class="tailwindSubmit">

@@ -6,22 +6,24 @@ interface verifyUserInput{
 }
 
 export async function loginRequest(verifyUserInput: verifyUserInput){
+    let rtnObj = {
+        flag: false
+    };
+
     try{
         const verifyUser ={
             ...verifyUserInput,
             action: 'login'
         }
         const response = await login(verifyUser);
-        //response: bool
 
-        //if response redirect accordingly
+        rtnObj.flag = response.action
 
-        
-
-        // console.log(response);
     }catch(error){
         console.log(error);
     }
+
+    return rtnObj;
 }
 
 

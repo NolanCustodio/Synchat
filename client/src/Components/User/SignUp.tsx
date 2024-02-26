@@ -1,16 +1,13 @@
-import { createSignal } from "solid-js";
+import { createSignal, Show } from "solid-js";
 import { useNavigate } from "@solidjs/router";
 
 import { signUpRequest } from "./helperFunctions/signUpRequest";
-import { userInput, setUserInput } from "../../stores/userStore";
-import { emptyFields } from "./helperFunctions/formChecks";
 
 import "./userAuth.css";
 
 
 export default function SignUp() {
     const [requestOutput, setRequestOutput] = createSignal('');
-    const [inputClass, setInputClass] = createSignal(`tailwindInput`);
 
     const [isInputUsed, setIsInputUsed] = createSignal({
         flag: true,
@@ -19,6 +16,18 @@ export default function SignUp() {
         password: true,
     })
 
+    const [userInput, setUserInput] = createSignal({
+        username: {value: '', isUnique: true},
+        email: {value: '', isUnique: true},
+        password: {value: ''}
+    })
+
+    const changeInputStateToTrue = (inputField: string): void =>{
+        setIsInputUsed((state) => ({
+            ...state,
+            [inputField]: true
+        }))
+    }
 
     const navigate = useNavigate();
 
@@ -27,12 +36,12 @@ export default function SignUp() {
 
         setUserInput((state) => ({
             username: {value: event.target[0].value, isUnique: state.username.isUnique},
-            email: {value: event.target[1].value, isUnique: state.username.isUnique},
+            email: {value: event.target[1].value, isUnique: state.email.isUnique},
             password: {value: event.target[2].value}
             
         }))
 
-        Object.entries(userInput).forEach(([key, value]) => {
+        Object.entries(userInput()).forEach(([key, value]) => {
             if(value.value === ''){
                 setIsInputUsed((state) => ({
                     ...state,
@@ -42,35 +51,24 @@ export default function SignUp() {
             }
         })
 
-        console.log(isInputUsed());
-
-        // const response = await signUpRequest(verifyUserSignUp);
-
-        if (isInputUsed().flag){
-            console.log('weeo')
+        if (isInputUsed().flag === false){
+            changeInputStateToTrue('flag');
+            return;
         }
+        const response = await signUpRequest(userInput());
 
-        //maybe change this to look for session
-        // if(newUser.action){
-        //     setRequestOutput(() => ('Success - Redirecting'))
-        //     setTimeout(() => {navigate('/Login')}, 2000);
-        // }else{
-        //     setRequestOutput(() => ('Problem'))
-
-        //     //call function with each problem area
-        //     badInput();
-        // }
-
-        setIsInputUsed((state) => ({
+        setUserInput((state) => ({
             ...state,
-            flag: true
+            username: {value: state.username.value, isUnique: response.username},
+            email: {value: state.email.value, isUnique: response.email}
         }))
+
+        if (response.flag){
+            setRequestOutput(() => ('Success - Redirecting'));
+            setTimeout(() => {navigate('/Home')}, 2000);
+        }
     }
 
-    function badInput(){
-        setInputClass(() => (`input-error`))
-    }
-    
 
     return (
         <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -92,19 +90,25 @@ export default function SignUp() {
                                 id="username" 
                                 name="username" 
                                 type="text" 
-                                class={inputClass()}
+                                class={isInputUsed().username ? "tailwindInput" : "input-error"}
                                 placeholder="Username" 
-                                
+                                onClick={()=>{changeInputStateToTrue('username')}}
                             />
+                            <Show when={userInput().username.isUnique === false}>
+                                <p class='taken-field'>Username Taken</p>
+                            </Show>
                         </div>
 
                         <div class="form-input">
                             <label for="email" class="sr-only">Email address</label>
-                            <input id="email" name="email"   class={isInputUsed().email ? "tailwindInput" : "input-error"} placeholder="Email address" />
+                            <input id="email" name="email"   class={isInputUsed().email ? "tailwindInput" : "input-error"} placeholder="Email address" onClick={()=>{changeInputStateToTrue('email')}}/>
+                            <Show when={userInput().email.isUnique === false}>
+                                <p class='taken-field'>Email Taken</p>
+                            </Show>
                         </div>
                         <div class="form-input">
                             <label for="password" class="sr-only">Password</label>
-                            <input id="password" name="password" type="password" class={inputClass()} placeholder="Password" />
+                            <input id="password" name="password" type="password" class={isInputUsed().password ? "tailwindInput" : "input-error"} placeholder="Password" onClick={()=>{changeInputStateToTrue('password')}}/>
                         </div>
                     </div>
 

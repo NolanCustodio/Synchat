@@ -10,7 +10,8 @@ export default async function signUp(data: any){
         username: false,
         email: false,
     };
-    rtnData.action = false
+    rtnData.action = false;
+    rtnData.session = '';
     // console.log('db query',data);
 
     try{

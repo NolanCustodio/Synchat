@@ -5,7 +5,7 @@ const router = express.Router();
 import DatabaseRequest from '../../Services/RabbitMQ/Users/DatabaseRequest';
 import hashPassword from '../../Services/Encrypt/Users/passwordEncrypt';
 import comparePasswords from '../../Services/Encrypt/Users/comparePassword';
-import { sessionCheck } from '../../Middleware/Users/sessionAuth';
+// import { sessionCheck } from '../../Middleware/Users/sessionAuth';
 
 router.post('/signUp', async (req, res) => {
     try{
@@ -20,7 +20,15 @@ router.post('/signUp', async (req, res) => {
 
         let rtn = await DatabaseRequest(newUser);
 
-        console.log(';',rtn.session);
+        if (rtn.action){
+            res.cookie('sessionId', rtn.session, {
+                maxAge: 1000 * 60 * 60 * 24 * 7, //7 days
+                httpOnly: true, 
+                secure: true,
+                sameSite: 'strict',
+            });
+        }
+
         res.send(rtn);
 
     }catch (error){
@@ -30,39 +38,20 @@ router.post('/signUp', async (req, res) => {
 
 router.post("/login", async (req, res) =>{
     try{
-        console.log(req.body);
+        let rtn = await DatabaseRequest(req.body);
+        console.log('requst done', rtn);
 
-        const verifyUser = {
-            username: req.body.username,
-            password: req.body.password,
-            action: req.body.action,
+        const isPasswordMatch = await comparePasswords(req.body.password, rtn.password);
+
+        if (isPasswordMatch){
+            res.cookie('sessionId', rtn.session, {
+                maxAge: 1000 * 60 * 60 * 24 * 7, //7days
+                httpOnly: true,
+                secure: true,
+                sameSite: 'strict'
+            })
         }
-
-        //send username and action to database
-        let rtn = await DatabaseRequest(verifyUser);
-        // console.log('requst done');
-
-        const bool = await comparePasswords(req.body.password, rtn.password);
-        // console.log('trying user id', req.session);
-        //return hashed password
-
-        console.log(bool);
-
-        // if (bool){
-        //     req.session.userId = await sessionCheck(req.session.userId);
-        // }
-        
-        // req.session.userId = await sessionCheck(req.session.userId);
-
-        // console.log(req.session.userId);
-
-        res.cookie('sessionId', rtn.session, {
-            maxAge: 1000 * 60 * 60 * 24 * 7, //7 days
-            httpOnly: true, 
-            secure: true,
-            sameSite: 'strict',
-        });
-        res.send(req.session);
+        res.send({action: isPasswordMatch});
 
     }catch(error){
         console.log(error);
@@ -86,7 +75,6 @@ router.get("/cookieCheck", async (req, res) => {
     }catch(error){
         console.log(error);
     }
-    // console.log(rtn);
     res.send(rtn);
 })
 
