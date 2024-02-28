@@ -1,8 +1,8 @@
 import { setIsLoggedIn } from "../../../stores/userStore";
-import { cookieCheck } from "../../../API/User/userAuth";
+import { checkSession } from "../../../API/User/userAuth";
 
 export async function cookieRequest(){
-    const rtn = await cookieCheck();
+    const rtn = await checkSession();
     
     if(rtn.isCookieUsed){
         setIsLoggedIn({state: rtn.isCookieUsed})

@@ -55,7 +55,7 @@ export async function login(data: verifyUser){
     }
 }
 
-export async function cookieCheck(): Promise<any>{
+export async function checkSession(): Promise<any>{
     const options: any = {
         method: "GET",
         credentials: 'include',
@@ -65,7 +65,7 @@ export async function cookieCheck(): Promise<any>{
     }
 
     try{
-        const response = await fetch(`${route}/cookieCheck`, options);
+        const response = await fetch(`${route}/checkSession`, options);
         return response.json();
     }catch(error){
     }

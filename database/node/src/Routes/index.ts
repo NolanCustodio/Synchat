@@ -1,6 +1,6 @@
 import signUp from './User/SignUp';
 import login from './User/Login';
-import cookieCheck from './Auth/Session/cookieCheck';
+import { checkSession } from './Auth/Session/sessionHelpers';
 
 export default async function handleMessage(action: string, data: any){
     let rtnData;
@@ -13,8 +13,13 @@ export default async function handleMessage(action: string, data: any){
         case 'login':
             rtnData = await login(data);
             break;
-        case 'cookieCheck':
-            rtnData = await cookieCheck(data);
+        case 'checkSession':
+            rtnData = await checkSession(data);
+            break;
+        default:
+            rtnData = {
+                eventUUID: data.eventUUID
+            };
             break;
     }
 

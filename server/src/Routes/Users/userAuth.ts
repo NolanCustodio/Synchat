@@ -11,6 +11,8 @@ router.post('/signUp', async (req, res) => {
     try{
         const hashedPassword = await hashPassword(req.body.password);
 
+        req.body.password = '';
+
         const newUser = {
             username: req.body.username,
             email: req.body.email,
@@ -37,39 +39,67 @@ router.post('/signUp', async (req, res) => {
 });
 
 router.post("/login", async (req, res) =>{
-    try{
-        let rtn = await DatabaseRequest(req.body);
-        console.log('requst done', rtn);
+    let isPasswordMatch = false;
+    let isSessionValid = false;
+    let rtnSession;
 
-        const isPasswordMatch = await comparePasswords(req.body.password, rtn.password);
+    try{
+        const userInput = {
+            username: req.body.username,
+            action: req.body.action
+        }
+
+        const rtnUserInfo = await DatabaseRequest(userInput);
+
+        isPasswordMatch = await comparePasswords(req.body.password, rtnUserInfo.password);
 
         if (isPasswordMatch){
-            res.cookie('sessionId', rtn.session, {
+            const currentSession = {
+                sessionId: rtnUserInfo.sessionId,
+                action: 'checkSession'
+            }
+
+            rtnSession = await DatabaseRequest(currentSession);
+            isSessionValid = rtnSession.isSessionUsed;
+        }
+
+        if (isSessionValid){
+            res.cookie('sessionId', rtnSession.sessionId, {
                 maxAge: 1000 * 60 * 60 * 24 * 7, //7days
                 httpOnly: true,
                 secure: true,
                 sameSite: 'strict'
             })
         }
-        res.send({action: isPasswordMatch});
+
+        res.send({flag: isPasswordMatch});
 
     }catch(error){
         console.log(error);
     }
 })
 
-router.get("/cookieCheck", async (req, res) => {
+router.get("/checkSession", async (req, res) => {
     let rtn = {
         isCookieUsed: false
     }
 
     try{
         if (req.cookies.sessionId){
+            console.log(req.cookies.sessionId);
+
             const cookieData ={
                 sessionId: req.cookies.sessionId,
-                action: 'cookieCheck',
+                action: 'checkSession',
             }
             rtn = await DatabaseRequest(cookieData);
+
+            // res.cookie('sessionId', rtn.session, {
+            //     maxAge: 1000 * 60 * 60 * 24 * 7, //7days
+            //     httpOnly: true,
+            //     secure: true,
+            //     sameSite: 'strict'
+            // })
         }
 
     }catch(error){

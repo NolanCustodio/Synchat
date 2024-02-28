@@ -5,7 +5,11 @@ interface verifyUserInput{
     password: string
 }
 
-export async function loginRequest(verifyUserInput: verifyUserInput){
+interface rtnFlag{
+    flag: boolean
+}
+
+export async function loginRequest(verifyUserInput: verifyUserInput): Promise<rtnFlag>{
     let rtnObj = {
         flag: false
     };
@@ -17,7 +21,7 @@ export async function loginRequest(verifyUserInput: verifyUserInput){
         }
         const response = await login(verifyUser);
 
-        rtnObj.flag = response.action
+        rtnObj.flag = response.flag
 
     }catch(error){
         console.log(error);

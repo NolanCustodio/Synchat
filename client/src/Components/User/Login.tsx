@@ -1,5 +1,4 @@
 import { createSignal, Show } from 'solid-js';
-import { useNavigate } from '@solidjs/router';
 
 import { loginRequest } from "./helperFunctions/loginRequest";
 
@@ -20,8 +19,6 @@ export default function Login(){
         password: ''
     })
 
-    const navigate = useNavigate();
-    
     const changeInputStateToTrue = (inputField: string): void => {
         setIsInputUsed((state) => ({
             ...state,
@@ -57,7 +54,7 @@ export default function Login(){
 
         if (response.flag){
             setRequestOutput(() => ('Success - Redirecting'));
-            setTimeout(() => {navigate('/Home')}, 2000);
+            setTimeout(() => {window.location.href='/Home'}, 2000);
         }
 
         setUserInput((state) => ({

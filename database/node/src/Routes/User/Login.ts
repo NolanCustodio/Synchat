@@ -1,16 +1,15 @@
 import { prisma } from "../../Services/Prisma";
 
+import { updateSession } from "../Auth/Session/sessionHelpers";
+
 export default async function login(data: any){
 
     let rtnData = {
-        username: '',
-        email: '',
         password: '',
-        session: '',
+        sessionId: '',
         eventUUID: data.eventUUID
     }
 
-    // console.log('current test',data.username);
     /**
      * data = {
      *  username:string
@@ -30,10 +29,8 @@ export default async function login(data: any){
     // console.log('current test',usernameExists);
 
     if (usernameExists !== null && usernameExists.session !== null){
-        rtnData.username = usernameExists.username;
-        rtnData.email = usernameExists.email;
         rtnData.password = usernameExists.password;
-        rtnData.session = usernameExists.session.sessionId;
+        rtnData.sessionId = usernameExists.session.sessionId;
     }
 
     return rtnData;
