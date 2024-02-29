@@ -55,6 +55,23 @@ export async function login(data: verifyUser){
     }
 }
 
+export async function logOut(): Promise<any>{
+    const options: any = {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }
+
+    try{
+        const response = await fetch(`${route}/logOut`, options);
+        return response.json();
+    }catch(error){
+
+    }
+}
+
 export async function checkSession(): Promise<any>{
     const options: any = {
         method: "GET",

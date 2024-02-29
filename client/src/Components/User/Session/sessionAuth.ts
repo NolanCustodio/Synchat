@@ -9,7 +9,3 @@ export async function cookieRequest(){
     }
 }
 
-export function deleteSession(){
-    //logout
-}
-

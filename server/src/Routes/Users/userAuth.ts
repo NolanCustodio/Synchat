@@ -84,6 +84,10 @@ router.post("/login", async (req, res) =>{
     }
 })
 
+router.get("/logOut", async (req, res) => {
+    console.log('test');
+});
+
 router.get("/checkSession", async (req, res) => {
     let isSessionValid;
 

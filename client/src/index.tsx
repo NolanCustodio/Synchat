@@ -16,7 +16,7 @@ import { cookieRequest } from './Components/User/Session/sessionAuth'
 await cookieRequest();
 
 const SignUp = lazy(() => import ("./Components/User/SignUp"));
-const Login = lazy(() => import ("./Components/User/Login"))
+const Login = lazy(() => import ("./Components/User/Login"));
 
 //debug
 const Error = lazy(() => import("./Components/Error/Error"))
@@ -31,7 +31,6 @@ render(() => (
         
         <Route path="/SignUp" component={SignUp}/>
         <Route path="/Login" component={Login}/>
-        
         
         <Route path="/Error" component={Error}/>
         

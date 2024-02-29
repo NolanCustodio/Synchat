@@ -1,5 +1,7 @@
-import { Show } from "solid-js";
+import { Show, lazy } from "solid-js";
 import { A } from "@solidjs/router"
+
+const LogOut = lazy(() => import("../../Components/User/LogOut"));
 
 import { isLoggedIn } from "../../stores/userStore";
 
@@ -7,7 +9,7 @@ const NavButton = (props: any) => {
 
     return(
         <A href={props.nav_link}>
-            <button class="px-4 py-2 font-medium rounded text-white bg-blue-500 hover:bg-blue-700">
+            <button class="nav-button">
                 {props.nav_text}
             </button>
         </A>
@@ -26,6 +28,7 @@ export default () => {
 
             <NavButton nav_link="SignUp" nav_text="Sign Up"/>
             <NavButton nav_link="Login" nav_text="Login"/>
+            <LogOut/>
         
         </div>
     )
