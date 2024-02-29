@@ -1,14 +1,10 @@
 import { isLoggedIn } from "../../stores/userStore";
 
 
-const Event = () =>{
-    console.log(isLoggedIn.state);
-
+export default function Groups(){
     return(
         <div>
-            Group Component
+            Test Group
         </div>
     )
 }
-
-export default Event;

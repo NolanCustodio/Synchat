@@ -85,7 +85,20 @@ router.post("/login", async (req, res) =>{
 })
 
 router.get("/logOut", async (req, res) => {
-    console.log('test');
+    
+    try {
+        if (req.cookies.sessionId){
+            res.clearCookie('sessionId',{
+                httpOnly: true,
+                secure: true,
+                sameSite: true
+            });
+        };
+    }catch(error){
+
+    }
+
+    res.send();
 });
 
 router.get("/checkSession", async (req, res) => {

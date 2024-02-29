@@ -9,6 +9,8 @@ export default function logOut(){
         event.preventDefault();
 
         const response = await logOutRequest()
+
+        setTimeout(() => {window.location.href="/"}, 2000);
     }
 
     return(

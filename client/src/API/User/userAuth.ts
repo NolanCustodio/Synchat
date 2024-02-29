@@ -55,7 +55,7 @@ export async function login(data: verifyUser){
     }
 }
 
-export async function logOut(): Promise<any>{
+export async function logOut(): Promise<void>{
     const options: any = {
         method: 'GET',
         credentials: 'include',
@@ -66,9 +66,7 @@ export async function logOut(): Promise<any>{
 
     try{
         const response = await fetch(`${route}/logOut`, options);
-        return response.json();
     }catch(error){
-
     }
 }
 

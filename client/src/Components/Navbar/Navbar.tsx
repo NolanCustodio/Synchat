@@ -24,12 +24,16 @@ export default () => {
             <Show when={isLoggedIn.state}>
                 <NavButton nav_link="Home" nav_text="Home"/>
                 <NavButton nav_link="Groups" nav_text="Groups"/>
+                <LogOut/>
             </Show>
 
-            <NavButton nav_link="SignUp" nav_text="Sign Up"/>
-            <NavButton nav_link="Login" nav_text="Login"/>
-            <LogOut/>
-        
+            <Show when={!isLoggedIn.state}>
+                <NavButton nav_link="SignUp" nav_text="Sign Up"/>
+                <NavButton nav_link="Login" nav_text="Login"/>
+            </Show>
+
+            
+
         </div>
     )
 }
