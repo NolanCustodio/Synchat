@@ -13,7 +13,7 @@ interface verifyUser{
     action: string
 }
 
-let route = `http://localhost:${REQUEST_PORT}/users`
+const route = `http://localhost:${REQUEST_PORT}/users`
 
 export async function signUp(data: newUserSignUp): Promise<any>{
 

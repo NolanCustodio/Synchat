@@ -60,7 +60,7 @@ router.post("/login", async (req, res) =>{
             }
 
             rtnSession = await DatabaseRequest(currentSession);
-            isSessionValid = rtnSession.isSessionUsed;
+            isSessionValid = rtnSession.isSessionValid;
         }
 
         if (isSessionValid){
@@ -70,9 +70,14 @@ router.post("/login", async (req, res) =>{
                 secure: true,
                 sameSite: 'strict'
             })
+        }else{
+            res.clearCookie('sessionId', {
+                httpOnly: true,
+                secure: true,
+                sameSite: 'strict'
+            });
         }
-
-        res.send({flag: isPasswordMatch});
+        res.send({flag: isSessionValid});
 
     }catch(error){
         console.log(error);
@@ -80,32 +85,31 @@ router.post("/login", async (req, res) =>{
 })
 
 router.get("/checkSession", async (req, res) => {
-    let rtn = {
-        isCookieUsed: false
-    }
+    let isSessionValid;
 
     try{
         if (req.cookies.sessionId){
-            console.log(req.cookies.sessionId);
 
             const cookieData ={
                 sessionId: req.cookies.sessionId,
                 action: 'checkSession',
             }
-            rtn = await DatabaseRequest(cookieData);
+            const response = await DatabaseRequest(cookieData);
+            isSessionValid = response.isSessionValid;
+        }
 
-            // res.cookie('sessionId', rtn.session, {
-            //     maxAge: 1000 * 60 * 60 * 24 * 7, //7days
-            //     httpOnly: true,
-            //     secure: true,
-            //     sameSite: 'strict'
-            // })
+        if (isSessionValid === false){
+            res.clearCookie('sessionId',{
+                httpOnly: true,
+                secure: true,
+                sameSite: true
+            })
         }
 
     }catch(error){
         console.log(error);
     }
-    res.send(rtn);
+    res.send({isSessionValid: isSessionValid});
 })
 
 export default router;

@@ -1,5 +1,4 @@
 import { createSignal, Show } from "solid-js";
-import { useNavigate } from "@solidjs/router";
 
 import { signUpRequest } from "./helperFunctions/signUpRequest";
 
@@ -28,8 +27,6 @@ export default function SignUp() {
             [inputField]: true
         }))
     }
-
-    const navigate = useNavigate();
 
     const handleSubmit = async (event: any) => {
         event.preventDefault();
@@ -65,7 +62,7 @@ export default function SignUp() {
 
         if (response.flag){
             setRequestOutput(() => ('Success - Redirecting'));
-            setTimeout(() => {navigate('/Home')}, 2000);
+            setTimeout(() => {window.location.href='/Home'}, 2000);
         }
     }
 

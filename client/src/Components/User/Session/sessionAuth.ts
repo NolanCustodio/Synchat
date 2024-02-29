@@ -4,8 +4,8 @@ import { checkSession } from "../../../API/User/userAuth";
 export async function cookieRequest(){
     const rtn = await checkSession();
     
-    if(rtn.isCookieUsed){
-        setIsLoggedIn({state: rtn.isCookieUsed})
+    if(rtn.isSessionValid){
+        setIsLoggedIn({state: rtn.isSessionValid})
     }
 }
 

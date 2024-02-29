@@ -1,7 +1,5 @@
 import { prisma } from "../../Services/Prisma";
 
-import { updateSession } from "../Auth/Session/sessionHelpers";
-
 export default async function login(data: any){
 
     let rtnData = {
@@ -19,11 +17,15 @@ export default async function login(data: any){
     */
     
     const usernameExists = await prisma.users.findUnique({
-        where:{
-            username: data.username,
-
-        },
-        include: {session: true},
+        where:{username: data.username},
+        select:{
+            password: true,
+            session:{
+                select:{
+                    sessionId: true,
+                }
+            }
+        }
     });
 
     // console.log('current test',usernameExists);

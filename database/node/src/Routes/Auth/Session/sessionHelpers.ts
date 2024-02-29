@@ -5,12 +5,11 @@ import { getSessionAge } from './getSessionAge';
 
 export async function checkSession(data: any){
     let rtnData = {
-        isSessionUsed: false,
+        isSessionValid: false,
         sessionId : '',
         eventUUID: data.eventUUID
     }
 
-    let isSessionValid = false;
     let sessionAgeInDays: number = 8;
 
     const sessionExists = await prisma.session.findUnique({
@@ -20,20 +19,19 @@ export async function checkSession(data: any){
     });
 
     if (sessionExists !== null){
-        isSessionValid = true;
-        rtnData.isSessionUsed = true;
+        rtnData.isSessionValid = true;
         sessionAgeInDays = getSessionAge(sessionExists.creationDate);
+        console.log('days',sessionAgeInDays);
     }
 
     //if session is younger than 7 days
-    if (isSessionValid && sessionAgeInDays <= 7){
+    if (rtnData.isSessionValid && sessionAgeInDays <= 7){
         rtnData.sessionId = data.sessionId;
     };
     
     //if session is older than 7 days
-    if (isSessionValid && sessionAgeInDays > 7){
-        const newSession = await updateSession(sessionExists!.userId);
-        rtnData.sessionId = newSession;
+    if (rtnData.isSessionValid && sessionAgeInDays > 7){
+        rtnData.sessionId = await updateSession(sessionExists!.userId);
     };
 
     return rtnData;
