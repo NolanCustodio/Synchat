@@ -103,6 +103,8 @@ router.get("/logOut", async (req, res) => {
 
 router.get("/checkSession", async (req, res) => {
     let isSessionValid;
+    
+    console.log('checking');
 
     try{
         if (req.cookies.sessionId){

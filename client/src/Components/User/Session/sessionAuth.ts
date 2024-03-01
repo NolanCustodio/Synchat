@@ -6,6 +6,7 @@ export async function cookieRequest(){
     
     if(rtn.isSessionValid){
         setIsLoggedIn({state: rtn.isSessionValid})
+        return;
     }
 }
 

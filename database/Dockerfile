@@ -5,14 +5,15 @@ FROM ubuntu:22.04
 #run mysql
 #init database and tables
 RUN apt-get update 
-RUN apt-get install -y mysql-server 
-RUN apt-get install -y curl 
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - 
+RUN apt-get -y install sudo
+RUN sudo apt-get install -y mysql-server 
+RUN sudo apt-get install -y curl 
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash 
 RUN apt-get install -y nodejs 
-RUN rm -rf /var/lib/apt/lists/*
+# RUN rm -rf /var/lib/apt/lists/*
 RUN sudo npm cache clean -f
 RUN sudo npm install -g n
-RUN sudo n stable
+# RUN sudo n stable
 
 #mysql setup
 COPY ./mysql/init.sql /docker-entrypoint-initdb.d/

@@ -1,0 +1,14 @@
+.group-card{
+    @apply flex flex-col md:flex-row bg-white shadow-md rounded-xl overflow-hidden;
+
+    border: 1px solid black;
+}
+
+.x{
+    padding-top: 10px;
+}
+
+.group-card-pic{
+    width: 200px;
+    height: 200px;
+}

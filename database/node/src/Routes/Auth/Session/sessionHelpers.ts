@@ -21,7 +21,6 @@ export async function checkSession(data: any){
     if (sessionExists !== null){
         rtnData.isSessionValid = true;
         sessionAgeInDays = getSessionAge(sessionExists.creationDate);
-        console.log('days',sessionAgeInDays);
     }
 
     //if session is younger than 7 days

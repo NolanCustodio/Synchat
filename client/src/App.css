@@ -5,9 +5,9 @@
   text-align: center;
 }
 
-.debug-container{
+/* .debug-container{
   border: solid black 1px;
-}
+} */
 
 .nav-button{
   @apply px-4 py-2 font-medium rounded text-white bg-blue-500 hover:bg-blue-700
