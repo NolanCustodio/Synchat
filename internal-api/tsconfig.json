@@ -11,9 +11,8 @@
        "allowImportingTsExtensions": true
     },
     "include": [
-      //  "src/**/*.ts",
-       "node/src/**/*.ts", 
-       "index.ts"   
+       "src/**/*.ts", 
+       "src/index.ts"   
     ],
     "exclude": [
        "node_modules"

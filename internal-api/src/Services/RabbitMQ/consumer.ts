@@ -31,7 +31,7 @@ export default class Consumer{
                 }
 
                 //call helper function/handler to execute operation
-                const rtnData = await handleMessage(message.properties.headers.action, JSON.parse(message.content.toString()));
+                const rtnData = await handleMessage(message.properties.headers!.action, JSON.parse(message.content.toString()));
 
                 //sendToQueue
                 await RabbitmqClient.produce(rtnData, correlationId, replyTo);
