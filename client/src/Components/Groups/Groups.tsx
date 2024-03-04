@@ -1,14 +1,16 @@
+import { A } from "@solidjs/router";
+
 import { isLoggedIn } from "../../stores/userStore";
 
 import "./groups.css";
 
 const SingleGroup = (props: any) => {
     return(
-        <div class="x">
+        <A class="x" href={props.number}>
             <div class="group-card">
                 {/* <!-- Image section --> */}
                 <div class="md:w-1/2 relative">
-                    <img class="group-card-pic" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.murrayglass.com%2Fwp-content%2Fuploads%2F2020%2F10%2Favatar-768x768.jpeg&f=1&nofb=1&ipt=18d27bf08e4e73ae56008ac620be1bb1e39d4841568cc643af4ddc32d598d197&ipo=images" alt="Card image" class="object-cover w-full h-full"/>
+                    <img class="object-cover w-full h-full group-card-pic" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.murrayglass.com%2Fwp-content%2Fuploads%2F2020%2F10%2Favatar-768x768.jpeg&f=1&nofb=1&ipt=18d27bf08e4e73ae56008ac620be1bb1e39d4841568cc643af4ddc32d598d197&ipo=images" alt="Card image"/>
                 </div>
                 {/* <!-- Content section --> */}
                 <div class="md:w-1/2 p-6">
@@ -22,16 +24,17 @@ const SingleGroup = (props: any) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </A>
     );
 };
 
 export default function Groups(){
+
     return(
         <div>
-            <SingleGroup/>
+            <SingleGroup number='1'/>
 
-            <SingleGroup/>
+            <SingleGroup number='2'/>
         </div>
     );
 };

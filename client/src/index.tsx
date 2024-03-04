@@ -18,6 +18,9 @@ await cookieRequest();
 const SignUp = lazy(() => import ("./Components/User/SignUp"));
 const Login = lazy(() => import ("./Components/User/Login"));
 
+//Groups
+const SingleGroupPage = lazy(() => import("./Components/Groups/singleGroupPage"));
+
 //debug
 const Error = lazy(() => import("./Components/Error/Error"))
 
@@ -32,6 +35,8 @@ render(() => (
         <Route path="/SignUp" component={SignUp}/>
         <Route path="/Login" component={Login}/>
         
+        <Route path="/Groups/:number" component={SingleGroupPage}/>
+
         <Route path="/Error" component={Error}/>
         
     </Router>
