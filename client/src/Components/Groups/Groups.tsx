@@ -1,6 +1,6 @@
 import { A } from "@solidjs/router";
 
-import { isLoggedIn } from "../../stores/userStore";
+// import { isLoggedIn } from "../../stores/userStore";
 
 import "./groups.css";
 
