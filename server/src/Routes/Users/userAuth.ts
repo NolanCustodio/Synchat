@@ -20,6 +20,7 @@ router.post('/signUp', async (req, res) => {
             action: req.body.action,
         }
 
+
         let rtn = await DatabaseRequest(newUser);
 
         if (rtn.action){

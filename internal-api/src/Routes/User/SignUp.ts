@@ -3,6 +3,8 @@ import { randomUUID } from 'crypto';
 
 
 export default async function signUp(data: any){
+    console.log(data);
+
     let rtnData: any = {};
     
     rtnData.eventUUID = data.eventUUID
