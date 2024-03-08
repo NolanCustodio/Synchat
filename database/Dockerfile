@@ -1,17 +1,16 @@
 FROM mongo:7.0
 
-# we take over the default & start mongo in replica set mode in a background task
-ENTRYPOINT mongod --port $MONGO_REPLICA_PORT --replSet rs0 --bind_ip 0.0.0.0 & MONGOD_PID=$!; \
-# we prepare the replica set with a single node and prepare the root user config
-INIT_REPL_CMD="rs.initiate({ _id: 'rs0', members: [{ _id: 0, host: '$MONGO_REPLICA_HOST:$MONGO_REPLICA_PORT' }] })"; \
-# INIT_USER_CMD="db.createUser({ \
-#     user: $MONGO_INITDB_ROOT_USERNAME, \
-#     pwd: $MONGO_INITDB_ROOT_PASSWORD, \
-#     roles: [\
-#         {role: "userAdminAnyDatabase", db: "admin"},\
-#         {role: "userWriteAnyDatabase", db: "admin"},\
-#     ]})";\
-# we wait for the replica set to be ready and then submit the command just above
-until ($MONGO_COMMAND admin --port $MONGO_REPLICA_PORT --eval "$INIT_REPL_CMD"); do sleep 1; done; \
-# we are done but we keep the container by waiting on signals from the mongo task
-echo "REPLICA SET ONLINE"; wait $MONGOD_PID;
+# Copy the generate-keyfile.sh script to the container
+COPY generate-keyfile.sh /generate-keyfile.sh
+
+# Create the keyfile directory and generate the keyfile during the image build
+RUN mkdir -p /opt/keyfile && \
+    /bin/bash /generate-keyfile.sh
+
+# Copy the custom mongod.conf to the container's configuration directory
+COPY mongod.conf /etc/mongod.conf
+
+# Copy the mongo-init.js file to the container's initialization script directory
+COPY mongo-init.js /docker-entrypoint-initdb.d/mongo-init.js
+
+CMD ["mongod", "-f", "/etc/mongod.conf"]
