@@ -1,3 +1,4 @@
 mongo-init.js
 
 /node_modules
+/mysql/*

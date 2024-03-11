@@ -1,8 +1,10 @@
+import { groups } from "../../stores/groupStore";
 
-export default function SingleGroupPage(props: any){
+export default function SingleGroupPage(){
+    
     return(
         <div>
-            {props.number}
+            {groups.number}
         </div>
     )
 }

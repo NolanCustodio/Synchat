@@ -9,6 +9,7 @@ import App from './App'
 //myfiles
 const HomePage = lazy(() => import("./Components/HomePage/HomePage"));
 const LandingPage = lazy(() => import("./Components/LandingPage/LandingPage"));
+const CreateGroup = lazy(() => import("./Components/Groups/createGroups/CreateGroup"));
 const Groups = lazy(() => import("./Components/Groups/Groups"));
 
 //user auth
@@ -30,11 +31,12 @@ render(() => (
     <Router root={App}>
         <Route path="/" component={LandingPage}/>
         <Route path="/Home" component={HomePage}/>
-        <Route path="/Groups" component={Groups}/>
         
         <Route path="/SignUp" component={SignUp}/>
         <Route path="/Login" component={Login}/>
         
+        <Route path="/Groups" component={Groups}/>
+        <Route path="/CreateGroup" component={CreateGroup}/>
         <Route path="/Groups/:number" component={SingleGroupPage}/>
 
         <Route path="/Error" component={Error}/>
