@@ -14,19 +14,30 @@
 }
 
 /* create group */
-.create-group-form{
+
+.part{
     border: black solid 1px;
-    @apply py-10
+    padding-inline: 20%;
+    @apply py-10 flex flex-col
 }
 
-.create-group-form > *{
+.part > *{
     @apply py-2.5
 }
 
 .create-group-input{
     font-size: 300%;
     padding-left: 3.33%;
+    width: 100%;
 
-    @apply w-screen md:w-3/4 border-2 border-black focus:border-blue-500
+    @apply border-2 border-black focus:border-blue-500
 }
 
+.create-group-button{
+    @apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded
+}
+
+.create-group-form-row{
+    padding-inline: 3px;
+    @apply flex justify-between
+}

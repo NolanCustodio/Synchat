@@ -1,5 +1,6 @@
 import { defineConfig, loadEnv } from 'vite'
 import solid from 'vite-plugin-solid'
+import taliwindcss from 'tailwindcss'
 
 
 
@@ -10,6 +11,11 @@ export default ({mode}) => {
     plugins: [solid()],
     build: {
       sourcemap: true
+    },
+    css:{
+      postcss:{
+        plugins:[taliwindcss()],
+      }
     },
     server: { 
       host: "0.0.0.0",
