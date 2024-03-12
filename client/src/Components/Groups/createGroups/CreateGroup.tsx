@@ -1,6 +1,6 @@
-import { Show, createSignal, Component } from "solid-js";
+import { Show, createSignal, onMount } from "solid-js";
 import { Calendar } from "fullcalendar";
-// import dayGridPlugin from "@fullcalendar/daygrid/internal.js";
+import dayGridPlugin from "@fullcalendar/daygrid";
 
 
 import "../groups.css"
@@ -30,6 +30,22 @@ function PlainTextInput(props: createGroupProps){
     )
 }
 
+const CalendarComponent = () =>{
+    let calendarE1!: HTMLDivElement;
+
+    onMount(() => {
+        const calendar = new Calendar(calendarE1, {
+            plugins: [dayGridPlugin],
+            initialView: 'dayGridMonth',
+        });
+        calendar.render();
+    });
+
+    return(
+        <div ref={calendarE1}></div>
+    )
+}
+
 export default function CreateGroup(){
     const [showCalendar, setShowCalendar] = createSignal(false);
 
@@ -38,21 +54,6 @@ export default function CreateGroup(){
         setShowCalendar(!showCalendar());
     }
 
-    const CalendarComponent: Component<any> = (props) => {
-        // Initialize the calendar when the component mounts
-        const calendarEl = document.getElementById('calendar');
-        if (calendarEl) {
-           const calendar = new Calendar(calendarEl, {
-             initialView: 'dayGridMonth'
-             // Add any FullCalendar options here
-           });
-           calendar.render();
-        }
-       
-        return (
-           <div id="calendar"></div>
-        );
-    };
 
     return(
         <>
@@ -78,9 +79,11 @@ export default function CreateGroup(){
                         </button>
                     </div>
 
-                    {/* <Show></Show> */}
-
-                    <CalendarComponent/>
+                    <Show when={showCalendar()}>
+                        
+                        <CalendarComponent/>
+                        
+                    </Show>
 
                     <CreateGroupNavButtons/>
                 </div>
