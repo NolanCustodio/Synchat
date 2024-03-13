@@ -50,3 +50,13 @@
 .time-colon{
     font-size: 300%;
 }
+
+.clock{
+
+    @apply border border-black w-1/4
+}
+
+.time-row{
+
+    @apply flex items-center justify-center
+}

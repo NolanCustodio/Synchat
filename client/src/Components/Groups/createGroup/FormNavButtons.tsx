@@ -1,23 +1,24 @@
-import {pageNumber, setPageNumber} from "./CreateGroup";
+import { newGroupCreation, setNewGroupCreation } from "../../../stores/groupStore";
 
 export default function CreateGroupFormNavButtons(){
 
     function handleButton(event: any, isNext: boolean){
         event.preventDefault()
+        
         if (isNext){
-            setPageNumber(pageNumber() + 1);
+            setNewGroupCreation("pageNumber", newGroupCreation.pageNumber + 1);
         }else{
-            setPageNumber(pageNumber() - 1);
+            setNewGroupCreation("pageNumber", newGroupCreation.pageNumber - 1);
         }
 
-        if(pageNumber() < 0){
-            setPageNumber(0);
+        if(newGroupCreation.pageNumber < 0){
+            setNewGroupCreation("pageNumber",0);
         };
 
         //Set this max to number of sub-pages
         //for this form
-        if(pageNumber() > 1){
-            setPageNumber(1);
+        if(newGroupCreation.pageNumber > 1){
+            setNewGroupCreation("pageNumber", 1);
         };
 
     }

@@ -1,21 +1,36 @@
-import { Show, createSignal } from "solid-js";
-export const [pageNumber, setPageNumber] = createSignal(1);
+import { Show, createSignal, onMount } from "solid-js";
+// export const [pageNumber, setPageNumber] = createSignal(0);
 
 import CalendarComponent from "../../../Calendar/Calendar";
 import CreateGroupFormNavButtons from "./FormNavButtons";
 import TimeInputs from "./TimeInputs";
 
+import { newGroupCreation, setNewGroupCreation } from "../../../stores/groupStore";
+
 import "../groups.css"
+
 
 interface createGroupProps{
     placeholderText: string
+    id: string
 }
 
 
-function PlainTextInput(props: createGroupProps){
+function PlainTextInput(props: createGroupProps, id: string){
+    const handleTextInput = (event: any) =>{
+        console.log(event.target);
+        console.log(id);
+    }
+
     return(
         <div>
-            <input class="create-group-input" placeholder={props.placeholderText}></input>
+            <input 
+                type="text"
+                id={id}
+                class="create-group-input" 
+                placeholder={props.placeholderText}
+                onInput={handleTextInput}
+            />
         </div>
     )
 }
@@ -23,6 +38,10 @@ function PlainTextInput(props: createGroupProps){
 export default function CreateGroup(){
     const [showCalendar, setShowCalendar] = createSignal(false);
     const [showTime, setShowTime] = createSignal(false);
+
+    onMount(() => {
+        setNewGroupCreation("pageNumber", 0);
+    })
 
     function handleDate(event: any){
         event.preventDefault();
@@ -37,10 +56,13 @@ export default function CreateGroup(){
     return(
         <>
             <form class="create-group-form ">
-                <Show when={pageNumber() === 0}>
+                <Show when={newGroupCreation.pageNumber === 0}>
                     <div class="part">
-                        <PlainTextInput placeholderText="Group Name"/>
-                        <PlainTextInput placeholderText="Add Group Member"/>
+                        <PlainTextInput 
+                            placeholderText="Group Name"
+                            id="groupName"
+                        />
+                        <PlainTextInput placeholderText="Add Group Member" id="groupMembers"/>
 
                         <div>
                             display group members here
@@ -50,9 +72,9 @@ export default function CreateGroup(){
                     </div>
                 </Show>
 
-                <Show when={pageNumber() === 1}>
+                <Show when={newGroupCreation.pageNumber === 1}>
                     <div class="part">
-                        <PlainTextInput placeholderText="Event Suggestion"/>
+                        <PlainTextInput placeholderText="Event" id="event"/>
 
                         <div>
                             <button class="create-group-button" onClick={(event:any) => {handleDate(event)}}>
