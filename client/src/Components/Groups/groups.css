@@ -41,3 +41,12 @@
     padding-inline: 3px;
     @apply flex justify-between
 }
+
+.time-input{
+
+    @apply p-4 border-2 border-black w-1/4
+}
+
+.time-colon{
+    font-size: 300%;
+}

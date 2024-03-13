@@ -9,7 +9,7 @@ import App from './App'
 //myfiles
 const HomePage = lazy(() => import("./Components/HomePage/HomePage"));
 const LandingPage = lazy(() => import("./Components/LandingPage/LandingPage"));
-const CreateGroup = lazy(() => import("./Components/Groups/createGroups/CreateGroup"));
+const CreateGroup = lazy(() => import("./Components/Groups/createGroup/CreateGroup"));
 const Groups = lazy(() => import("./Components/Groups/Groups"));
 
 //user auth
