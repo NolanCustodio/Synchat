@@ -3,9 +3,15 @@ import { Calendar } from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
+import { newGroupCreation, setNewGroupCreation } from "../stores/groupStore";
+
 
 export default function CalendarComponent(){
     let calendarE1!: HTMLDivElement;
+
+    function handleDate(date: string){
+        setNewGroupCreation("startDate", date)
+    }
 
     onMount(() => {
         const calendar = new Calendar(calendarE1, {
@@ -14,7 +20,7 @@ export default function CalendarComponent(){
             editable: true,
             selectable: true,
             select: function(info){
-                console.log("clicked here", info.startStr);
+                handleDate(info.startStr);
             }
         });
         calendar.render();

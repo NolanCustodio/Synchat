@@ -1,6 +1,6 @@
 import { Show, createSignal, onCleanup, onMount } from "solid-js";
 
-import { newGroupCreation, setnewGroupCreation } from "../../../stores/groupStore";
+import { newGroupCreation, setNewGroupCreation } from "../../../stores/groupStore";
 
 export default function TimeInputs(){
     const [showHours, setShowHourClock] = createSignal(false);
@@ -24,6 +24,34 @@ export default function TimeInputs(){
         setShowMinuteClock(showMinuteBool);
     }
 
+    interface timeInputProps{
+        id: string,
+        max: string,
+    }
+
+    function TimeInput(props: timeInputProps){
+        const handleTimeInput = (event: any) => {
+            setNewGroupCreation((state) => ({
+                ...state,
+                [props.id]: event.target.value,
+            }));
+
+            console.log(JSON.stringify(newGroupCreation));
+        }
+
+        return(
+            <input
+                class="time-input"
+                type="number"
+                id={props.id}
+                min="0"
+                max={props.max}
+                value={newGroupCreation[props.id]}
+                onInput={handleTimeInput}
+            />
+        )
+    }
+
     onMount(() => {
         document.addEventListener('click', handleShowClock);
     })
@@ -35,9 +63,11 @@ export default function TimeInputs(){
     return(
         <div class="">
             <div class="time-row">
-                <input class="time-input" id="hour" type="number" min="0" max="24"/>
+                <TimeInput id="startHour" max="24"/>
+                {/* <input class="time-input" id="hour" type="number" min="0" max="24"/> */}
                 <p class="time-colon">:</p>
-                <input class="time-input" id="minute" type="number" min="0" max="60"/>
+                <TimeInput id="startMinute" max="60"/>
+                {/* <input class="time-input" id="minute" type="number" min="0" max="60"/> */}
             </div>
             <div class="time-row">
                 <Show when={showHours()}>

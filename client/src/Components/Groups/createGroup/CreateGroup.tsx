@@ -1,5 +1,4 @@
 import { Show, createSignal, onMount } from "solid-js";
-// export const [pageNumber, setPageNumber] = createSignal(0);
 
 import CalendarComponent from "../../../Calendar/Calendar";
 import CreateGroupFormNavButtons from "./FormNavButtons";
@@ -16,17 +15,21 @@ interface createGroupProps{
 }
 
 
-function PlainTextInput(props: createGroupProps, id: string){
+function PlainTextInput(props: createGroupProps){
     const handleTextInput = (event: any) =>{
-        console.log(event.target);
-        console.log(id);
-    }
+        const inputId = props.id;
+        const value = event.target.value;
+
+        setNewGroupCreation((state) => ({
+            ...state,
+            [inputId]: value
+    }))}
 
     return(
         <div>
             <input 
                 type="text"
-                id={id}
+                id={props.id}
                 class="create-group-input" 
                 placeholder={props.placeholderText}
                 onInput={handleTextInput}
@@ -53,6 +56,13 @@ export default function CreateGroup(){
         setShowTime(!showTime());
     }
 
+    function handleSubmit(event: any){
+        event.preventDefault();
+        const x = newGroupCreation;
+
+        console.log(JSON.stringify(x));
+    }
+
     return(
         <>
             <form class="create-group-form ">
@@ -74,7 +84,7 @@ export default function CreateGroup(){
 
                 <Show when={newGroupCreation.pageNumber === 1}>
                     <div class="part">
-                        <PlainTextInput placeholderText="Event" id="event"/>
+                        <PlainTextInput placeholderText="Event" id="currentEvent"/>
 
                         <div>
                             <button class="create-group-button" onClick={(event:any) => {handleDate(event)}}>
@@ -99,6 +109,10 @@ export default function CreateGroup(){
                         <CreateGroupFormNavButtons/>
                     </div>
                 </Show>
+
+                <button class="create-group-button" onClick={(event:any) => {handleSubmit(event)}}>
+                    Submit
+                </button>
             </form>
         </>
     )
