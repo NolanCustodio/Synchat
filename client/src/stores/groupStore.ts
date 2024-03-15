@@ -14,14 +14,15 @@ export const [groups, setGroups] = createStore({
 //     startTime:{hour: number, minute: number}
 // }
 
-export const [newGroupCreation, setNewGroupCreation] = createStore({
+interface stringIndex{
+    [index: string]: any
+}
+
+export const [newGroupCreation, setNewGroupCreation] = createStore<stringIndex>({
     pageNumber: 0,
     groupName: '',
     groupMembers: [],
     currentEvent: '',
-    previousEvents: [],
     startDate: '',
-    startHour: 0,
-    startMinute: 0
-    // startTime: {hour: 0, mintue: 0},
+    startTime: {hour: 0, minute: 0},
 })

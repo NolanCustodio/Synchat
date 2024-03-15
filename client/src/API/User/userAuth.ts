@@ -1,4 +1,5 @@
-const REQUEST_PORT = import.meta.env.VITE_REQUEST_PORT;
+import { API_Route } from "../constants"
+const route = `${API_Route}/users`
 
 interface newUserSignUp{
     username: string,
@@ -12,8 +13,6 @@ interface verifyUser{
     password: string,
     action: string
 }
-
-const route = `http://localhost:${REQUEST_PORT}/users`
 
 export async function signUp(data: newUserSignUp): Promise<any>{
 

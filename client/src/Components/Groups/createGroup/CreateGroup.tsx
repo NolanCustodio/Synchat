@@ -3,6 +3,7 @@ import { Show, createSignal, onMount } from "solid-js";
 import CalendarComponent from "../../../Calendar/Calendar";
 import CreateGroupFormNavButtons from "./FormNavButtons";
 import TimeInputs from "./TimeInputs";
+import { createGroupRequest } from "./apiRequests/createGroupRequest";
 
 import { newGroupCreation, setNewGroupCreation } from "../../../stores/groupStore";
 
@@ -20,10 +21,8 @@ function PlainTextInput(props: createGroupProps){
         const inputId = props.id;
         const value = event.target.value;
 
-        setNewGroupCreation((state) => ({
-            ...state,
-            [inputId]: value
-    }))}
+        setNewGroupCreation([inputId], value);
+    }
 
     return(
         <div>
@@ -58,9 +57,7 @@ export default function CreateGroup(){
 
     function handleSubmit(event: any){
         event.preventDefault();
-        const x = newGroupCreation;
-
-        console.log(JSON.stringify(x));
+        console.log(JSON.parse(JSON.stringify(newGroupCreation)))
     }
 
     return(

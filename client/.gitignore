@@ -24,5 +24,5 @@ dist-ssr
 *.sw?
 
 #my-files
-/src/Components/Database
 *.myNotes
+/src/API/constants.ts
