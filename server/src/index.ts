@@ -13,7 +13,7 @@ import RabbitmqClient from './Services/RabbitMQ/RabbitClient'
 
 //Route Paths
 import auth from './Routes/Users/userAuth';
-// const auth = require("./Routes/Users/userAuth");
+import group from './Routes/Group/createGroup';
 
 //Env
 const clientPort = process.env.CLIENT_PORT;
@@ -33,6 +33,7 @@ app.use(cookieParser());
 
 //Routes
 app.use('/users', auth);
+app.use('/group', group);
 
 //Rabbit Testing
 RabbitmqClient.initialize();

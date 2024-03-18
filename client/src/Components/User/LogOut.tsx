@@ -1,9 +1,6 @@
-import { createSignal } from "solid-js";
-
 import { logOutRequest } from "./helperFunctions/logOutRequest";
 
 export default function LogOut(){
-    const [logOut, setLogOut] = createSignal();
 
     const handleLogout = async (event: any) => {
         event.preventDefault();

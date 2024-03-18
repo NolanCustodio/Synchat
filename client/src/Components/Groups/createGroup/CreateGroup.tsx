@@ -57,7 +57,9 @@ export default function CreateGroup(){
 
     function handleSubmit(event: any){
         event.preventDefault();
-        console.log(JSON.parse(JSON.stringify(newGroupCreation)))
+        const newGroupAsObject = JSON.parse(JSON.stringify(newGroupCreation));
+
+        const rtnObj = createGroupRequest(newGroupAsObject);
     }
 
     return(

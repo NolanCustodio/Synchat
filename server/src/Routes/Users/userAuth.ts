@@ -1,13 +1,13 @@
 import express from 'express';
 
-const router = express.Router();
+const userRouter = express.Router();
 
 import DatabaseRequest from '../../Services/RabbitMQ/Users/DatabaseRequest';
 import hashPassword from '../../Services/Encrypt/Users/passwordEncrypt';
 import comparePasswords from '../../Services/Encrypt/Users/comparePassword';
 // import { sessionCheck } from '../../Middleware/Users/sessionAuth';
 
-router.post('/signUp', async (req, res) => {
+userRouter.post('/signUp', async (req, res) => {
     try{
         const hashedPassword = await hashPassword(req.body.password);
 
@@ -39,7 +39,7 @@ router.post('/signUp', async (req, res) => {
     }
 });
 
-router.post("/login", async (req, res) =>{
+userRouter.post("/login", async (req, res) =>{
     let isPasswordMatch = false;
     let isSessionValid = false;
     let rtnSession;
@@ -85,7 +85,7 @@ router.post("/login", async (req, res) =>{
     }
 })
 
-router.get("/logOut", async (req, res) => {
+userRouter.get("/logOut", async (req, res) => {
     
     try {
         if (req.cookies.sessionId){
@@ -102,7 +102,7 @@ router.get("/logOut", async (req, res) => {
     res.send();
 });
 
-router.get("/checkSession", async (req, res) => {
+userRouter.get("/checkSession", async (req, res) => {
     let isSessionValid;
     
     console.log('checking');
@@ -132,4 +132,4 @@ router.get("/checkSession", async (req, res) => {
     res.send({isSessionValid: isSessionValid});
 })
 
-export default router;
+export default userRouter;

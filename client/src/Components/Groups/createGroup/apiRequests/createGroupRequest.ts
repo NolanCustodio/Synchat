@@ -1,4 +1,4 @@
-
+import { createGroup } from "../../../../API/Group/createGroup";
 
 export async function createGroupRequest(newGroupData: any): Promise<any>{
     let rtnObj = {
@@ -6,7 +6,12 @@ export async function createGroupRequest(newGroupData: any): Promise<any>{
     };
 
     try{
-        console.log(newGroupData);
+        newGroupData.action = "createGroup";
+        delete newGroupData.pageNumber;
+
+        // console.log(newGroupData);
+        const response = await createGroup(newGroupData);
+
     }catch (error){
         console.log(error);
     }

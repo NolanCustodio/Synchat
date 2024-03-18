@@ -3,8 +3,6 @@ import { randomUUID } from 'crypto';
 
 
 export default async function signUp(data: any){
-    console.log(data);
-
     let rtnData: any = {};
     
     rtnData.eventUUID = data.eventUUID
@@ -18,13 +16,13 @@ export default async function signUp(data: any){
 
     try{
 
-        const usernameIsUnique = await prisma.users.findUnique({
+        const usernameIsUnique = await prisma.user.findUnique({
             where:{
                 username: data.username,
             }
         })
         
-        const emailIsUnique = await prisma.users.findUnique({
+        const emailIsUnique = await prisma.user.findUnique({
             where:{
                 email: data.email,
             },
@@ -47,7 +45,7 @@ export default async function signUp(data: any){
         const newUserSession = randomUUID().toString();
 
         if (rtnData.action){
-            await prisma.users.create({
+            await prisma.user.create({
                 data:{
                     username: data.username,
                     email: data.email,

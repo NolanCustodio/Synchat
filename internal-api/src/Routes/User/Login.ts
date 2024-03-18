@@ -16,7 +16,7 @@ export default async function login(data: any){
      * }
     */
     
-    const usernameExists = await prisma.users.findUnique({
+    const usernameExists = await prisma.user.findUnique({
         where:{username: data.username},
         select:{
             password: true,
