@@ -5,7 +5,7 @@ import DatabaseRequest from '../../Services/RabbitMQ/Users/DatabaseRequest';
 
 groupRouter.post('/createGroup', async (req, res) => {
     try{
-        const userAndGroupInfo = { ...req.body, userId: req.cookies.sessionId }
+        const userAndGroupInfo = { ...req.body, userSessionId: req.cookies.sessionId }
 
         const rtn = await DatabaseRequest(userAndGroupInfo);
 
