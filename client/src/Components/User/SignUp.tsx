@@ -1,6 +1,6 @@
 import { createSignal, Show } from "solid-js";
 
-import { signUpRequest } from "./helperFunctions/signUpRequest";
+import { signUpRequest } from "./userRequests/signUpRequest";
 
 import "./userAuth.css";
 

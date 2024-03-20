@@ -4,38 +4,12 @@ import CalendarComponent from "../../../Calendar/Calendar";
 import CreateGroupFormNavButtons from "./FormNavButtons";
 import TimeInputs from "./TimeInputs";
 import { createGroupRequest } from "./apiRequests/createGroupRequest";
+import { TextInput } from "./TextInput";
+import { SearchForUser } from "../../User/otherUserInteractions/SeachForUser";
 
 import { newGroupCreation, setNewGroupCreation } from "../../../stores/groupStore";
 
 import "../groups.css"
-
-
-interface createGroupProps{
-    placeholderText: string
-    id: string
-}
-
-
-function PlainTextInput(props: createGroupProps){
-    const handleTextInput = (event: any) =>{
-        const inputId = props.id;
-        const value = event.target.value;
-
-        setNewGroupCreation([inputId], value);
-    }
-
-    return(
-        <div>
-            <input 
-                type="text"
-                id={props.id}
-                class="create-group-input" 
-                placeholder={props.placeholderText}
-                onInput={handleTextInput}
-            />
-        </div>
-    )
-}
 
 export default function CreateGroup(){
     const [showCalendar, setShowCalendar] = createSignal(false);
@@ -67,11 +41,11 @@ export default function CreateGroup(){
             <form class="create-group-form ">
                 <Show when={newGroupCreation.pageNumber === 0}>
                     <div class="part">
-                        <PlainTextInput 
+                        <TextInput 
                             placeholderText="Group Name"
                             id="groupName"
                         />
-                        <PlainTextInput placeholderText="Add Group Member" id="groupMembers"/>
+                        <SearchForUser placeholderText="Add Group Member" id="groupMembers"/>
 
                         <div>
                             display group members here
@@ -83,7 +57,7 @@ export default function CreateGroup(){
 
                 <Show when={newGroupCreation.pageNumber === 1}>
                     <div class="part">
-                        <PlainTextInput placeholderText="Event" id="currentEvent"/>
+                        <TextInput placeholderText="Event" id="currentEvent"/>
 
                         <div>
                             <button class="create-group-button" onClick={(event:any) => {handleDate(event)}}>

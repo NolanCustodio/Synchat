@@ -1,6 +1,4 @@
-import { group } from "console";
 import { prisma } from "../../Services/Prisma";
-import { eventNames } from "process";
 
 export default async function createGroup(data: any){
     let rtnData = {

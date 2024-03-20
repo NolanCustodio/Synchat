@@ -64,7 +64,7 @@ export async function logOut(): Promise<void>{
     }
 
     try{
-        const response = await fetch(`${route}/logOut`, options);
+        await fetch(`${route}/logOut`, options);
     }catch(error){
     }
 }

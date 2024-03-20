@@ -1,4 +1,4 @@
-import { logOutRequest } from "./helperFunctions/logOutRequest";
+import { logOutRequest } from "./userRequests/logOutRequest";
 
 export default function LogOut(){
 
