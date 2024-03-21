@@ -3,18 +3,21 @@ const userInteractionRouter = express.Router();
 
 import DatabaseRequest from '../../Services/RabbitMQ/Users/DatabaseRequest';
 
-userInteractionRouter.post('/search', async (req, res) => {
+userInteractionRouter.post('/usernameSearch', async (req, res) => {
     try{
-        const x  = req.body;
-        console.log('in express',x);
+        req.body.userSessionId = req.cookies.sessionId
+        // const x  = req.body;
+        // console.log('in express',req.body);
 
-        // const rtn = await DatabaseRequest();
+        const rtn = await DatabaseRequest(req.body);
+
+        // console.log('in express after db',rtn);
+        res.send(rtn);
 
     }catch (error){
         console.log(error);
     }
 
-    res.send({});
 });
 
 export default userInteractionRouter;

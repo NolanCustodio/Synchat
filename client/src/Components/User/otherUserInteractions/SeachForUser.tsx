@@ -1,17 +1,29 @@
-import { createSignal } from "solid-js";
+import { createSignal, createEffect } from "solid-js";
 
 import { handleTextInput } from "../../Groups/createGroup/TextInput";
 import { userSearchRequest } from "./userInteractionRequest/userSearchRequest";
 
 import { newGroupCreation } from "../../../stores/groupStore";
 
-export function SearchForUser(props: any){
-    const [otherUsers, setOtherUsers] = createSignal([
-        {}
-    ]);
+const [otherUsers, setOtherUsers] = createSignal([]);
 
-    const handleUserSearch = (event: any) =>{
-        userSearchRequest({username: event.target.value});
+function UserList(){
+    console.log(otherUsers())
+    return(
+        <ul>
+            {otherUsers().map((username: any) => (<li>{username}</li>))}
+        </ul>
+    )
+}
+
+export function SearchForUser(props: any){
+
+    const handleUserSearch = async (event: any) =>{
+        //create something to check for whitespace
+        if(event.target.value){
+            const rtnObj = await userSearchRequest({username: event.target.value});
+            setOtherUsers(rtnObj.usernames)
+        }
     }
 
     return(
@@ -27,6 +39,7 @@ export function SearchForUser(props: any){
                     handleUserSearch(event);
                 }}
             />
+            <UserList/>
         </div>
     )
 }

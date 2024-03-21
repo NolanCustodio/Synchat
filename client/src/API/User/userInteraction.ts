@@ -13,7 +13,8 @@ export async function usernameSearch(data: any): Promise<any>{
     }
 
     try{
-        const response = await fetch(`${route}/search`, options)
+        const response = await fetch(`${route}/usernameSearch`, options);
+        return response.json();
     }catch(error){
         return {error: error};
     }

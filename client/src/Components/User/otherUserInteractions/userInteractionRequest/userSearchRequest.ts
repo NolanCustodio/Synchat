@@ -8,10 +8,9 @@ export async function userSearchRequest(userSearch: any): Promise<any>{
     // console.log('testing request', userSearch);
 
     try{
-        userSearch.action = 'search'
-
+        userSearch.action = 'usernameSearch';
         const response = await usernameSearch(userSearch);
-
+        return response;
     }catch(error){
         console.log(error);
     }

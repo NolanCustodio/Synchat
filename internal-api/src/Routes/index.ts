@@ -1,5 +1,11 @@
+//User
 import signUp from './User/SignUp';
 import login from './User/Login';
+
+//UserInteractions
+import usernameSearch from './userInteractions/usernameSearch';
+
+//Session
 import { checkSession } from './Auth/Session/sessionHelpers';
 
 //Group
@@ -21,6 +27,9 @@ export default async function handleMessage(action: string, data: any){
             break;
         case 'createGroup':
             rtnData = await createGroup(data);
+            break;
+        case 'usernameSearch':
+            rtnData = await usernameSearch(data);
             break;
         default:
             rtnData = {
