@@ -1,0 +1,7 @@
+.userDisplayList{
+    @apply border-solid border-2 border-slate-400 mt-2 rounded-md
+}
+
+.singleUserInList{
+    @apply p-4 border-b border-black last:border-b-0
+}

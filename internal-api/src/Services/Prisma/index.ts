@@ -4,7 +4,7 @@ import { fakeUsers } from './fakeInputs/fakeUsers';
 export const prisma = new PrismaClient();
 
 async function main() {
-    // fakeUsers(7, prisma);
+    // fakeUsers(50, prisma);
 }
 
 main().then(async () => {
