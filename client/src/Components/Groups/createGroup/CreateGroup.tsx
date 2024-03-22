@@ -45,12 +45,11 @@ export default function CreateGroup(){
                             placeholderText="Group Name"
                             id="groupName"
                         />
+
+                        <h2>
+                            Current Group Members: {newGroupCreation.groupMembers[0]}
+                        </h2>
                         <SearchForUser placeholderText="Add Group Member" id="groupMembers"/>
-
-                        <div>
-                            display group members here
-                        </div>
-
                         <CreateGroupFormNavButtons/>
                     </div>
                 </Show>

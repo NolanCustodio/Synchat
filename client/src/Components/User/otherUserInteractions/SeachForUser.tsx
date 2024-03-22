@@ -1,6 +1,6 @@
-import { createSignal, createEffect, For } from "solid-js";
+import { createSignal, For } from "solid-js";
 
-import { handleTextInput } from "../../Groups/createGroup/TextInput";
+// import { handleTextInput } from "../../Groups/createGroup/TextInput";
 import { userSearchRequest } from "./userInteractionRequest/userSearchRequest";
 
 import { newGroupCreation, setNewGroupCreation } from "../../../stores/groupStore";
@@ -8,8 +8,15 @@ import "./userInteraction.css"
 
 const [otherUsers, setOtherUsers] = createSignal([]);
 
-function addUserToList(userId: string){
-    console.log('userid',userId);
+function addUserToList(user: any){
+    console.log(user)
+
+    setNewGroupCreation(
+        'groupMembers', 
+        [...newGroupCreation.groupMembers, 
+            {username: user.username, userId: user.userId}
+        ]
+    )
 }
 
 function UserList(){
@@ -18,7 +25,7 @@ function UserList(){
         <ul class="userDisplayList">
             <For each={otherUsers()}>
                 {(item: any) => (
-                    <li onClick={() => {addUserToList(item.userId)}} class="singleUserInList">
+                    <li onClick={() => {addUserToList(item)}} class="singleUserInList">
                         Username: {item.username}
                     </li>
                 )}
@@ -47,7 +54,7 @@ export function SearchForUser(props: any){
                 placeholder={props.placeholderText}
                 value={newGroupCreation[props.id]}
                 onInput={(event:any) => {
-                    handleTextInput(props.id, event.target.value);
+                    // handleTextInput(props.id, event.target.value);
                     handleUserSearch(event);
                 }}
             />
