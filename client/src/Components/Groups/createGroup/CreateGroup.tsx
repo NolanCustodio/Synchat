@@ -5,7 +5,7 @@ import CreateGroupFormNavButtons from "./FormNavButtons";
 import TimeInputs from "./TimeInputs";
 import { createGroupRequest } from "./apiRequests/createGroupRequest";
 import { TextInput } from "./TextInput";
-import { SearchForUser } from "../../User/otherUserInteractions/SeachForUser";
+import { SearchForUser, GroupMembersString } from "../../User/otherUserInteractions/SeachForUser";
 
 import { newGroupCreation, setNewGroupCreation } from "../../../stores/groupStore";
 
@@ -46,9 +46,8 @@ export default function CreateGroup(){
                             id="groupName"
                         />
 
-                        <h2>
-                            Current Group Members: {newGroupCreation.groupMembers[0]}
-                        </h2>
+                        <GroupMembersString/>
+                        
                         <SearchForUser placeholderText="Add Group Member" id="groupMembers"/>
                         <CreateGroupFormNavButtons/>
                     </div>
