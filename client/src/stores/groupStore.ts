@@ -23,6 +23,6 @@ export const [newGroupCreation, setNewGroupCreation] = createStore<stringIndex>(
     groupName: '',
     groupMembers: [],
     currentEvent: '',
-    startDate: '',
+    startDate: '0001-01-01',
     startTime: {hour: 0, minute: 0},
 })

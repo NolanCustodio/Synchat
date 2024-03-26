@@ -28,9 +28,9 @@ function UserList(){
     return(
         <ul class="userDisplayList">
             <For each={otherUsers()}>
-                {(item: any) => (
-                    <li onClick={() => {addUserToList(item);}} class="singleUserInList">
-                        Username: {item.username}
+                {(user: any) => (
+                    <li onClick={() => {addUserToList(user);}} class="singleUserInList">
+                        Username: {user.username}
                     </li>
                 )}
             </For>
@@ -52,7 +52,7 @@ export function SearchForUser(props: any){
         //create something to check for whitespace
         if(event.target.value){
             const rtnObj = await userSearchRequest({username: event.target.value});
-            setOtherUsers(rtnObj.usernames)
+            setOtherUsers(rtnObj.users)
         }
     }
 

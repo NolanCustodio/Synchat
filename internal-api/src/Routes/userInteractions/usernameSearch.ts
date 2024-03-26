@@ -9,7 +9,7 @@ export default async function usernameSearch(data: any){
     // console.log('inside query file',data);
 
     try{
-        const usernames = await prisma.user.findMany({
+        const users = await prisma.user.findMany({
             take: 10,
             where:{
                 username:{
@@ -22,13 +22,13 @@ export default async function usernameSearch(data: any){
             }
         })
 
-        rtnData.usernames = usernames
+        rtnData.users = users
 
     }catch (error){
         console.log(error);
     }
 
-    console.log(rtnData.usernames);
+    // console.log(rtnData.users);
 
     return rtnData;
 }

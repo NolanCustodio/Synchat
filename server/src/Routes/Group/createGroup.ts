@@ -7,8 +7,8 @@ groupRouter.post('/createGroup', async (req, res) => {
     try{
         const userAndGroupInfo = { ...req.body, userSessionId: req.cookies.sessionId }
 
-        console.log(userAndGroupInfo);
-        // const rtn = await DatabaseRequest(userAndGroupInfo);
+        // console.log(userAndGroupInfo);
+        const rtn = await DatabaseRequest(userAndGroupInfo);
 
         // console.log(rtn);
 

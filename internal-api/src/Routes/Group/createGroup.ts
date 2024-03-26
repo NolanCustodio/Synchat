@@ -7,8 +7,9 @@ export default async function createGroup(data: any){
         flag: false
     }
     
-    console.log(data);
+    // console.log(data);
 
+    
     const datetimeISO = new Date(`${data.startDate} ${data.startTime.hour}:${data.startTime.minute}`).toISOString();
 
     try{
@@ -34,22 +35,25 @@ export default async function createGroup(data: any){
             }
         })  
 
-        // console.log('new group', newGroup);
+        console.log('new group', newGroup);
+
+        console.log(data.groupMembers);
 
         if (rtnData.flag){
+            const userGroupRelationArr = data.groupMembers.map((user: any) => {
+                return {user:{connect:{userId: user.userId}}}
+            })
+            userGroupRelationArr.push(
+                {user:{connect:{userId: userInfo?.userId}}}
+            )
+
             const newRelation = await prisma.group.update({
                 where:{
                     id: newGroup.id
                 },
                 data:{
                     users:{
-                        create:[
-                            {user:{
-                                connect:{
-                                    userId: userInfo!.userId
-                                }
-                            }}
-                        ]
+                        create: userGroupRelationArr
                     }
                 }
             })
