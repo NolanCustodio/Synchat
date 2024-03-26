@@ -8,7 +8,7 @@ import { newGroupCreation, setNewGroupCreation } from "../../../stores/groupStor
 import "./userInteraction.css"
 
 const [otherUsers, setOtherUsers] = createSignal([]);
-const [ usernameList, setUsernameList ] = createSignal('');
+const [ usernameString, setUsernameString ] = createSignal('');
 
 function addUserToList(user: any){
     // console.log(user)
@@ -19,6 +19,8 @@ function addUserToList(user: any){
             {username: user.username, userId: user.userId}
         ]
     )
+
+    setUsernameString(`${usernameString()} ${user.username}`)
 }
 
 function UserList(){
@@ -37,26 +39,9 @@ function UserList(){
 }
 
 export function GroupMembersString(){
-    let string = ''
-
-    createEffect(() => {
-        const newMembers = unwrap(newGroupCreation.groupMembers);
-        // string = newMembers.map((userObj: any) => {
-        //     string.concat(`${userObj.username}, `)
-        // })
-        newMembers.forEach((userObj: any) => {
-            console.log('yuser',userObj.username)
-            // string.concat(`${userObj.username}, `)
-            // string += `${userObj.username}, `;
-            
-        })
-        
-        console.log(usernameList());
-    })
-
     return(
         <h2>
-            {`Group Members: ${string}`}
+            {`Group Members: ${usernameString()}`}
         </h2>
     )
 }
