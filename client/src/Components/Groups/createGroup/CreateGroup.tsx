@@ -29,11 +29,13 @@ export default function CreateGroup(){
         setShowTime(!showTime());
     }
 
-    function handleSubmit(event: any){
+    async function handleSubmit(event: any){
         event.preventDefault();
         const newGroupAsObject = JSON.parse(JSON.stringify(newGroupCreation));
 
-        const rtnObj = createGroupRequest(newGroupAsObject);
+        const rtnObj = await createGroupRequest(newGroupAsObject);
+        console.log(rtnObj);
+        //Should re-direct to new group page
     }
 
     return(

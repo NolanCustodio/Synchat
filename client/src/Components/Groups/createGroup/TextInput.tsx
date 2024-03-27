@@ -5,14 +5,6 @@ export const handleTextInput = (id: string, value: string) =>{
 }
 
 export function TextInput(props: any){
-    // const handleTextInput = (event: any) =>{
-    //     const inputId = props.id;
-    //     const value = event.target.value;
-
-    //     setNewGroupCreation([inputId], value);
-    // }
-
-    // console.log(`component ${props.id}`, props);
 
     return(
         <div>

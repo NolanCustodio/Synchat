@@ -5,3 +5,11 @@
 .singleUserInList{
     @apply p-4 border-b border-black last:border-b-0
 }
+
+.selectedUsers{
+    @apply flex justify-evenly
+}
+
+.removeUser{
+    @apply bg-red-500 text-white px-4 py-2 rounded
+}

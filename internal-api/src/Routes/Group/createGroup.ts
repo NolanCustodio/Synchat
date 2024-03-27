@@ -2,7 +2,6 @@ import { prisma } from "../../Services/Prisma";
 
 export default async function createGroup(data: any){
     let rtnData = {
-        test: 'work',
         eventUUID: data.eventUUID,
         flag: false
     }
@@ -58,7 +57,7 @@ export default async function createGroup(data: any){
                 }
             })
 
-            console.log('new relation', newRelation);
+            // console.log('new relation', newRelation);
         }
 
     }catch(error){

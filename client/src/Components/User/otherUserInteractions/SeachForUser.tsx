@@ -1,4 +1,4 @@
-import { createEffect, createSignal, For } from "solid-js";
+import { createSignal, For } from "solid-js";
 import { unwrap } from "solid-js/store";
 
 // import { handleTextInput } from "../../Groups/createGroup/TextInput";
@@ -8,11 +8,11 @@ import { newGroupCreation, setNewGroupCreation } from "../../../stores/groupStor
 import "./userInteraction.css"
 
 const [otherUsers, setOtherUsers] = createSignal([]);
-const [ selectedUsers, setSelectedUsers ] = createSignal([]);
+export const [ selectedUsers, setSelectedUsers ] = createSignal([]);
 
 
 function addUserToList(user: any){
-    for (let i = selectedUsers().length - 1; i > 0; i--){
+    for (let i = selectedUsers().length - 1; i >= 0; i--){
         if(user.userId === unwrap(selectedUsers())[i]['userId']){
             return;
         }
@@ -25,7 +25,7 @@ function addUserToList(user: any){
         ]
     )
 
-    setSelectedUsers(unwrap(newGroupCreation.groupMembers));
+    setSelectedUsers(newGroupCreation.groupMembers);
 }
 
 function UserList(){
@@ -44,13 +44,28 @@ function UserList(){
 }
 
 export function GroupMembersString(){
+    const handleRemoveUser = (event: any, user: any) =>{
+        event.preventDefault();
+
+        setNewGroupCreation('groupMembers',[
+            ...newGroupCreation.groupMembers.filter((item: any) => item.userId !== user.userId)
+        ])
+        setSelectedUsers(newGroupCreation.groupMembers);
+    }
+    
     return(
         <div>
-            Users:
-            {selectedUsers().map((user: any): string => {
-                // console.log(user);
-                return 'x';
-            })}
+            <p>Users:</p>
+            <div class="selectedUsers">
+                <For each={selectedUsers()}>
+                    {(user: any) =>(
+                        <div>
+                            <p>{user.username}</p>
+                            <button class="removeUser" onClick={(event:any) => (handleRemoveUser(event, user))}>Remove</button>
+                        </div>
+                    )}
+                </For>
+            </div>
         </div>
     )
 }
