@@ -27,7 +27,7 @@ export default groupRouter;
 groupRouter.post('/getGroups', async (req, res) => {
     try{
         req.body.userSessionId = req.cookies.sessionId;
-        console.log(req.body);
+        // console.log(req.body);
 
         const rtn = await DatabaseRequest(req.body);
         
