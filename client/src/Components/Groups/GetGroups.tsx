@@ -1,14 +1,6 @@
-
-
-const GetGroups = () => {
+import { getGroupsRequest } from "./apiRequests/groupRequest"
     
-
-    return(
-        <div>
-            <p>Group name</p>
-            <p>Group Description / Other Users</p>
-        </div>
-    )
+export async function GetGroups(){
+    console.log('test');
+    getGroupsRequest();
 }
-
-export default GetGroups;

@@ -1,6 +1,8 @@
 import { Dynamic } from "solid-js/web";
 import { A } from "@solidjs/router";
 
+import { GetGroups } from "./GetGroups";
+
 import { groups, setGroups } from "../../stores/groupStore";
 
 
@@ -36,6 +38,8 @@ function SingleGroup(props: any){
 };
 
 export default function Groups(){
+
+    GetGroups();
 
     return(
         <div>

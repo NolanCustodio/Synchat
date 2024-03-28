@@ -1,4 +1,4 @@
-import { createGroup } from "../../../../API/Group/createGroup";
+import { createGroup, getGroups } from "../../../API/Group/createGroup";
 
 export async function createGroupRequest(newGroupData: any): Promise<any>{
     let rtnObj = {
@@ -17,4 +17,19 @@ export async function createGroupRequest(newGroupData: any): Promise<any>{
     }
 
     return rtnObj;
+}
+
+export async function getGroupsRequest(): Promise<any>{
+    let rtnObj = {
+        flag: false
+    }
+
+    try{
+        const getUserGroups = {
+            action: 'getGroups',
+        }
+        const response = await getGroups(getUserGroups);
+    }catch(error){
+        console.log(error);
+    }
 }

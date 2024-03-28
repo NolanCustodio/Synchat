@@ -3,7 +3,7 @@ import { Show, createSignal, onMount } from "solid-js";
 import CalendarComponent from "../../../Calendar/Calendar";
 import CreateGroupFormNavButtons from "./FormNavButtons";
 import TimeInputs from "./TimeInputs";
-import { createGroupRequest } from "./apiRequests/createGroupRequest";
+import { createGroupRequest } from "../apiRequests/groupRequest";
 import { TextInput } from "./TextInput";
 import { SearchForUser, GroupMembersString } from "../../User/otherUserInteractions/SeachForUser";
 
