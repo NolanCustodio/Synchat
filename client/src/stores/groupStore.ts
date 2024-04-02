@@ -1,8 +1,12 @@
 import { createStore } from "solid-js/store";
 
-export const [groups, setGroups] = createStore({
-    number: 0
+// export const [groups, setGroups] = createStore([])
+
+export const [currentGroup, setCurrnetGroup] = createStore({
+
 })
+
+export const [userGroups, setUserGroups] = createStore([])
 
 // export interface newGroup{
 //     pageNumber: number,

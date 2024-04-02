@@ -1,7 +1,7 @@
 import { prisma } from "../../Services/Prisma"
 
 export async function getGroups(data: any){
-    let rtnData = {
+    let rtnData: any = {
         eventUUID: data.eventUUID,
         userGroups: []
     }
@@ -9,26 +9,44 @@ export async function getGroups(data: any){
     try{
         // console.log('etsstsd');
 
-        const userGroupsRelation = await prisma.user.findMany({
+        const userGroups = await prisma.user.findFirst({
             where:{
                 session:{
                     sessionId: data.userSessionId
                 }
             },
             select:{
-                groups: true,
+                groups:{
+                    select:{
+                        group:{
+                            select:{
+                                groupName: true,
+                                id: true,
+                                events: true
+                            }
+                        }
+                    }
+                }
             }
         })
 
-        console.log(userGroupsRelation[0]['groups'])
+        if (userGroups){
+            let groupsArray: any[] = []
 
-        // const userGroupsInformation = await prisma.group.findMany({
-        //     where:{
-        //         id:{
-        //             contains: userGroupsRelation[0]['groups']
-        //         }
-        //     }
+            userGroups.groups.forEach((item: any) => {
+                console.log(item.group);
+                groupsArray.push(item.group);
+            })
+            rtnData.userGroups = groupsArray;
+        }
+    
+        // let groups = {}
+
+        // userGroups?.groups.forEach((item:any) => {
+        //     console.log(item.group.events);
         // })
+        // console.log(userGroups?.groups);
+
 
     }catch(error){
         console.log(error);

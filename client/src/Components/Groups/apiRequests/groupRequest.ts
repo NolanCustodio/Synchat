@@ -20,8 +20,8 @@ export async function createGroupRequest(newGroupData: any): Promise<any>{
 }
 
 export async function getGroupsRequest(): Promise<any>{
-    let rtnObj = {
-        flag: false
+    let rtnObj: any = {
+        groups : []
     }
 
     try{
@@ -29,7 +29,10 @@ export async function getGroupsRequest(): Promise<any>{
             action: 'getGroups',
         }
         const response = await getGroups(getUserGroups);
+        rtnObj= response.userGroups;
     }catch(error){
         console.log(error);
     }
+
+    return rtnObj
 }

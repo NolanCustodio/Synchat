@@ -5,7 +5,7 @@
 }
 
 .x{
-    padding-top: 10px;
+    @apply py-4;
 }
 
 .group-card-pic{

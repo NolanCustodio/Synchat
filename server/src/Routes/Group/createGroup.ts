@@ -13,7 +13,7 @@ groupRouter.post('/createGroup', async (req, res) => {
         // console.log(userAndGroupInfo);
         const rtn = await DatabaseRequest(userAndGroupInfo);
 
-        // console.log(rtn);
+        console.log(rtn);
 
     }catch (error){
         console.log(error);
@@ -25,16 +25,18 @@ groupRouter.post('/createGroup', async (req, res) => {
 export default groupRouter;
 
 groupRouter.post('/getGroups', async (req, res) => {
+    let rtn;
     try{
         req.body.userSessionId = req.cookies.sessionId;
         // console.log(req.body);
 
-        const rtn = await DatabaseRequest(req.body);
-        
+        rtn = await DatabaseRequest(req.body);
+        // console.log(rtn);
 
     }catch(error){
+        rtn = {}
         console.log(error);
     }
 
-    res.send({})
+    res.send(rtn)
 })
