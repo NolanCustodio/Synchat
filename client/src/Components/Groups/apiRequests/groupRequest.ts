@@ -1,4 +1,4 @@
-import { createGroup, getGroups } from "../../../API/Group/createGroup";
+import { createGroup, getGroups } from "../../../API/Group/mainGroupFunctions";
 
 export async function createGroupRequest(newGroupData: any): Promise<any>{
     let rtnObj = {

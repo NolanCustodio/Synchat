@@ -9,8 +9,6 @@ import App from './App'
 //myfiles
 const HomePage = lazy(() => import("./Components/HomePage/HomePage"));
 const LandingPage = lazy(() => import("./Components/LandingPage/LandingPage"));
-const CreateGroup = lazy(() => import("./Components/Groups/createGroup/CreateGroup"));
-const Groups = lazy(() => import("./Components/Groups/Groups"));
 
 //user auth
 import { cookieRequest } from './Components/User/Session/sessionAuth'
@@ -20,7 +18,9 @@ const SignUp = lazy(() => import ("./Components/User/SignUp"));
 const Login = lazy(() => import ("./Components/User/Login"));
 
 //Groups
-const SingleGroupPage = lazy(() => import("./Components/Groups/singleGroupPage"));
+const SingleGroupPage = lazy(() => import("./Components/Groups/SingleGroup/singleGroupPage"));
+const CreateGroup = lazy(() => import("./Components/Groups/createGroup/CreateGroup"));
+const Groups = lazy(() => import("./Components/Groups/Groups"));
 
 //debug
 const Error = lazy(() => import("./Components/Error/Error"))
@@ -37,7 +37,7 @@ render(() => (
         
         <Route path="/Groups" component={Groups}/>
         <Route path="/CreateGroup" component={CreateGroup}/>
-        <Route path="/Groups/:number" component={SingleGroupPage}/>
+        <Route path="/Groups/:groupName" component={SingleGroupPage}/>
 
         <Route path="/Error" component={Error}/>
         

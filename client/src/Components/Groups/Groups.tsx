@@ -5,16 +5,24 @@ import { A } from "@solidjs/router";
 
 // import { getGroups } from "./getGroups";
 
-import { currentGroup, setCurrnetGroup } from "../../stores/groupStore";
-const [groups, setGroups] = createSignal([])
+import { userGroups } from "../../stores/groupStore";
+const [ groups, setGroups ] = createSignal([])
 
 import "./groups.css";
 
 function SingleGroupCard(props: any){
+    const handleClick = (event: any, index: number) => {
+        // event.preventDefault();
+        // console.log(index)
+    }
+
+    const handleUrl = (groupName: string): string =>{
+        return groupName.replace(/\s+/g, '-')
+    }
 
     return(
         <div class="x">
-            <A href={props.groupName}>
+            <A href={handleUrl(props.groupName)} onclick={(event:any, ) => {handleClick(event, props.index)}}>
                 <div class="group-card">
                     {/* <!-- Image section --> */}
                     <div class="md:w-1/4 relative">
@@ -30,7 +38,11 @@ function SingleGroupCard(props: any){
                             </h2>
                             <span class="text-sm text-gray-600">Category</span>
                         </div>
-                        <p class="mt-4 text-gray-700">This is a brief description of the card content. It provides a quick overview of what the card is about.</p>
+                        <p class="mt-4 text-gray-700">
+                            This is a brief description of the card content.
+                            --
+                            {props.events}
+                        </p>
                     </div>
                 </div>
             </A>
@@ -42,7 +54,7 @@ export default function Groups(){
     onMount(async() => {
         // const x = await getGroups();
         // console.log(x);
-        // setGroups(x);
+        setGroups(userGroups);
     })
     
     createEffect(() => {
@@ -54,9 +66,12 @@ export default function Groups(){
     return(
         <>
             <For each={groups()}>
-                
                 {(group: any) => (
-                    <SingleGroupCard groupName={group.groupName} index={index++}/>
+                    <SingleGroupCard 
+                        groupName={group.groupName}
+                        index={index++}
+                        events={group.events}
+                    />
                 )}
             </For>
         </>

@@ -2,9 +2,9 @@ import { createStore } from "solid-js/store";
 
 // export const [groups, setGroups] = createStore([])
 
-export const [currentGroup, setCurrnetGroup] = createStore({
+// export const [currentGroup, setCurrnetGroup] = createStore({
 
-})
+// })
 
 export const [userGroups, setUserGroups] = createStore([])
 
