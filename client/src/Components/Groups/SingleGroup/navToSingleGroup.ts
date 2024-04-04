@@ -1,22 +1,15 @@
 import { unwrap } from "solid-js/store";
-
 import { userGroups } from "../../../stores/groupStore";
 
-export function navFromURL(){
+export function navFromURL(groupNameFromURL: string){
     const groupsArr = unwrap(userGroups);
-    const currentGroupName = (location.pathname).substring(8).replace(/-/g, ' ');
-
-    let rtnGroupObj:any = []
+    let rtnGroupObj:any = [];
 
     groupsArr.forEach((group:any) => {
-        
-        if (currentGroupName === group.groupName){
-            
+        if (groupNameFromURL === group.groupName.replace(/\s+/g, '-')){
             rtnGroupObj.push(group)
-            console.log(rtnGroupObj);
-        }
-    })
-    console.log(rtnGroupObj);
+        };
+    });
     return rtnGroupObj;
 }
 

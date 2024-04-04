@@ -3,10 +3,10 @@ import { unwrap } from "solid-js/store";
 import { Dynamic } from "solid-js/web";
 import { A } from "@solidjs/router";
 
-// import { getGroups } from "./getGroups";
+import { SearchGroups } from "./helperComponents/SearchGroup";
 
 import { userGroups } from "../../stores/groupStore";
-const [ groups, setGroups ] = createSignal([])
+export const [ groups, setGroups ] = createSignal<any[]>([])
 
 import "./groups.css";
 
@@ -17,7 +17,7 @@ function SingleGroupCard(props: any){
     }
 
     const handleUrl = (groupName: string): string =>{
-        return groupName.replace(/\s+/g, '-')
+        return groupName.replace(/\s+/g, '-');
     }
 
     return(
@@ -58,13 +58,15 @@ export default function Groups(){
     })
     
     createEffect(() => {
-        console.log(unwrap(groups));
+        // console.log(unwrap(groups));
     })
 
     let index = 0;
 
     return(
         <>
+            <SearchGroups/>
+
             <For each={groups()}>
                 {(group: any) => (
                     <SingleGroupCard 

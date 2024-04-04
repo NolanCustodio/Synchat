@@ -52,11 +52,17 @@
 }
 
 .clock{
-
     @apply border border-black w-1/4
 }
 
 .time-row{
-
     @apply flex items-center justify-center
+}
+
+.groupSearchBarContainer{
+    @apply p-4
+}
+
+.groupSearchBar{
+    @apply w-full p-2 border border-gray-300 rounded
 }

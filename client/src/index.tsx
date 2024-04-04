@@ -18,7 +18,7 @@ const SignUp = lazy(() => import ("./Components/User/SignUp"));
 const Login = lazy(() => import ("./Components/User/Login"));
 
 //Groups
-const SingleGroupPage = lazy(() => import("./Components/Groups/SingleGroup/singleGroupPage"));
+const SingleGroupPageControll = lazy(() => import("./Components/Groups/SingleGroup/SingleGroupPageControll"));
 const CreateGroup = lazy(() => import("./Components/Groups/createGroup/CreateGroup"));
 const Groups = lazy(() => import("./Components/Groups/Groups"));
 
@@ -37,7 +37,7 @@ render(() => (
         
         <Route path="/Groups" component={Groups}/>
         <Route path="/CreateGroup" component={CreateGroup}/>
-        <Route path="/Groups/:groupName" component={SingleGroupPage}/>
+        <Route path="/Groups/:groupName" component={SingleGroupPageControll}/>
 
         <Route path="/Error" component={Error}/>
         
