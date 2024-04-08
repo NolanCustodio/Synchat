@@ -13,7 +13,7 @@ function addGroupToList(userInput: string){
 
     userGroups.forEach((group:any) => {
         if(group.groupName.toLowerCase().includes(userInput.toLocaleLowerCase())){
-            setGroups((prevArray) => [...prevArray, group])
+            setGroups((prevArray) => [group, ...prevArray])
         }
     })
 }

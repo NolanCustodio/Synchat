@@ -1,28 +1,35 @@
 import { For, createEffect, createSignal, onMount } from "solid-js";
 import { unwrap } from "solid-js/store";
 import { Dynamic } from "solid-js/web";
-import { A } from "@solidjs/router";
+import { A, useNavigate } from "@solidjs/router";
 
 import { SearchGroups } from "./helperComponents/SearchGroup";
 
 import { userGroups } from "../../stores/groupStore";
 export const [ groups, setGroups ] = createSignal<any[]>([])
+export const [ currentGroup, setCurrentGroup ] = createSignal({
+    groupName: '',
+    id: '',
+    index: -1,
+    events: [],
+});
 
 import "./groups.css";
 
 function SingleGroupCard(props: any){
-    const handleClick = (event: any, index: number) => {
-        // event.preventDefault();
-        // console.log(index)
+    const handleClick = (event: any, groupInfo: any) => {
+        event.preventDefault();
+        setCurrentGroup(groupInfo);
+        props.navigate(`/Groups/${handleUrl(groupInfo.groupName)}`);
     }
 
-    const handleUrl = (groupName: string): string =>{
+    const handleUrl = (groupName: string): string => {
         return groupName.replace(/\s+/g, '-');
     }
 
     return(
         <div class="x">
-            <A href={handleUrl(props.groupName)} onclick={(event:any, ) => {handleClick(event, props.index)}}>
+            <A href={handleUrl(props.groupName)} onclick={(event:any ) => {handleClick(event, props)}}>
                 <div class="group-card">
                     {/* <!-- Image section --> */}
                     <div class="md:w-1/4 relative">
@@ -40,7 +47,7 @@ function SingleGroupCard(props: any){
                         </div>
                         <p class="mt-4 text-gray-700">
                             This is a brief description of the card content.
-                            --
+                            <br/>--
                             {props.events}
                         </p>
                     </div>
@@ -51,6 +58,8 @@ function SingleGroupCard(props: any){
 };
 
 export default function Groups(){
+    const navigate = useNavigate()
+
     onMount(async() => {
         // const x = await getGroups();
         // console.log(x);
@@ -73,6 +82,8 @@ export default function Groups(){
                         groupName={group.groupName}
                         index={index++}
                         events={group.events}
+                        id={group.id}
+                        navigate={navigate}
                     />
                 )}
             </For>
