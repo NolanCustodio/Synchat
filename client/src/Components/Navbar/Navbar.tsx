@@ -26,6 +26,8 @@ export default () => {
                 <NavButton nav_link="Groups" nav_text="Groups"/>
                 <NavButton nav_link="CreateGroup" nav_text="Create Group"/>
                 <LogOut/>
+
+                <NavButton nav_link="/Groups/x" nav_text="Test x"/>
             </Show>
 
             <Show when={!isLoggedIn.state}>

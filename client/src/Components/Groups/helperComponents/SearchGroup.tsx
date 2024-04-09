@@ -26,6 +26,8 @@ export function SearchGroups(){
     })
 
     function handleInput(event: any){
+        setUrlError(false);
+
         if(event.target.value){
             addGroupToList(event.target.value);
         }else{

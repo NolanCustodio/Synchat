@@ -1,9 +1,10 @@
-import { For, createEffect, createSignal, onMount } from "solid-js";
+import { For, Show, createEffect, createSignal, onMount } from "solid-js";
 import { unwrap } from "solid-js/store";
 import { Dynamic } from "solid-js/web";
 import { A, useNavigate } from "@solidjs/router";
 
 import { SearchGroups } from "./helperComponents/SearchGroup";
+import { urlError } from "./helperComponents/SearchGroup";
 
 import { userGroups } from "../../stores/groupStore";
 export const [ groups, setGroups ] = createSignal<any[]>([])
@@ -75,6 +76,10 @@ export default function Groups(){
     return(
         <>
             <SearchGroups/>
+
+            <Show when={urlError()}>
+                <h2>Could not find Group</h2>
+            </Show>
 
             <For each={groups()}>
                 {(group: any) => (

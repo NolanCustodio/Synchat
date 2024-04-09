@@ -14,12 +14,8 @@ export default function SingleGroupPageControll(){
     if (currentGroup().index === -1){
         const groupName = location.pathname.substring(8);
         const findGroups = navFromURL(groupName);
-
-        if(findGroups.length === 0){
-            window.location.href="/Groups";
-        };
     
-        if(findGroups.length > 1){
+        if(findGroups.length !== 1){
             setUrlError(true);
             setGroupSearchInput(groupName);
             navigate('/Groups');
