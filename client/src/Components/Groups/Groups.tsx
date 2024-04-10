@@ -18,9 +18,16 @@ export const [ currentGroup, setCurrentGroup ] = createSignal({
 import "./groups.css";
 
 function SingleGroupCard(props: any){
+    const handleHover = (event: any, groupInfo: any) => {
+        event.preventDefault();
+        localStorage.setItem("currentGroupId", groupInfo.id);
+        // console.log(localStorage.getItem("currentGroupId"));
+    }
+    
     const handleClick = (event: any, groupInfo: any) => {
         event.preventDefault();
         setCurrentGroup(groupInfo);
+        localStorage.setItem("currentGroupName", groupInfo.id);
         props.navigate(`/Groups/${handleUrl(groupInfo.groupName)}`);
     }
 
@@ -30,7 +37,11 @@ function SingleGroupCard(props: any){
 
     return(
         <div class="x">
-            <A href={handleUrl(props.groupName)} onclick={(event:any ) => {handleClick(event, props)}}>
+            <A 
+                href={handleUrl(props.groupName)} 
+                onclick={(event:any ) => {handleClick(event, props)}}
+                // onmouseover={(event:any) => {handleHover(event, props)}}
+            >
                 <div class="group-card">
                     {/* <!-- Image section --> */}
                     <div class="md:w-1/4 relative">
@@ -49,7 +60,7 @@ function SingleGroupCard(props: any){
                         <p class="mt-4 text-gray-700">
                             This is a brief description of the card content.
                             <br/>--
-                            {props.events}
+                            {props.id}
                         </p>
                     </div>
                 </div>
