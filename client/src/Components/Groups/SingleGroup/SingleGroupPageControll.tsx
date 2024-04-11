@@ -12,14 +12,10 @@ export default function SingleGroupPageControll(){
     const navigate = useNavigate();
 
     const currentGroupId = localStorage.getItem("currentGroupId");
+    const groupName = location.pathname.substring(8);
     console.log(currentGroupId);
 
-    // if (currentGroupId){
-
-    // }
-
     if (currentGroup().index === -1){
-        const groupName = location.pathname.substring(8);
         const findGroups = setGroupFromGroupName(groupName);
     
         if(findGroups.length !== 1){

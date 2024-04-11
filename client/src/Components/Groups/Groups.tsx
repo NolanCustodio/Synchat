@@ -1,13 +1,16 @@
-import { For, Show, createEffect, createSignal, onMount } from "solid-js";
+import { For, Show, createEffect, createSignal, onCleanup, onMount } from "solid-js";
 import { unwrap } from "solid-js/store";
 import { Dynamic } from "solid-js/web";
 import { A, useNavigate } from "@solidjs/router";
 
+import { getGroups } from "./getGroups";
 import { SearchGroups } from "./helperComponents/SearchGroup";
 import { urlError } from "./helperComponents/SearchGroup";
 
-import { userGroups } from "../../stores/groupStore";
-export const [ groups, setGroups ] = createSignal<any[]>([])
+import { userGroups, setUserGroups } from "../../stores/groupStore";
+import { groupCount } from "./helperComponents/SearchGroup";
+
+export const [ groups, setGroups ] = createSignal<any[]>(userGroups)
 export const [ currentGroup, setCurrentGroup ] = createSignal({
     groupName: '',
     id: '',
@@ -17,30 +20,31 @@ export const [ currentGroup, setCurrentGroup ] = createSignal({
 
 import "./groups.css";
 
+const handleUrl = (groupName: string, groupId: string): string => {
+    return (`${groupName} ${groupId}`).replace(/\s+/g, '-');
+}
+
 function SingleGroupCard(props: any){
-    const handleHover = (event: any, groupInfo: any) => {
-        event.preventDefault();
-        localStorage.setItem("currentGroupId", groupInfo.id);
-        // console.log(localStorage.getItem("currentGroupId"));
-    }
     
     const handleClick = (event: any, groupInfo: any) => {
         event.preventDefault();
+        console.log(groupInfo.id);
         setCurrentGroup(groupInfo);
-        localStorage.setItem("currentGroupName", groupInfo.id);
-        props.navigate(`/Groups/${handleUrl(groupInfo.groupName)}`);
+        // localStorage.setItem("currentGroupId", groupInfo.id);
+        props.navigate(`/Groups/${handleUrl(groupInfo.groupName, groupInfo.id.substring(8))}`);
     }
 
-    const handleUrl = (groupName: string): string => {
-        return groupName.replace(/\s+/g, '-');
+    const handleAuxClick = (event: any, groupInfo: any) => {
+        localStorage.setItem("currentGroupId", groupInfo.id);
     }
 
     return(
         <div class="x">
             <A 
-                href={handleUrl(props.groupName)} 
-                onclick={(event:any ) => {handleClick(event, props)}}
-                // onmouseover={(event:any) => {handleHover(event, props)}}
+                href={handleUrl(props.groupName, props.id.substring(8))} 
+                onclick={(event:any) => {handleClick(event, props)}}
+                oncontextmenu={(event:any) => {handleAuxClick(event, props)}}
+                onauxclick={(event:any) => {handleAuxClick(event, props)}}
             >
                 <div class="group-card">
                     {/* <!-- Image section --> */}
@@ -59,7 +63,7 @@ function SingleGroupCard(props: any){
                         </div>
                         <p class="mt-4 text-gray-700">
                             This is a brief description of the card content.
-                            <br/>--
+                            <br/>--<br/>
                             {props.id}
                         </p>
                     </div>
@@ -70,19 +74,14 @@ function SingleGroupCard(props: any){
 };
 
 export default function Groups(){
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     onMount(async() => {
-        // const x = await getGroups();
+        const groups = await getGroups();
         // console.log(x);
-        setGroups(userGroups);
+        setUserGroups(groups);
+        groupCount.setValue(0);
     })
-    
-    createEffect(() => {
-        // console.log(unwrap(groups));
-    })
-
-    let index = 0;
 
     return(
         <>
@@ -96,7 +95,7 @@ export default function Groups(){
                 {(group: any) => (
                     <SingleGroupCard 
                         groupName={group.groupName}
-                        index={index++}
+                        index={groupCount.increment()}
                         events={group.events}
                         id={group.id}
                         navigate={navigate}

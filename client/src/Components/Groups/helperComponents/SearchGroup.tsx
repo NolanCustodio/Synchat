@@ -7,6 +7,17 @@ import { setGroups } from "../Groups";
 export const [urlError, setUrlError] = createSignal(false);
 export const [groupSearchInput, setGroupSearchInput] = createSignal('')
 
+export let groupCount = {
+    value: 0,
+    increment() {
+        this.value++;
+        return this.value;
+    },
+    setValue(value: number) {
+        this.value = value;
+    }
+};
+
 //create sub array using search value
 function addGroupToList(userInput: string){
     setGroups([])
@@ -27,6 +38,8 @@ export function SearchGroups(){
 
     function handleInput(event: any){
         setUrlError(false);
+
+        groupCount.setValue(0);
 
         if(event.target.value){
             addGroupToList(event.target.value);
