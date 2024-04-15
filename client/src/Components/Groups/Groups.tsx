@@ -31,7 +31,7 @@ function SingleGroupCard(props: any){
         console.log(groupInfo.id);
         setCurrentGroup(groupInfo);
         // localStorage.setItem("currentGroupId", groupInfo.id);
-        props.navigate(`/Groups/${handleUrl(groupInfo.groupName, groupInfo.id.substring(8))}`);
+        props.navigate(`/Groups/${handleUrl(groupInfo.groupName, groupInfo.id.substring(0,8))}`);
     }
 
     const handleAuxClick = (event: any, groupInfo: any) => {
