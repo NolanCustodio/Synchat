@@ -1,4 +1,4 @@
-import { createSignal, onMount } from "solid-js";
+import { createEffect, createSignal, onMount } from "solid-js";
 
 import { userGroups } from "../../../stores/groupStore"
 
@@ -33,7 +33,13 @@ export function SearchGroups(){
     onMount(() => {
         if(urlError()){
             addGroupToList(groupSearchInput());
+            return
         }
+    })
+
+    createEffect(() => {
+        groupCount.setValue(0);
+        setGroups(userGroups);
     })
 
     function handleInput(event: any){

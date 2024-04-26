@@ -25,7 +25,7 @@ export async function checkSession(data: any){
 
     //if session is younger than 7 days
     if (rtnData.isSessionValid && sessionAgeInDays <= 7){
-        rtnData.sessionId = data.sessionId;
+        rtnData.sessionId = sessionExists!.sessionId;
     };
     
     //if session is older than 7 days

@@ -3,6 +3,14 @@ import { unwrap } from "solid-js/store";
 import { userGroups } from "../../../stores/groupStore";
 import { setCurrentGroup } from "../Groups";
 
+export function getGroupWithFullUUID(){
+
+}
+
+export function getGroupWithPartialUUID(){
+    
+}
+
 export function setGroupFromGroupName(groupNameFromURL: string){
     const groupsArr = unwrap(userGroups);
     let rtnGroupArr:any = [];

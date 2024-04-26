@@ -103,8 +103,6 @@ userRouter.get("/logOut", async (req, res) => {
 
 userRouter.get("/checkSession", async (req, res) => {
     let isSessionValid;
-    
-    console.log('checking');
 
     try{
         if (req.cookies.sessionId){
@@ -128,6 +126,7 @@ userRouter.get("/checkSession", async (req, res) => {
     }catch(error){
         console.log(error);
     }
+    console.log(isSessionValid,"asdfasdf");
     res.send({isSessionValid: isSessionValid});
 })
 

@@ -71,7 +71,7 @@ export async function logOut(): Promise<void>{
 
 export async function checkSession(): Promise<any>{
     const options: any = {
-        method: "GET",
+        method: 'GET',
         credentials: 'include',
         headers: {
             'Content-Type': 'application/json'

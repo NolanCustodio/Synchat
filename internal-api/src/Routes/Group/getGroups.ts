@@ -21,8 +21,14 @@ export async function getGroups(data: any){
                         group:{
                             select:{
                                 groupName: true,
-                                id: true,
-                                events: true
+                                groupId: true,
+                                events: {
+                                    select:{
+                                        eventId: true,
+                                        eventName: true,
+                                        startDate: true
+                                    }
+                                }
                             }
                         }
                     }

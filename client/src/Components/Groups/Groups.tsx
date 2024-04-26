@@ -34,17 +34,11 @@ function SingleGroupCard(props: any){
         props.navigate(`/Groups/${handleUrl(groupInfo.groupName, groupInfo.id.substring(0,8))}`);
     }
 
-    const handleAuxClick = (event: any, groupInfo: any) => {
-        localStorage.setItem("currentGroupId", groupInfo.id);
-    }
-
     return(
         <div class="x">
             <A 
-                href={handleUrl(props.groupName, props.id.substring(8))} 
+                href={handleUrl(props.groupName, props.id.substring(0,8))} 
                 onclick={(event:any) => {handleClick(event, props)}}
-                oncontextmenu={(event:any) => {handleAuxClick(event, props)}}
-                onauxclick={(event:any) => {handleAuxClick(event, props)}}
             >
                 <div class="group-card">
                     {/* <!-- Image section --> */}
@@ -80,6 +74,9 @@ export default function Groups(){
         const groups = await getGroups();
         // console.log(x);
         setUserGroups(groups);
+    })
+
+    createEffect(() => {
         groupCount.setValue(0);
     })
 
@@ -97,7 +94,7 @@ export default function Groups(){
                         groupName={group.groupName}
                         index={groupCount.increment()}
                         events={group.events}
-                        id={group.id}
+                        id={group.groupId}
                         navigate={navigate}
                     />
                 )}

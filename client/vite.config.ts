@@ -1,5 +1,5 @@
 import { defineConfig, loadEnv } from 'vite'
-import solid from 'vite-plugin-solid'
+import solidPlugin from 'vite-plugin-solid'
 import taliwindcss from 'tailwindcss'
 
 
@@ -8,7 +8,7 @@ export default ({mode}) => {
   process.env = {...process.env, ...loadEnv(mode, process.cwd())};
 
   return defineConfig({
-    plugins: [solid()],
+    plugins: [solidPlugin()],
     build: {
       sourcemap: true
     },
