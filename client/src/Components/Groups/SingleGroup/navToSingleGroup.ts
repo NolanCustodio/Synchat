@@ -3,8 +3,10 @@ import { unwrap } from "solid-js/store";
 import { userGroups } from "../../../stores/groupStore";
 import { setCurrentGroup } from "../Groups";
 
-export function getGroupWithFullUUID(){
+import { getGroupRequest } from "../apiRequests/groupRequest";
 
+export async function getGroupWithFullUUID(groupUUID: string){
+    const response = await getGroupRequest(groupUUID, true);
 }
 
 export function getGroupWithPartialUUID(){

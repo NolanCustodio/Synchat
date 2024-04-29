@@ -1,6 +1,6 @@
 import { prisma } from "../../Services/Prisma"
 
-export async function getGroups(data: any){
+export default async function getGroups(data: any){
     let rtnData: any = {
         eventUUID: data.eventUUID,
         userGroups: []
@@ -40,7 +40,7 @@ export async function getGroups(data: any){
             let groupsArray: any[] = []
 
             userGroups.groups.forEach((item: any) => {
-                console.log(item.group);
+                // console.log(item.group);
                 groupsArray.push(item.group);
             })
             rtnData.userGroups = groupsArray;

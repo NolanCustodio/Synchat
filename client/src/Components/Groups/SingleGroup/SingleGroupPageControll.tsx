@@ -1,8 +1,8 @@
-import { For } from "solid-js";
+import { For, onMount } from "solid-js";
 import { useLocation, useNavigate } from "@solidjs/router";
 // import { groups } from "../../stores/groupStore";
 
-import { getGroupWithPartialUUID } from "./navToSingleGroup";
+import { getGroupWithPartialUUID, getGroupWithFullUUID } from "./navToSingleGroup";
 import { setGroupSearchInput, setUrlError } from "../helperComponents/SearchGroup";
 import { currentGroup } from "../Groups";
 
@@ -12,18 +12,22 @@ export default function SingleGroupPageControll(){
     const navigate = useNavigate();
 
     const groupName = location.pathname.substring(8);
-    console.log(groupName);
+    // console.log(groupName);
 
-    if (currentGroup().index === -1){
-        const findGroups = getGroupWithPartialUUID();
-    
-        // if(findGroups.length !== 1){
-        //     setUrlError(true);
-        //     setGroupSearchInput(groupName);
-        //     navigate('/Groups');
-        // };
-    }
-    
+    onMount(async() => {
+        if (currentGroup().index !== -1){
+            // console.log(currentGroup().id);
+            const allGroupInfo = await getGroupWithFullUUID(currentGroup().id);
+
+        
+            // if(findGroups.length !== 1){
+            //     setUrlError(true);
+            //     setGroupSearchInput(groupName);
+            //     navigate('/Groups');
+            // };
+        }    
+    })
+
     return(
         <div>
             Group Name - {`<${currentGroup().groupName}>`}

@@ -10,7 +10,8 @@ import { checkSession } from './Auth/Session/sessionHelpers';
 
 //Group
 import createGroup from './Group/createGroup';
-import { getGroups } from './Group/getGroups';
+import getGroups from './Group/getGroups';
+import getGroup from './Group/getGroup';
 
 export default async function handleMessage(action: string, data: any){
     let rtnData;
@@ -34,6 +35,9 @@ export default async function handleMessage(action: string, data: any){
             break;
         case 'getGroups':
             rtnData = await getGroups(data);
+            break;
+        case 'getGroup':
+            rtnData = await getGroup(data);
             break;
         default:
             rtnData = {

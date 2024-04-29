@@ -13,7 +13,7 @@ import RabbitmqClient from './Services/RabbitMQ/RabbitClient'
 
 //Route Paths
 import auth from './Routes/Users/userAuth';
-import group from './Routes/Group/createGroup';
+import group from './Routes/Group/groupIndex';
 import userInteraction from './Routes/Users/userInteraction';
 
 //Env

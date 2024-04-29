@@ -28,7 +28,7 @@ function SingleGroupCard(props: any){
     
     const handleClick = (event: any, groupInfo: any) => {
         event.preventDefault();
-        console.log(groupInfo.id);
+        // console.log(groupInfo.id);
         setCurrentGroup(groupInfo);
         // localStorage.setItem("currentGroupId", groupInfo.id);
         props.navigate(`/Groups/${handleUrl(groupInfo.groupName, groupInfo.id.substring(0,8))}`);

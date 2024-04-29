@@ -1,4 +1,4 @@
-import { createGroup, getGroups } from "../../../API/Group/mainGroupFunctions";
+import { createGroup, getGroups, getGroup } from "../../../API/Group/mainGroupFunctions";
 
 export async function createGroupRequest(newGroupData: any): Promise<any>{
     let rtnObj = {
@@ -35,4 +35,25 @@ export async function getGroupsRequest(): Promise<any>{
     }
 
     return rtnObj
+}
+
+export async function getGroupRequest(groupId: string, isUuidComplete: boolean): Promise<any>{
+    let rtnObj: any = {
+        group:{},
+        events:{},
+        chat:{}
+    }
+
+    try{
+        const currentGroup = {
+            action: 'getGroup',
+            isUuidComplete: isUuidComplete,
+            groupId: groupId
+        }
+        const response = await getGroup(currentGroup);
+        console.log('resrr', response);
+
+    }catch(error){
+        console.log(error);
+    }
 }

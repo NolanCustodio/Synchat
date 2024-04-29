@@ -40,3 +40,16 @@ groupRouter.post('/getGroups', async (req, res) => {
 
     res.send(rtn)
 })
+
+groupRouter.post('/getGroup', async (req, res) => {
+    let rtn = {};
+    try{
+        req.body.userSessionId = req.cookies.sessionId;
+
+        rtn = await DatabaseRequest(req.body);
+        
+    }catch(error){
+        console.log(error);
+    }
+    res.send(rtn);
+})

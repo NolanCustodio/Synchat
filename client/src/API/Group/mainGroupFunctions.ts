@@ -38,3 +38,13 @@ export async function getGroups(data: any): Promise<any>{
     }
 }
 
+export async function getGroup(data: any): Promise<any>{
+    const options = buildOptions('POST', data);
+
+    try{
+        const response = await fetch(`${route}/getGroup`, options)
+        return response.json();
+    }catch(error){
+        console.log(error);
+    }
+}
