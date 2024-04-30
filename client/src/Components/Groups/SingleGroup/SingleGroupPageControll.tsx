@@ -30,6 +30,7 @@ export default function SingleGroupPageControll(){
 
     return(
         <div>
+            {/* create components for each page aspect */}
             Group Name - {`<${currentGroup().groupName}>`}
             <br/> --- <br/>
             {currentGroup().id}
