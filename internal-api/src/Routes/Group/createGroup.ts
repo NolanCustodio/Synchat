@@ -1,4 +1,5 @@
 import { prisma } from "../../Services/Prisma";
+import { randomUUID } from 'crypto';
 
 export default async function createGroup(data: any){
     let rtnData = {
@@ -30,9 +31,14 @@ export default async function createGroup(data: any){
                         eventName: data.currentEvent,
                         startDate: datetimeISO,
                     }]
+                },
+                groupChat:{
+                    create: {}
                 }
             }
         })  
+
+        // const groupChat = await prisma.groupChat.create({})
 
         console.log('new group', newGroup);
 
@@ -56,6 +62,18 @@ export default async function createGroup(data: any){
                     }
                 }
             })
+
+            // const relateChat = await prisma.group.update({
+            //     where:{
+            //         id: newGroup.id
+            //     },
+            //     data:{
+            //         groupChat:{
+            //             create:{
+            //             }    
+            //         }
+            //     }
+            // })
 
             // console.log('new relation', newRelation);
         }

@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { fakeUsers } from './fakeInputs/fakeUsers';
+import { fakeUsers } from './helper/fakeUsers';
 
 export const prisma = new PrismaClient();
 
