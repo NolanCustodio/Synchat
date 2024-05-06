@@ -25,8 +25,11 @@ export default async function getGroups(data: any){
                                 events: {
                                     select:{
                                         eventId: true,
-                                        eventName: true,
-                                        startDate: true
+                                    }
+                                },
+                                groupChat:{
+                                    select:{
+                                        id: true
                                     }
                                 }
                             }
@@ -35,6 +38,8 @@ export default async function getGroups(data: any){
                 }
             }
         })
+
+        console.log(userGroups?.groups[0].group.events);
 
         if (userGroups){
             let groupsArray: any[] = []

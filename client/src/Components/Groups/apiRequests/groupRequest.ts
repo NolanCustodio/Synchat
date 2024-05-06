@@ -51,7 +51,7 @@ export async function getGroupRequest(groupId: string, isUuidComplete: boolean):
             groupId: groupId
         }
         const response = await getGroup(currentGroup);
-        console.log('resrr', response);
+        // console.log('resrr', response);
 
     }catch(error){
         console.log(error);

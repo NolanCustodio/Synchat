@@ -16,6 +16,7 @@ export const [ currentGroup, setCurrentGroup ] = createSignal({
     id: '',
     index: -1,
     events: [],
+    groupChatId: null
 });
 
 import "./groups.css";
@@ -28,7 +29,7 @@ function SingleGroupCard(props: any){
     
     const handleClick = (event: any, groupInfo: any) => {
         event.preventDefault();
-        // console.log(groupInfo.id);
+        // console.log(groupInfo);
         setCurrentGroup(groupInfo);
         // localStorage.setItem("currentGroupId", groupInfo.id);
         props.navigate(`/Groups/${handleUrl(groupInfo.groupName, groupInfo.id.substring(0,8))}`);
@@ -93,8 +94,9 @@ export default function Groups(){
                     <SingleGroupCard 
                         groupName={group.groupName}
                         index={groupCount.increment()}
-                        events={group.events}
+                        eventId={group.events}
                         id={group.groupId}
+                        groupChatId={group.groupChat.id}
                         navigate={navigate}
                     />
                 )}

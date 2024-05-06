@@ -45,6 +45,11 @@ async function completeUUID(uuid: string){
                         eventName: true,
                         startDate: true,
                     }
+                },
+                groupChat:{
+                    select:{
+                        groupChatId: true,
+                    }
                 }
             }
         });

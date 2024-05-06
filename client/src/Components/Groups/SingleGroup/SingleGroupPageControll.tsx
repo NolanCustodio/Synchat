@@ -35,17 +35,9 @@ export default function SingleGroupPageControll(){
             <br/> --- <br/>
             {currentGroup().id}
             <br/> --- <br/>
-            <For each={currentGroup().events}>
-                {(event:any) =>(
-                    <div>
-                        {event.startDate}
-                        <br/>---<br/>    
-                        {event.eventName}    
-                    </div>
-                )}
-            </For>
+            {currentGroup().events}
             ---
-            <p>chat</p>
+            <p>{currentGroup().groupChatId}</p>
         </div>
     )
 }
