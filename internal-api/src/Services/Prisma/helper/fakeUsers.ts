@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client/extension";
-
+import { randomUUID } from "crypto";
 
 
 function createRandomString(length: number): string {
@@ -18,13 +18,15 @@ export async function fakeUsers(amount: number, prismaInstance: PrismaClient){
         for (let i = 0; i < amount; i++){
             const newString = createRandomString(5);
 
+            const uuid = randomUUID().toString();
+
             fakeUserArr.push({ 
                 username: newString,
                 email: newString,
                 password: newString,
                 session:{
                     create:{
-                        sessionId: newString
+                        sessionId: uuid
                     }
                 }
             })

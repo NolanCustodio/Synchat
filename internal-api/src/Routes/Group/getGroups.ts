@@ -39,7 +39,7 @@ export default async function getGroups(data: any){
             }
         })
 
-        console.log(userGroups?.groups[0].group.events);
+        // console.log(userGroups?.groups[0].group.events);
 
         if (userGroups){
             let groupsArray: any[] = []

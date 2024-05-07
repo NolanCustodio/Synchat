@@ -7,7 +7,7 @@ export default async function createGroup(data: any){
         flag: false
     }
     
-    // console.log(data);
+    console.log(data);
 
     
     const datetimeISO = new Date(`${data.startDate} ${data.startTime.hour}:${data.startTime.minute}`).toISOString();
@@ -26,23 +26,14 @@ export default async function createGroup(data: any){
         const newGroup = await prisma.group.create({
             data:{
                 groupName: data.groupName,
-                events: {
-                    create:[{
-                        eventName: data.currentEvent,
-                        startDate: datetimeISO,
-                    }]
-                },
                 groupChat:{
                     create: {}
-                }
+                },
+                
             }
         })  
 
-        // const groupChat = await prisma.groupChat.create({})
-
         console.log('new group', newGroup);
-
-        console.log(data.groupMembers);
 
         if (rtnData.flag){
             const userGroupRelationArr = data.groupMembers.map((user: any) => {
@@ -52,7 +43,7 @@ export default async function createGroup(data: any){
                 {user:{connect:{userId: userInfo?.userId}}}
             )
 
-            const newRelation = await prisma.group.update({
+            await prisma.group.update({
                 where:{
                     id: newGroup.id
                 },
@@ -61,21 +52,11 @@ export default async function createGroup(data: any){
                         create: userGroupRelationArr
                     }
                 }
-            })
+            });
+        }
 
-            // const relateChat = await prisma.group.update({
-            //     where:{
-            //         id: newGroup.id
-            //     },
-            //     data:{
-            //         groupChat:{
-            //             create:{
-            //             }    
-            //         }
-            //     }
-            // })
-
-            // console.log('new relation', newRelation);
+        if (data.currentEvent !== ''){
+            
         }
 
     }catch(error){
