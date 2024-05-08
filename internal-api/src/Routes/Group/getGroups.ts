@@ -22,9 +22,15 @@ export default async function getGroups(data: any){
                             select:{
                                 groupName: true,
                                 groupId: true,
-                                events: {
+                                currentEvent: {
                                     select:{
-                                        eventId: true,
+                                        event: {
+                                            select: {
+                                                eventId: true,
+                                                eventName: true,
+                                                startDate: true
+                                            },
+                                        },
                                     }
                                 },
                                 groupChat:{

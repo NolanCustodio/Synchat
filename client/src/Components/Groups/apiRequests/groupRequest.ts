@@ -9,6 +9,16 @@ export async function createGroupRequest(newGroupData: any): Promise<any>{
         newGroupData.action = "createGroup";
         delete newGroupData.pageNumber;
 
+        newGroupData.eventInfo = {
+            currentEvent: newGroupData.currentEvent,
+            startDate: newGroupData.startDate,
+            startTime: newGroupData.startTime
+        }
+
+        delete newGroupData.currentEvent
+        delete newGroupData.startDate
+        delete newGroupData.startTime
+
         // console.log(newGroupData);
         const response = await createGroup(newGroupData);
 

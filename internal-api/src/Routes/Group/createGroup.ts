@@ -1,6 +1,8 @@
 import { prisma } from "../../Services/Prisma";
 import { randomUUID } from 'crypto';
 
+import { createEvent } from "../Event/helper/createEvent";
+
 export default async function createGroup(data: any){
     let rtnData = {
         eventUUID: data.eventUUID,
@@ -8,9 +10,6 @@ export default async function createGroup(data: any){
     }
     
     console.log(data);
-
-    
-    const datetimeISO = new Date(`${data.startDate} ${data.startTime.hour}:${data.startTime.minute}`).toISOString();
 
     try{
         const userInfo = await prisma.session.findUnique({
@@ -33,7 +32,7 @@ export default async function createGroup(data: any){
             }
         })  
 
-        console.log('new group', newGroup);
+        // console.log('new group', newGroup);
 
         if (rtnData.flag){
             const userGroupRelationArr = data.groupMembers.map((user: any) => {
@@ -55,8 +54,8 @@ export default async function createGroup(data: any){
             });
         }
 
-        if (data.currentEvent !== ''){
-            
+        if (data.eventInfo.currentEvent !== ''){
+            createEvent(data.eventInfo, newGroup.id, prisma);
         }
 
     }catch(error){
