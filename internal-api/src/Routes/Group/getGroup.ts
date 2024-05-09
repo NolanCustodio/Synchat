@@ -2,7 +2,7 @@ import { prisma } from "../../Services/Prisma"
 
 export default async function getGroup(data: any){
     let rtnData: any = {
-        event:data.eventUUID,
+        eventUUID: data.eventUUID,
         completeGroup:{}
     }
 
@@ -22,7 +22,7 @@ export default async function getGroup(data: any){
 async function completeUUID(uuid: string){
 
     try{
-        const findGroup = await prisma.group.findFirst({
+        const findGroup = await prisma.group.findUnique({
             where:{
                 groupId: uuid
             },
@@ -44,6 +44,7 @@ async function completeUUID(uuid: string){
                         eventId: true,
                         eventName: true,
                         startDate: true,
+                        isCurrent: true
                     }
                 },
                 groupChat:{

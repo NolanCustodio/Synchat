@@ -11,7 +11,7 @@ export default function SingleGroupPageControll(){
     const location = useLocation();
     const navigate = useNavigate();
 
-    const groupName = location.pathname.substring(8);
+    const urlGroupInfo = location.pathname.substring(8);
     // console.log(groupName);
 
     onMount(async() => {
@@ -25,19 +25,23 @@ export default function SingleGroupPageControll(){
             //     setGroupSearchInput(groupName);
             //     navigate('/Groups');
             // };
-        }    
+        }else{
+            const allGroupInfo = await getGroupWithPartialUUID(urlGroupInfo);
+        }
     })
+
+    console.log(currentGroup())
 
     return(
         <div>
             {/* create components for each page aspect */}
             Group Name - {`<${currentGroup().groupName}>`}
             <br/> --- <br/>
-            {currentGroup().id}
+            Group Id - {currentGroup().id}
             <br/> --- <br/>
-            {currentGroup().events}
-            ---
-            <p>{currentGroup().groupChatId}</p>
+            Group Events - {(currentGroup().events)}
+            <br/>---
+            <p>Group Chat Id - {currentGroup().groupChatId}</p>
         </div>
     )
 }

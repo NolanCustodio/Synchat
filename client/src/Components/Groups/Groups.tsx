@@ -60,6 +60,8 @@ function SingleGroupCard(props: any){
                             This is a brief description of the card content.
                             <br/>--<br/>
                             {props.id}
+                            <br/>--<br/>
+                            {props.eventName}
                         </p>
                     </div>
                 </div>
@@ -73,8 +75,9 @@ export default function Groups(){
 
     onMount(async() => {
         const groups = await getGroups();
-        // console.log(x);
         setUserGroups(groups);
+
+        // console.log(groups);
     })
 
     createEffect(() => {
@@ -91,10 +94,17 @@ export default function Groups(){
 
             <For each={groups()}>
                 {(group: any) => (
+                    
                     <SingleGroupCard 
                         groupName={group.groupName}
                         index={groupCount.increment()}
-                        eventId={group.events}
+                        eventName={() => {
+                            if(group.currentEvent){
+                                return group.currentEvent.event.eventName;
+                            }else{
+                                return "";
+                            }
+                        }}
                         id={group.groupId}
                         groupChatId={group.groupChat.id}
                         navigate={navigate}

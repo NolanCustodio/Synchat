@@ -7,10 +7,11 @@ import { getGroupRequest } from "../apiRequests/groupRequest";
 
 export async function getGroupWithFullUUID(groupUUID: string){
     const response = await getGroupRequest(groupUUID, true);
+    console.log(response);
 }
 
-export function getGroupWithPartialUUID(){
-    
+export async function getGroupWithPartialUUID(urlGroupInfo: string){
+    console.log(urlGroupInfo);
 }
 
 export function setGroupFromGroupName(groupNameFromURL: string){

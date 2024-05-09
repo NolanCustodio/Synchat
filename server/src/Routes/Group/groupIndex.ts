@@ -47,6 +47,7 @@ groupRouter.post('/getGroup', async (req, res) => {
         req.body.userSessionId = req.cookies.sessionId;
 
         rtn = await DatabaseRequest(req.body);
+        console.log(rtn);
         
     }catch(error){
         console.log(error);
