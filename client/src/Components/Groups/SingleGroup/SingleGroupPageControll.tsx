@@ -4,20 +4,21 @@ import { useLocation, useNavigate } from "@solidjs/router";
 
 import { getGroupWithPartialUUID, getGroupWithFullUUID } from "./navToSingleGroup";
 import { setGroupSearchInput, setUrlError } from "../helperComponents/SearchGroup";
-import { currentGroup } from "../Groups";
+import { currentGroup, setCurrentGroup } from "../Groups";
 
 
 export default function SingleGroupPageControll(){
     const location = useLocation();
     const navigate = useNavigate();
+    let groupInfo: any;
 
     const urlGroupInfo = location.pathname.substring(8);
     // console.log(groupName);
 
     onMount(async() => {
-        if (currentGroup().index !== -1){
+        if (currentGroup().isIdSet){
             // console.log(currentGroup().id);
-            const allGroupInfo = await getGroupWithFullUUID(currentGroup().id);
+            groupInfo = await getGroupWithFullUUID(currentGroup().id);
 
         
             // if(findGroups.length !== 1){
@@ -26,22 +27,25 @@ export default function SingleGroupPageControll(){
             //     navigate('/Groups');
             // };
         }else{
-            const allGroupInfo = await getGroupWithPartialUUID(urlGroupInfo);
+            groupInfo = await getGroupWithPartialUUID(urlGroupInfo);
         }
+        setCurrentGroup(groupInfo.completeGroup)
+
+        console.log(currentGroup().groupChat.groupChatId);
     })
 
-    console.log(currentGroup())
+    
 
     return(
         <div>
             {/* create components for each page aspect */}
             Group Name - {`<${currentGroup().groupName}>`}
             <br/> --- <br/>
-            Group Id - {currentGroup().id}
+            Group Id - {currentGroup().groupId}
             <br/> --- <br/>
-            Group Events - {(currentGroup().events)}
-            <br/>---
-            <p>Group Chat Id - {currentGroup().groupChatId}</p>
+            Group Events - {currentGroup().events}
+            <br/> --- <br/>
+            Group Chat Id - {currentGroup().groupChat}
         </div>
     )
 }

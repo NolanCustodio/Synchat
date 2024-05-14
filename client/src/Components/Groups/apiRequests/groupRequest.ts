@@ -48,22 +48,19 @@ export async function getGroupsRequest(): Promise<any>{
 }
 
 export async function getGroupRequest(groupId: string, isUuidComplete: boolean): Promise<any>{
-    let rtnObj: any = {
-        group:{},
-        events:{},
-        chat:{}
-    }
-
+    let rtnObj;
     try{
         const currentGroup = {
             action: 'getGroup',
             isUuidComplete: isUuidComplete,
             groupId: groupId
         }
-        const response = await getGroup(currentGroup);
+        rtnObj = await getGroup(currentGroup);
         // console.log('resrr', response);
 
     }catch(error){
         console.log(error);
     }
+
+    return rtnObj;
 }
