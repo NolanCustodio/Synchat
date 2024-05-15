@@ -19,6 +19,8 @@ export default function SingleGroupPageControll(){
 
     onMount(async() => {
 
+        // console.log(currentGroup.groupId);
+
         if (currentGroup.groupId){
             groupInfo = await getGroupWithFullUUID(currentGroup.groupId);
         }else{

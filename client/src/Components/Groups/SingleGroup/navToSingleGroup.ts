@@ -11,7 +11,8 @@ export async function getGroupWithFullUUID(groupUUID: string){
 }
 
 export async function getGroupWithPartialUUID(urlGroupInfo: string){
-    console.log(urlGroupInfo);
+    const response = await getGroupRequest(urlGroupInfo, false);
+    console.log(response);
 }
 
 // export function setGroupFromGroupName(groupNameFromURL: string){
