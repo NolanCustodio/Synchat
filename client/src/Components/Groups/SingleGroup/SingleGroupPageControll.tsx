@@ -1,10 +1,12 @@
-import { For, onMount } from "solid-js";
+import { For, createSignal, onMount } from "solid-js";
 import { useLocation, useNavigate } from "@solidjs/router";
+import { unwrap } from "solid-js/store";
+
 // import { groups } from "../../stores/groupStore";
 
 import { getGroupWithPartialUUID, getGroupWithFullUUID } from "./navToSingleGroup";
 import { setGroupSearchInput, setUrlError } from "../helperComponents/SearchGroup";
-import { currentGroup, setCurrentGroup } from "../Groups";
+import { currentGroup, setCurrentGroup } from "../../../stores/groupStore";
 
 
 export default function SingleGroupPageControll(){
@@ -16,22 +18,22 @@ export default function SingleGroupPageControll(){
     // console.log(groupName);
 
     onMount(async() => {
-        if (currentGroup().isIdSet){
-            // console.log(currentGroup().id);
-            groupInfo = await getGroupWithFullUUID(currentGroup().id);
 
-        
-            // if(findGroups.length !== 1){
-            //     setUrlError(true);
-            //     setGroupSearchInput(groupName);
-            //     navigate('/Groups');
-            // };
+        if (currentGroup.groupId){
+            groupInfo = await getGroupWithFullUUID(currentGroup.groupId);
         }else{
             groupInfo = await getGroupWithPartialUUID(urlGroupInfo);
         }
-        setCurrentGroup(groupInfo.completeGroup)
 
-        console.log(currentGroup().groupChat.groupChatId);
+        setCurrentGroup({
+            groupId: groupInfo.groupId,
+            groupName: groupInfo.groupName,
+            events: groupInfo.events,
+            currentEvent: groupInfo.currentEvent,
+            groupChatId: groupInfo.groupChat.groupChatId,
+            users: groupInfo.users
+        })
+        console.log(unwrap(currentGroup));
     })
 
     
@@ -39,13 +41,13 @@ export default function SingleGroupPageControll(){
     return(
         <div>
             {/* create components for each page aspect */}
-            Group Name - {`<${currentGroup().groupName}>`}
+            Group Name - {currentGroup.groupName}
             <br/> --- <br/>
-            Group Id - {currentGroup().groupId}
+            Group Id - {currentGroup.groupId}
             <br/> --- <br/>
-            Group Events - {currentGroup().events}
+            Group Events - {currentGroup.events}
             <br/> --- <br/>
-            Group Chat Id - {currentGroup().groupChat}
+            Group Chat Id - {currentGroup.groupChatId}
         </div>
     )
 }

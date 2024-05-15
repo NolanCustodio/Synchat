@@ -8,6 +8,17 @@ import { createStore } from "solid-js/store";
 
 export const [userGroups, setUserGroups] = createStore([])
 
+interface currentGroup{
+    groupName?: string,
+    groupId?: string,
+    events?: [],
+    groupChatId?: string,
+    currentEvent?: {},
+    users?: []
+}
+
+export const [currentGroup, setCurrentGroup] = createStore<currentGroup>({})
+
 // export interface newGroup{
 //     pageNumber: number,
 //     groupName: string,

@@ -4,8 +4,9 @@
     border: 1px solid black;
 }
 
-.x{
+.group-button{
     @apply py-4;
+    cursor: pointer;
 }
 
 .group-card-pic{
