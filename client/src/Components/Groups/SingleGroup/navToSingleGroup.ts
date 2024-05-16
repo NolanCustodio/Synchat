@@ -1,19 +1,24 @@
 import { unwrap } from "solid-js/store";
+import { useNavigate } from "@solidjs/router";
 
+import navigate from "../../Nav/Navigate";
 import { userGroups } from "../../../stores/groupStore";
 
 import { getGroupRequest } from "../apiRequests/groupRequest";
 
-export async function getGroupWithFullUUID(groupUUID: string){
-    const response = await getGroupRequest(groupUUID, true);
+export async function getGroup(groupUUID: string){
+    const response = await getGroupRequest(groupUUID);
     // console.log(response);
+
     return response.completeGroup;
 }
 
-export async function getGroupWithPartialUUID(urlGroupInfo: string){
-    const response = await getGroupRequest(urlGroupInfo, false);
-    console.log(response);
-}
+// export async function getGroupFromURL(urlGroupInfo: string){
+//     const response = await getGroupRequest(urlGroupInfo, true);
+//     console.log(response);
+//     // return {};
+//     return response.completeGroup;
+// }
 
 // export function setGroupFromGroupName(groupNameFromURL: string){
 //     const groupsArr = unwrap(userGroups);

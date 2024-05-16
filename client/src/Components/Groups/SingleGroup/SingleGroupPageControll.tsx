@@ -4,7 +4,7 @@ import { unwrap } from "solid-js/store";
 
 // import { groups } from "../../stores/groupStore";
 
-import { getGroupWithPartialUUID, getGroupWithFullUUID } from "./navToSingleGroup";
+import { getGroup } from "./navToSingleGroup";
 import { setGroupSearchInput, setUrlError } from "../helperComponents/SearchGroup";
 import { currentGroup, setCurrentGroup } from "../../../stores/groupStore";
 
@@ -13,18 +13,26 @@ export default function SingleGroupPageControll(){
     const location = useLocation();
     const navigate = useNavigate();
     let groupInfo: any;
-
-    const urlGroupInfo = location.pathname.substring(8);
     // console.log(groupName);
 
     onMount(async() => {
 
         // console.log(currentGroup.groupId);
+        let groupId
 
         if (currentGroup.groupId){
-            groupInfo = await getGroupWithFullUUID(currentGroup.groupId);
+            groupId = currentGroup.groupId
         }else{
-            groupInfo = await getGroupWithPartialUUID(urlGroupInfo);
+            groupId = location.pathname.substring(8);
+        }
+
+        groupInfo = await getGroup(groupId);
+
+        if(groupInfo === null){
+            //set value in store for error of page not found
+
+            navigate("/Home");
+            return;
         }
 
         setCurrentGroup({

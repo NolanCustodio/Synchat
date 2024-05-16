@@ -7,13 +7,14 @@ export default async function getGroup(data: any){
     }
 
     try{
-        let group;
-        if(data.isUuidComplete){
-            group = await completeUUID(data.groupId)
-            rtnData.completeGroup = group
-        }else{
-            group = await partialUUID(data.groupId);
-        }
+        const group = await completeUUID(data.groupId);
+        rtnData.completeGroup = group
+        // if(data.isUuidComplete){
+        //     group = await completeUUID(data.groupId)
+        //     rtnData.completeGroup = group
+        // }else{
+        //     group = await partialUUID(data.groupId);
+        // }
 
     }catch(error){
         console.log(error);
@@ -71,5 +72,7 @@ async function completeUUID(uuid: string){
 }
 
 async function partialUUID(partialUUID: string){
-    
+    console.log(partialUUID);
+
+    return {}
 }

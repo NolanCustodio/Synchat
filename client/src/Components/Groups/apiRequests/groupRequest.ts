@@ -47,12 +47,11 @@ export async function getGroupsRequest(): Promise<any>{
     return rtnObj
 }
 
-export async function getGroupRequest(groupId: string, isUuidComplete: boolean): Promise<any>{
+export async function getGroupRequest(groupId: string): Promise<any>{
     let rtnObj;
     try{
         const currentGroup = {
             action: 'getGroup',
-            isUuidComplete: isUuidComplete,
             groupId: groupId
         }
         rtnObj = await getGroup(currentGroup);
