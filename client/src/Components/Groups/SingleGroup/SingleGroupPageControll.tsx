@@ -8,6 +8,8 @@ import { getGroup } from "./navToSingleGroup";
 import { setGroupSearchInput, setUrlError } from "../helperComponents/SearchGroup";
 import { currentGroup, setCurrentGroup } from "../../../stores/groupStore";
 
+import { Events } from "./Events/events";
+
 
 export default function SingleGroupPageControll(){
     const location = useLocation();
@@ -31,7 +33,7 @@ export default function SingleGroupPageControll(){
         if(groupInfo === null){
             //set value in store for error of page not found
 
-            navigate("/Home");
+            navigate("/Groups");
             return;
         }
 
@@ -43,7 +45,7 @@ export default function SingleGroupPageControll(){
             groupChatId: groupInfo.groupChat.groupChatId,
             users: groupInfo.users
         })
-        console.log(unwrap(currentGroup));
+        // console.log(unwrap(currentGroup));
     })
 
     
@@ -55,7 +57,7 @@ export default function SingleGroupPageControll(){
             <br/> --- <br/>
             Group Id - {currentGroup.groupId}
             <br/> --- <br/>
-            Group Events - {currentGroup.events}
+            <Events/>
             <br/> --- <br/>
             Group Chat Id - {currentGroup.groupChatId}
         </div>

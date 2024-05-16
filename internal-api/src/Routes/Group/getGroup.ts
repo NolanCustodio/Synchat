@@ -58,7 +58,7 @@ async function completeUUID(uuid: string){
                 },
                 currentEvent:{
                     select: {
-                        eventId: true
+                        eventId: true,
                     }
                 }
             }
