@@ -15,11 +15,12 @@ const App = (props: any) => {
   })
 
   return (
-    <div class="debug-container">
+    <div>
       <Navbar/>
-
-      {/* Displays routes */}
-      {props.children}
+      <div class="debug-container">
+        {/* Displays routes */}
+        {props.children}
+      </div>
     </div>
   )
 }

@@ -32,7 +32,7 @@ export default function SingleGroupPageControll(){
 
         if(groupInfo === null){
             //set value in store for error of page not found
-
+            setUrlError(true);
             navigate("/Groups");
             return;
         }
@@ -51,11 +51,9 @@ export default function SingleGroupPageControll(){
     
 
     return(
-        <div>
+        <div class="group-foreground">
             {/* create components for each page aspect */}
-            Group Name - {currentGroup.groupName}
-            <br/> --- <br/>
-            Group Id - {currentGroup.groupId}
+            <h1>{currentGroup.groupName}</h1>
             <br/> --- <br/>
             <Events/>
             <br/> --- <br/>

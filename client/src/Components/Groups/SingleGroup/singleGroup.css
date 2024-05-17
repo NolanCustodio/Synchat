@@ -1,3 +1,9 @@
+.group-foreground{
+    @apply bg-slate-100;
+}
+
 .event-container{
-    @apply outline outline-2 outline-black
+    @apply outline outline-2 outline-black;
+    width: 98%;
+
 }
