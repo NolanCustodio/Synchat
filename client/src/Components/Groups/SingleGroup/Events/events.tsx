@@ -1,42 +1,57 @@
-import { For, createSignal, Show } from "solid-js";
+import { For, createSignal, Show, onMount, onCleanup} from "solid-js";
 
-import CreateEvent from "./hoverCreateEvent";
+import { CreateEvent } from "./hoverCreateEvent";
+import { SingleEventCard } from "./singleEventCard";
 
 import { currentGroup } from "../../../../stores/groupStore"
 import "../singleGroup.css"
+import { unwrap } from "solid-js/store";
 
-const singleEvent = (props: any) => {
-
-    return(
-        <div>
-            Event Name: {props.eventName}
-        </div>
-    )
-}
-
-
-export function Events(eventsObj: any){
+export function Events(){
+    const [createNewEvent, setCreateNewEvent] = createSignal(false);
     const [eventsDropdown, setEventsDropdown] = createSignal(false);
+    // const [eventsDropdown, setEventsDropdown] = createSignal(false);
+    
+    const handleClick = (event:any) =>{
+        // console.log(event.clientX, event.clientY)
+        // console.log(event.target.className);
+        if(event.target.className !== "new-event-form"){
+            setEventsDropdown(false);
+        }
+    }
+
+    onMount(async() => {
+        document.addEventListener('click', handleClick);
+    })
+
+    onCleanup(() => {
+        document.removeEventListener('click', handleClick);
+    })
 
     return(
         <div class="event-container">
 
-            <CreateEvent/>
+            <Show when={createNewEvent()}>
+                <CreateEvent/>
+            </Show>
 
             {/* currentEvent */}
             <div>
 
             </div>
 
-            {/* dropdown */}
-            <h3>Events</h3>
-            <For each={currentGroup.events}>
-                {(event: any) => (
-                    <div>
-                        {event.eventName}
-                    </div>
-                )}
-            </For>
+            <div>
+                {/* dropdown */}
+                <h3>Events</h3>
+                <button>v</button>
+                <Show when={eventsDropdown()}>
+                    <For each={unwrap(currentGroup.events)}>
+                        {(event: any) => (
+                            <SingleEventCard event={event}/>
+                        )}
+                    </For>
+                </Show>
+            </div>
         </div>
     )
 }

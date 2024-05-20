@@ -1,6 +1,6 @@
 import { createEffect } from 'solid-js';
 
-export default function CreateEvent(){
+export function CreateEvent(){
   const show = true; // Control visibility here
 
   createEffect(() => {
@@ -26,7 +26,7 @@ export default function CreateEvent(){
   return (
     <>
       {/* Content of the hovering component */}
-      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+      <div class="new-event-form">
         Hovering Component
       </div>
     </>

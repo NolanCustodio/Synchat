@@ -7,3 +7,23 @@
     width: 98%;
 
 }
+
+.new-event-form{
+    @apply outline outline-1 outline-red-500;
+
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    
+    height: 80%;
+    width: 80%;
+    background-color: white;
+}
+
+.single-event-card{
+    @apply p-4 space-y-4 outline outline-1 outline-red-500;
+
+    height: 25%;
+    width: 15%;
+}
