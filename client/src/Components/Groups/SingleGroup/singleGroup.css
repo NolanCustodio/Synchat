@@ -27,3 +27,11 @@
     height: 25%;
     width: 15%;
 }
+
+.event-toggle{
+    @apply px-4 py-2 font-medium rounded text-white bg-blue-500 hover:bg-blue-700
+}
+
+.create-event-button{
+    @apply px-4 py-2 font-medium rounded text-white bg-blue-500 hover:bg-blue-700
+}

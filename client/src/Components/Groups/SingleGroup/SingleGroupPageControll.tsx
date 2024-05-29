@@ -45,7 +45,7 @@ export default function SingleGroupPageControll(){
             groupChatId: groupInfo.groupChat.groupChatId,
             users: groupInfo.users
         })
-        // console.log(unwrap(currentGroup));
+        // console.log(currentGroup.events);
     })
 
     
