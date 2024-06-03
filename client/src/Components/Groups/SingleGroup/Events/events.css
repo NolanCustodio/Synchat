@@ -13,7 +13,7 @@
 }
 
 .new-event-form{
-    @apply outline outline-1 outline-black;
+    @apply outline outline-1 outline-black ;
 
     position: absolute; 
     top: 50%; 
@@ -23,6 +23,9 @@
     height: 80%;
     width: 80%;
     background-color: white;
+
+    text-align: center;
+    overflow-y: auto;
 }
 
 .top-right-button-container{
@@ -30,3 +33,18 @@
     text-align: right;
 }
 
+
+.close-event-form-button{
+    @apply bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 border border-black rounded
+}
+
+/* .submit-event-container{
+
+    display: flex;
+    flex-direction: column;
+} */
+
+.bottom-button{
+    position: absolute;
+    bottom: 5%;
+}

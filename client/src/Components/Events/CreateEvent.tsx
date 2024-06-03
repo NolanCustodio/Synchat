@@ -3,7 +3,6 @@ import { Show, createSignal } from "solid-js"
 import { CalendarComponent } from "../../Calendar/Calendar";
 import { TextInput } from "../Helper/TextInput"
 import { TimeInputs } from "../Helper/TimeInputs";
-import { CreateGroupFormNavButtons } from "../Helper/FormNavButtons";
 
 export function CreateEvent(){
     const [showCalendar, setShowCalendar] = createSignal(false);
@@ -42,8 +41,6 @@ export function CreateEvent(){
             <Show when={showTime()}>
                 <TimeInputs/>
             </Show>
-
-            <CreateGroupFormNavButtons/>
         </div>
     )
 }

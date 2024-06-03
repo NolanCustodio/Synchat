@@ -26,10 +26,10 @@ export default function CreateGroup(){
     }
 
     return(
-        <>
-            <form class="create-group-form ">
+        <div>
+            <form>
                 <Show when={newGroupCreation.pageNumber === 0}>
-                    <div class="part">
+                    <div class="event-form-container">
                         <TextInput 
                             placeholderText="Group Name"
                             id="groupName"
@@ -38,7 +38,6 @@ export default function CreateGroup(){
                         <GroupMembersString/>
                         
                         <SearchForUser placeholderText="Add Group Member" id="groupMembers"/>
-                        <CreateGroupFormNavButtons/>
                     </div>
                 </Show>
 
@@ -46,11 +45,13 @@ export default function CreateGroup(){
                     <CreateEvent/>
                 </Show>
 
+                <CreateGroupFormNavButtons/>
+
                 <button class="create-group-button" onClick={(event:any) => {handleSubmit(event)}}>
                     Submit
                 </button>
             </form>
-        </>
+        </div>
     )
 }
 

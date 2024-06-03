@@ -2,7 +2,7 @@ import { For, createSignal, Show, onMount, onCleanup} from "solid-js";
 import { unwrap } from "solid-js/store";
 import { Portal } from "solid-js/web";
 
-import { HoverCreateEvent } from "./hoverCreateEvent";
+import { HoverCreateEvent } from "./HoverCreateEvent";
 import { SingleEventCard } from "./singleEventCard";
 
 import { currentGroup } from "../../../../stores/groupStore"
