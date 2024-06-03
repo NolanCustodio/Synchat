@@ -1,4 +1,4 @@
-import { newGroupCreation, setNewGroupCreation } from "../../../stores/groupStore";
+import { newGroupCreation, setNewGroupCreation } from "../../stores/groupStore";
 
 export const handleTextInput = (id: string, value: string) =>{
     setNewGroupCreation([id], value)

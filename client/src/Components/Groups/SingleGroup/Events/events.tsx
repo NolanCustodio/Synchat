@@ -1,15 +1,21 @@
 import { For, createSignal, Show, onMount, onCleanup} from "solid-js";
+import { unwrap } from "solid-js/store";
 import { Portal } from "solid-js/web";
 
-import { CreateEvent } from "./hoverCreateEvent";
+import { HoverCreateEvent } from "./hoverCreateEvent";
 import { SingleEventCard } from "./singleEventCard";
 
 import { currentGroup } from "../../../../stores/groupStore"
-import "../singleGroup.css"
-import { unwrap } from "solid-js/store";
+
+// import "../singleGroup.css"
+import "./events.css"
+
+export const [createNewEvent, setCreateNewEvent] = createSignal(false);
+export const toggleNewEvent = (event:any, state: boolean) => {
+    setCreateNewEvent(state);
+}
 
 export function Events(){
-    const [createNewEvent, setCreateNewEvent] = createSignal(false);
     const [eventsDropdown, setEventsDropdown] = createSignal(false);
     // const [eventsDropdown, setEventsDropdown] = createSignal(false);
     const [eventsObj, setEventsObj] = createSignal<any>();
@@ -30,38 +36,12 @@ export function Events(){
 
     }
 
-    
-
-    const toggleNewEvent = (event:any) => {
-        const currentDiv = event.target.className;
-        // console.log(currentDiv);
-
-        if(currentDiv === "create-event-button"){
-            setCreateNewEvent(true);
-            return;
-        }
-
-        if(currentDiv !== "new-event-form"){
-            setCreateNewEvent(false);
-            return;
-        }
-    }
-
-    onMount(async() => {
-        document.addEventListener('click', toggleNewEvent);
-
-    })
-
-    onCleanup(() => {
-        document.removeEventListener('click', toggleNewEvent);
-    })
-
     return(
         <div class="event-container">
 
             <Show when={createNewEvent()}>
                 <Portal>
-                    <CreateEvent/>
+                    <HoverCreateEvent/>
                 </Portal>
             </Show>
 
@@ -82,9 +62,9 @@ export function Events(){
                     v
                 </button>
 
-                <button class="create-event-button"
+                <button class="event-toggle"
                     onClick={(event:any) => {
-                        toggleNewEvent(event);
+                        toggleNewEvent(event, true);
                     }}
                 >
                     +

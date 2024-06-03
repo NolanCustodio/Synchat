@@ -6,7 +6,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import { setNewGroupCreation } from "../stores/groupStore";
 
 
-export default function CalendarComponent(){
+export function CalendarComponent(){
     let calendarE1!: HTMLDivElement;
 
     function handleDate(date: string){

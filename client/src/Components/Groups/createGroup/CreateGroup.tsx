@@ -1,33 +1,20 @@
-import { Show, createSignal, onMount } from "solid-js";
+import { Show, onMount } from "solid-js";
 
-import CalendarComponent from "../../../Calendar/Calendar";
-import CreateGroupFormNavButtons from "./FormNavButtons";
-import TimeInputs from "./TimeInputs";
+import { CreateGroupFormNavButtons } from "../../Helper/FormNavButtons";
 import { createGroupRequest } from "../apiRequests/groupRequest";
-import { TextInput } from "./TextInput";
+import { TextInput } from "../../Helper/TextInput";
 import { SearchForUser, GroupMembersString } from "../../User/otherUserInteractions/SeachForUser";
+import { CreateEvent } from "../../Events/CreateEvent";
 
 import { newGroupCreation, setNewGroupCreation } from "../../../stores/groupStore";
 
 import "../groups.css"
 
 export default function CreateGroup(){
-    const [showCalendar, setShowCalendar] = createSignal(false);
-    const [showTime, setShowTime] = createSignal(false);
 
     onMount(() => {
         setNewGroupCreation("pageNumber", 0);
     })
-
-    function handleDate(event: any){
-        event.preventDefault();
-        setShowCalendar(!showCalendar());
-    }
-
-    function handleTime(event: any){
-        event.preventDefault();
-        setShowTime(!showTime());
-    }
 
     async function handleSubmit(event: any){
         event.preventDefault();
@@ -56,31 +43,7 @@ export default function CreateGroup(){
                 </Show>
 
                 <Show when={newGroupCreation.pageNumber === 1}>
-                    <div class="part">
-                        <TextInput placeholderText="Event" id="currentEvent"/>
-
-                        <div>
-                            <button class="create-group-button" onClick={(event:any) => {handleDate(event)}}>
-                                Set a Date
-                            </button>
-                        </div>
-
-                        <Show when={showCalendar()}>
-                            <CalendarComponent/>
-                        </Show>
-
-                        <div>
-                            <button class="create-group-button" onClick={(event:any) => {handleTime(event)}}>
-                                Set a Time
-                            </button>
-                        </div>
-
-                        <Show when={showTime()}>
-                            <TimeInputs/>
-                        </Show>
-
-                        <CreateGroupFormNavButtons/>
-                    </div>
+                    <CreateEvent/>
                 </Show>
 
                 <button class="create-group-button" onClick={(event:any) => {handleSubmit(event)}}>

@@ -1,0 +1,32 @@
+.group-foreground{
+    @apply bg-slate-100;
+}
+
+.event-container{
+    @apply outline outline-2 outline-black;
+    width: 98%;
+
+}
+
+.event-toggle{
+    @apply px-4 py-2 font-medium rounded text-white bg-blue-500 hover:bg-blue-700
+}
+
+.new-event-form{
+    @apply outline outline-1 outline-black;
+
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    
+    height: 80%;
+    width: 80%;
+    background-color: white;
+}
+
+.top-right-button-container{
+    @apply px-4 py-2;
+    text-align: right;
+}
+

@@ -1,26 +1,3 @@
-.group-foreground{
-    @apply bg-slate-100;
-}
-
-.event-container{
-    @apply outline outline-2 outline-black;
-    width: 98%;
-
-}
-
-.new-event-form{
-    @apply outline outline-1 outline-red-500;
-
-    position: absolute; 
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%);
-    
-    height: 80%;
-    width: 80%;
-    background-color: white;
-}
-
 .single-event-card{
     @apply p-4 space-y-4 outline outline-1 outline-red-500;
 
@@ -29,9 +6,5 @@
 }
 
 .event-toggle{
-    @apply px-4 py-2 font-medium rounded text-white bg-blue-500 hover:bg-blue-700
-}
-
-.create-event-button{
     @apply px-4 py-2 font-medium rounded text-white bg-blue-500 hover:bg-blue-700
 }

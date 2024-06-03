@@ -15,13 +15,13 @@
 
 /* create group */
 
-.part{
-    border: black solid 1px;
+.event-form-container{
+    /* @apply py-10 flex flex-col; */
     padding-inline: 20%;
-    @apply py-10 flex flex-col
+    align-items: center;
 }
 
-.part > *{
+.event-form-container > *{
     @apply py-2.5
 }
 

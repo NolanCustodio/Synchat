@@ -1,8 +1,8 @@
 import { Show, createSignal, onCleanup, onMount } from "solid-js";
 
-import { newGroupCreation, setNewGroupCreation } from "../../../stores/groupStore";
+import { newGroupCreation, setNewGroupCreation } from "../../stores/groupStore";
 
-export default function TimeInputs(){
+export function TimeInputs(){
     const [showHours, setShowHourClock] = createSignal(false);
     const [showMinutes, setShowMinuteClock] = createSignal(false);
 

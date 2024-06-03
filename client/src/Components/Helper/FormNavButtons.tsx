@@ -1,6 +1,6 @@
-import { newGroupCreation, setNewGroupCreation } from "../../../stores/groupStore";
+import { newGroupCreation, setNewGroupCreation } from "../../stores/groupStore";
 
-export default function CreateGroupFormNavButtons(){
+export function CreateGroupFormNavButtons(){
 
     function handleButton(event: any, isNext: boolean){
         event.preventDefault()
