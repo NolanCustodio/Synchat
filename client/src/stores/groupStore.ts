@@ -1,5 +1,7 @@
 import { createStore } from "solid-js/store";
 
+import { stringIndex } from "./interfaces";
+
 // export const [groups, setGroups] = createStore([])
 
 // export const [currentGroup, setCurrnetGroup] = createStore({
@@ -29,9 +31,9 @@ export const [currentGroup, setCurrentGroup] = createStore<currentGroup>({})
 //     startTime:{hour: number, minute: number}
 // }
 
-interface stringIndex{
-    [index: string]: any
-}
+// interface stringIndex{
+//     [index: string]: any
+// }
 
 export const [newGroupCreation, setNewGroupCreation] = createStore<stringIndex>({
     pageNumber: 0,

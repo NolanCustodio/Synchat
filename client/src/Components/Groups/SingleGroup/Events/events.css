@@ -38,13 +38,17 @@
     @apply bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 border border-black rounded
 }
 
-/* .submit-event-container{
+.submit-event-container{
 
     display: flex;
     flex-direction: column;
-} */
+}
 
 .bottom-button{
     position: absolute;
     bottom: 5%;
+}
+
+.single-event-card{
+    
 }

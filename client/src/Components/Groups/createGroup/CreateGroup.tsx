@@ -7,6 +7,7 @@ import { SearchForUser, GroupMembersString } from "../../User/otherUserInteracti
 import { CreateEvent } from "../../Events/CreateEvent";
 
 import { newGroupCreation, setNewGroupCreation } from "../../../stores/groupStore";
+import { newEventCreation } from "../../../stores/eventStore";
 
 import "../groups.css"
 
@@ -19,8 +20,9 @@ export default function CreateGroup(){
     async function handleSubmit(event: any){
         event.preventDefault();
         const newGroupAsObject = JSON.parse(JSON.stringify(newGroupCreation));
+        const newEventAsObject = JSON.parse(JSON.stringify(newEventCreation));
 
-        const rtnObj = await createGroupRequest(newGroupAsObject);
+        const rtnObj = await createGroupRequest(newGroupAsObject, newEventAsObject);
         console.log(rtnObj);
         //Should re-direct to new group page
     }
@@ -33,6 +35,7 @@ export default function CreateGroup(){
                         <TextInput 
                             placeholderText="Group Name"
                             id="groupName"
+                            store="group"
                         />
 
                         <GroupMembersString/>

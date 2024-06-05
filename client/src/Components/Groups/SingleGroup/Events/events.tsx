@@ -7,7 +7,7 @@ import { SingleEventCard } from "./singleEventCard";
 
 import { currentGroup } from "../../../../stores/groupStore"
 
-// import "../singleGroup.css"
+import "../singleGroup.css"
 import "./events.css"
 
 export const [createNewEvent, setCreateNewEvent] = createSignal(false);

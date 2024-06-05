@@ -1,6 +1,8 @@
 import { Show, createSignal, onCleanup, onMount } from "solid-js";
 
-import { newGroupCreation, setNewGroupCreation } from "../../stores/groupStore";
+// import { newGroupCreation, setNewGroupCreation } from "../../stores/groupStore";
+import { newEventCreation, setNewEventCreation } from "../../stores/eventStore";
+
 
 export function TimeInputs(){
     const [showHours, setShowHourClock] = createSignal(false);
@@ -31,7 +33,7 @@ export function TimeInputs(){
 
     function TimeInput(props: timeInputProps){
         const handleTimeInput = (event: any) => {
-            setNewGroupCreation("startTime", (prevList: any) => ({
+            setNewEventCreation("startTime", (prevList: any) => ({
                 ...prevList,
                 [props.id]: event.target.value
             }))
@@ -44,7 +46,7 @@ export function TimeInputs(){
                 id={props.id}
                 min="0"
                 max={props.max}
-                value={newGroupCreation.startTime[props.id]}
+                value={newEventCreation.startTime[props.id]}
                 onInput={handleTimeInput}
             />
         )

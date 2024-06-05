@@ -1,6 +1,6 @@
 import { createGroup, getGroups, getGroup } from "../../../API/Group/mainGroupFunctions";
 
-export async function createGroupRequest(newGroupData: any): Promise<any>{
+export async function createGroupRequest(newGroupData: any, newEventDaeta: any): Promise<any>{
     let rtnObj = {
         flag: false
     };

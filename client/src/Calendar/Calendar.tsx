@@ -3,14 +3,14 @@ import { Calendar } from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
-import { setNewGroupCreation } from "../stores/groupStore";
+import { setNewEventCreation } from "../stores/eventStore";
 
 
 export function CalendarComponent(){
     let calendarE1!: HTMLDivElement;
 
     function handleDate(date: string){
-        setNewGroupCreation("startDate", date)
+        setNewEventCreation("startDate", date)
     }
 
     onMount(() => {
