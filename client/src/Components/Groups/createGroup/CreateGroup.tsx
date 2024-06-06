@@ -19,6 +19,7 @@ export default function CreateGroup(){
 
     async function handleSubmit(event: any){
         event.preventDefault();
+        
         const newGroupAsObject = JSON.parse(JSON.stringify(newGroupCreation));
         const newEventAsObject = JSON.parse(JSON.stringify(newEventCreation));
 

@@ -1,23 +1,29 @@
+import { unwrap } from "solid-js/store";
 import { createGroup, getGroups, getGroup } from "../../../API/Group/mainGroupFunctions";
+import { newEventCreation, setEventDefault } from "../../../stores/eventStore";
+import { newGroupCreation } from "../../../stores/groupStore";
 
-export async function createGroupRequest(newGroupData: any, newEventDaeta: any): Promise<any>{
+export async function createGroupRequest(newGroupData: any, newEventData: any): Promise<any>{
     let rtnObj = {
         flag: false
     };
 
     try{
-        newGroupData.action = "createGroup";
-        delete newGroupData.pageNumber;
-
-        newGroupData.eventInfo = {
-            currentEvent: newGroupData.currentEvent,
-            startDate: newGroupData.startDate,
-            startTime: newGroupData.startTime
+        const newGroupData = {
+            action: "createGroup",
+            groupMembers: newGroupCreation.groupMembers,
+            groupName: newGroupCreation.groupName,
+            eventInfo:{
+                currentEvent: newEventCreation.eventName,
+                startDate: newEventCreation.startDate,
+                startTime: newEventCreation.startTime
+            }
         }
 
-        delete newGroupData.currentEvent
-        delete newGroupData.startDate
-        delete newGroupData.startTime
+        newGroupCreation.pageNumber = 0;
+
+        //setNewGroupDefault();
+        setEventDefault();
 
         // console.log(newGroupData);
         const response = await createGroup(newGroupData);

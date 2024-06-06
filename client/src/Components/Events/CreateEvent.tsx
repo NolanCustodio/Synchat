@@ -20,7 +20,7 @@ export function CreateEvent(){
 
     return(
         <div class="event-form-container">
-            <TextInput placeholderText="Event" id="currentEvent" store="event"/>
+            <TextInput placeholderText="Event" id="eventName" store="event"/>
 
             <div>
                 <button class="create-group-button" onClick={(event:any) => {handleDate(event)}}>

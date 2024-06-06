@@ -15,6 +15,7 @@ import RabbitmqClient from './Services/RabbitMQ/RabbitClient'
 import auth from './Routes/Users/userAuth';
 import group from './Routes/Group/groupIndex';
 import userInteraction from './Routes/Users/userInteraction';
+import event from './Routes/Event/eventIndex';
 
 //Env
 const clientPort = process.env.CLIENT_PORT;
@@ -35,7 +36,8 @@ app.use(cookieParser());
 //Routes
 app.use('/users', auth);
 app.use('/group', group);
-app.use('/userInteraction', userInteraction)
+app.use('/userInteraction', userInteraction);
+app.use('/event', event);
 
 //Rabbit Testing
 RabbitmqClient.initialize();

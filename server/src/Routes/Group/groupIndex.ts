@@ -22,8 +22,6 @@ groupRouter.post('/createGroup', async (req, res) => {
     res.send({});
 })
 
-export default groupRouter;
-
 groupRouter.post('/getGroups', async (req, res) => {
     let rtn;
     try{
@@ -54,3 +52,5 @@ groupRouter.post('/getGroup', async (req, res) => {
     }
     res.send(rtn);
 })
+
+export default groupRouter;

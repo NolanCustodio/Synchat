@@ -1,7 +1,13 @@
 import { CreateEvent } from "../../../Events/CreateEvent";
 import { toggleNewEvent } from "./events";
 
+import { addEventRequest } from "../apiRequests/eventRequests";
+
 export function HoverCreateEvent(){
+    const handleSumbit = () => {
+       addEventRequest();
+    }
+
     return(
         <div class="new-event-form">
             <div class="top-right-button-container">
@@ -18,7 +24,10 @@ export function HoverCreateEvent(){
             </div>
 
             <div class="submit-event-container">
-                <button class="create-group-button bottom-button">
+                <button 
+                    class="create-group-button bottom-button"
+                    onClick={(event:any) => {handleSumbit()}}
+                >
                     Add Event
                 </button>
             </div>

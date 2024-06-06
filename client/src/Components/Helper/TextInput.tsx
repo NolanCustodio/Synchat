@@ -24,6 +24,7 @@ const setValue = (store: string, id: string) => {
     }else{
         rtnValue = newGroupCreation[id]
     }
+    return rtnValue;
 }
 
 export function TextInput(props: any){
@@ -35,7 +36,7 @@ export function TextInput(props: any){
                 id={props.id}
                 class="create-group-input" 
                 placeholder={props.placeholderText}
-                value={newGroupCreation[props.id]}
+                value={setValue(props.store, props.id)}
                 onInput={(event:any) => {
                     handleTextInput(props.store, props.id, event.target.value);
                 }}
