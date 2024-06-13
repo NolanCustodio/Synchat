@@ -13,6 +13,9 @@ import createGroup from './Group/createGroup';
 import getGroups from './Group/getGroups';
 import getGroup from './Group/getGroup';
 
+//Event
+import addEvent from './Event/addEvent';
+
 export default async function handleMessage(action: string, data: any){
     let rtnData;
     // const action = data.action;
@@ -38,6 +41,9 @@ export default async function handleMessage(action: string, data: any){
             break;
         case 'getGroup':
             rtnData = await getGroup(data);
+            break;
+        case 'addEvent':
+            rtnData = await addEvent(data);
             break;
         default:
             rtnData = {
