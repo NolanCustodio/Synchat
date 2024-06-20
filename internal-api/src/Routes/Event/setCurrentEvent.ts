@@ -1,5 +1,5 @@
-import { prisma } from '../../Services/Prisma'
+import { PrismaClient } from "@prisma/client/extension";
 
-export default async function setCurrentEvent(){
-
+export async function setCurrentEvent(eventId: string, groupId: string, prisma: PrismaClient){
+    
 }

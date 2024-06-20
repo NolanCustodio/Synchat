@@ -13,6 +13,12 @@ export default async function addEventListener(data:any){
         const currentGroup = await prisma.group.findUnique({
             where:{groupId: data.currentGroupId},
         })
+
+        if (currentGroup === null){
+            
+        }
+
+        console.log(currentGroup);
         
     }catch(error){
 

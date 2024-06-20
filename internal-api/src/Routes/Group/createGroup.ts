@@ -1,7 +1,7 @@
 import { prisma } from "../../Services/Prisma";
 import { randomUUID } from 'crypto';
 
-import { createEvent } from "../Event/helper/createEvent";
+import { createEvent } from "../Event/createEvent";
 
 export default async function createGroup(data: any){
     let rtnData = {
