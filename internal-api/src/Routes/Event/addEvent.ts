@@ -14,8 +14,8 @@ export default async function addEventListener(data:any){
             where:{groupId: data.currentGroupId},
         })
 
-        if (currentGroup === null){
-            
+        if (currentGroup !== null){
+            //createEvent
         }
 
         console.log(currentGroup);
