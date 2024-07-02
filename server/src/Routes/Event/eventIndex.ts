@@ -8,6 +8,9 @@ eventRouter.post('/addEvent', async (req, res) => {
 
         // console.log('aetawet',req.body);
 
+        //check for user session
+            //if does not exist return
+
         const queryInfo = {
             ...req.body,
             userSession: req.cookies.sessionId

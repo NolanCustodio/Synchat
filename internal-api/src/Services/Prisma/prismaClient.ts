@@ -27,7 +27,7 @@ class myPrismaClient{
         }
     }
 
-    async produce(){
+    async query(queryName: string){
 
     }
 }

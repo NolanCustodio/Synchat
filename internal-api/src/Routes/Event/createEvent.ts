@@ -1,6 +1,15 @@
 import { PrismaClient } from "@prisma/client/extension";
 
-export async function createEvent(eventData: any, groupId: string, prisma: PrismaClient){
+interface eventData{
+    currentEvent: string,
+    startDate: string,
+    startTime:{
+        hour: string | number,
+        minute: string | number,
+    }
+}
+
+export async function createEvent(eventData: eventData, groupId: string, prisma: PrismaClient){
 
     const datetimeISO = new Date(`${eventData.startDate} ${eventData.startTime.hour}:${eventData.startTime.minute}`).toISOString();
 
