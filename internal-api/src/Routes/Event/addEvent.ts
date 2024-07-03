@@ -1,10 +1,12 @@
 import { prisma } from '../../Services/Prisma/index'
 
+import { createEvent } from './createEvent';
 
 export default async function addEventListener(data:any){
     let rtnData={
         eventUUID: data.eventUUID
-    }
+    };
+    let flag: boolean = false;
 
     console.log(data);
 
@@ -15,24 +17,25 @@ export default async function addEventListener(data:any){
             where:{groupId: data.currentGroupId},
         })
 
+
         const formatEvent = {
             currentEvent: data.eventname,
             startDate: data.startDate,
             startTime:{
                 hour: data.startTime.hour,
-                minute: data.starTime.minute
+                minute: data.startTime.minute
             }
         }
 
-        if (currentGroup !== null){
-            //createEvent
-        }
-
-
         console.log(currentGroup);
+
+        // if (currentGroup !== null){
+        //     createEvent(formatEvent, currentGroup.groupId, prisma)
+        // }
+
         
     }catch(error){
-
+        console.log(error);
     }
 
     return rtnData;
